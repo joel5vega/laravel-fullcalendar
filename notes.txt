@@ -1,0 +1,48 @@
+
+en htdocs
+composer create-project --prefer-dist laravel/laravel laravel-fullcalendar
+abrimos code y configuramos la autenticacion
+en app/providers/appservicesproviders
+
+
+
+https://laravel.com/docs/7.x/authentication
+composer require laravel/ui --dev
+
+usamos vue
+php artisan ui vue --auth
+//si falla la key
+php artisan key:generate
+npm install
+
+
+php artisan make:controller EventosController
+
+en la vista index.blade
+se coloca los scripts
+<link href="{{ asset('fullcalendar/list/main.css') }}" rel='stylesheet' />
+
+<!-- scripts -->
+  <!-- js de fullcalendar -->
+  <script src="{{ asset('fullcalendar/core/main.js') }}"defer></script>
+
+  para el diseno de las vistas
+  atajos
+  button*4
+  (input:text)*5    
+
+
+  para dar variables globales hay que modificar el service provider
+  https://styde.net/view-share-laravel/
+
+
+revisar este documento para hacer consultas con selects anidados
+https://documentacion-laravel.com/eloquent.html#subconsultas-avanzadas
+use App\Flight;
+use App\Destination;
+
+return Destination::addSelect(['last_flight' => Flight::select('name')
+    ->whereColumn('destination_id', 'destinations.id')
+    ->orderBy('arrived_at', 'desc')
+    ->limit(1)
+])->get();
