@@ -17,22 +17,33 @@ class ClaseController extends Controller
 
 
         $ambiente = $request->query('ambiente');
-        
+        $semestre = $request->query('semestre');
+
         if (isset($ambiente)) {
-            if($ambiente == 'undefined'){
+            if ($ambiente == 'undefined') {
                 $data['eventos'] = Clase::all();
                 // $data['eventos'] =Clase::query()->where('ambiente_id', '=', 1)->get();
-            return response()->json($data['eventos']);  
-            }
-            else 
+                return response()->json($data['eventos']);
+            } else
 
-            $data['eventos'] =Clase::query()->where('ambiente_id', '=', $ambiente)->get();
-            return response()->json($data['eventos']);  
+                $data['eventos'] = Clase::query()->where('ambiente_id', '=', $ambiente)->get();
+            return response()->json($data['eventos']);
+        } 
+        //para ver si llego el semestre
+        elseif (isset($semestre)) {
+            if ($semestre == 'undefined') {
+                $data['eventos'] = Clase::all();
+                return response()->json($data['eventos']);
+            } else
+
+                $data['eventos'] = Clase::CalxSemestre($semestre)->get();
+            return response()->json($data['eventos']);
         }
-           
-        
+
+
+
         $eventos = [];
-        
+
         return $ambiente;
     }
 
