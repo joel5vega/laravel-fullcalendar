@@ -17,6 +17,7 @@ class Clase extends Model
     public function scopeAula($query,$aula_id){
         return $query->where('ambiente_id','=',$aula_id);
     }
+    /*
     public function scopeCalAmbiente($query, $aula_id){
         if ($aula_id != '') {
             $query->where('ambiente_id','=',$aula_id)
@@ -33,6 +34,7 @@ class Clase extends Model
         }
         return $query;
     }
+    */
     // esta funcion retornara todos los horarios del dia
     public function scopeDia($query,$dia){
         return $query->where('dia','=',$dia);
@@ -58,12 +60,12 @@ class Clase extends Model
         ->join('responsables', 'responsable_id', '=', 'responsables.id')
         ->join('periodos', 'periodo', '=', 'periodos.id')
         ->join('ambientes', 'ambiente_id', '=', 'ambientes.id')
-        ->select('clases.id','dia','horaini','horafin',
-        'periodos.start_date as startRecur','periodos.end_date as endRecur',
-        'materias.sigla as sigla','materias.id as materia_id','materias.nombre as materia_nombre',
+        ->select('clases.id as id','materia_id','ambiente_id',
+        'startTime','endTime','daysOfWeek',
+        'materias.sigla as sigla','materias.nombre as title','materias.semestre as semestre','materias.tipo as tipo','materias.nivel as nivel',
+        'responsables.nombre as responsable','responsables.ap_paterno as responsable_ap_paterno',
         'ambientes.nombre as ambiente',
-        'responsables.titulo as responsable_titulo','responsables.nombre as responsable_nombre','responsables.ap_paterno as responsable_ap_paterno')
-        ;
+        'periodos.start_date as startRecur','periodos.end_date as endRecur');
     }
     //esta funcion devolvera todas las clases id por semestre
     public function scopeCalxSemestre($query,$semestre){

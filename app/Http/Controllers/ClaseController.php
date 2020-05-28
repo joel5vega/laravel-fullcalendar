@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Clase;
+use App\Dato;
 use Illuminate\Http\Request;
 
 class ClaseController extends Controller
@@ -77,28 +78,25 @@ class ClaseController extends Controller
     public function show($id)
     {
         //
-        $data['eventos'] = Clase::all();
-        // echo "pasa por show";
+        $data['eventos'] = Dato::all();
+        
         return response()->json($data['eventos']);
+    }                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          
+    public function getDatos(){
+         $datos=Dato::all();
+        return $datos;
     }
+    
     public function getSemestre($id)
     {
-        //
-        // echo "getSemestre";
-        // echo $id;
-
-        $clases = Clase::CalxSemestre($id)->get();
-
+        // $clases = Clase::CalxSemestre($id)->get();
+        $clases = Dato::Semestre($id)->get();
         return response()->json($clases);
     }
+    
     public function getAmbiente($id)
     {
-        // //
-        // echo "getAmbiente";
-        // echo $id;
-
-        $clases = Clase::CalxAmbiente($id)->get();
-
+        $clases= Dato::Ambiente($id)->get();
         return response()->json($clases);
     }
 
@@ -138,4 +136,6 @@ class ClaseController extends Controller
     {
         //
     }
+
+    
 }
