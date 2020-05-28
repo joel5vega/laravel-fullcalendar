@@ -25,7 +25,7 @@ Auth::routes(['register'=>false,'reset'=>false,'verify'=>false]);
 Route::get('showSemestres/{semestre}','EventosController@showSemestres');
 Route::get('showAulas/{aula}','EventosController@showAulas');
 Route::get('datos/','ClaseController@getDatos');
-Route::get('datos/{dato}','ClaseController@getDatos');
+Route::get('search/{dato}','ClaseController@getSearch');
 Route::get('semestres/{semestre}','ClaseController@getSemestre');
 Route::get('ambientes/{ambiente}','ClaseController@getAmbiente');
 

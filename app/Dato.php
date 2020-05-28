@@ -16,4 +16,14 @@ class Dato extends Model
     public function scopeSemestre($query,$semestre){
         return $query->where('semestre','=',$semestre);
     }
+    public function scopeTipo($query,$semestre,$tipo){
+        
+        return $query->where('semestre','=',$semestre)->where('tipo','=',$tipo);
+    }
+    
+    public function scopeMencion($query,$semestre,$mencion){
+        return $query->where('semestre','=',$semestre)->where($mencion,'=','si');
+    }
+    
+
 }

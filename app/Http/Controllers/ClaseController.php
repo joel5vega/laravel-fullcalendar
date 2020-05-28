@@ -86,12 +86,35 @@ class ClaseController extends Controller
          $datos=Dato::all();
         return $datos;
     }
+    public function getSearch(Request $request){
+        $semestre=$request->query('semestre');
+        $mencion=$request->query('mencion');
+        $ambiente=$request->query('ambiente');
+        if($semestre<7){
+            $clases= Dato::Ambiente($semestre)->get();
+            return response()->json($clases);
+        }
+        elseif(isset($mencion)){
+            $clases= Dato::Mencion($semestre,$mencion)->get();
+            return response()->json($clases);
+            
+        }
+        
+        
+   }
     
-    public function getSemestre($id)
+    public function getSemestre(Request $request)
     {
-        // $clases = Clase::CalxSemestre($id)->get();
-        $clases = Dato::Semestre($id)->get();
-        return response()->json($clases);
+        $semestre=$request->semestre;
+        $mencion=$request->query('mencion');
+        if($semestre<7){
+            $clases= Dato::Ambiente($semestre)->get();
+            return response()->json($clases);
+        }
+        elseif(isset($mencion)){
+            $clases= Dato::Mencion($semestre,$mencion)->get();
+            return response()->json($clases);
+        }
     }
     
     public function getAmbiente($id)
