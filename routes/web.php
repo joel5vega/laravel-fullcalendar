@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Route;
 |
 | Here is where you can register web routes for your application. These
 | routes are loaded by the RouteServiceProvider within a group which
+
 | contains the "web" middleware group. Now create something great!
 |
 */
@@ -17,17 +18,23 @@ use Illuminate\Support\Facades\Route;
 //     // return view('welcome');
 //     return view('eventos/index');
 // });
-Route::get('/','EventosController@index')->middleware('auth');
+Route::get('/','ClaseController@index')->middleware('auth');
 
 
 Auth::routes(['register'=>false,'reset'=>false,'verify'=>false]);
 //para rececpcionar eventos
 Route::get('showSemestres/{semestre}','EventosController@showSemestres');
 Route::get('showAulas/{aula}','EventosController@showAulas');
-Route::get('datos/','ClaseController@getDatos');
-Route::get('search/{dato}','ClaseController@getSearch');
-Route::get('semestres/{semestre}','ClaseController@getSemestre');
-Route::get('ambientes/{ambiente}','ClaseController@getAmbiente');
+
+//obtener datos para api
+Route::get('datos/','DatoController@getDatos');
+Route::get('search/{dato}','DatoController@getSearch');
+Route::get('semestres/{semestre}','DatoController@getClasesEnSemestre');
+Route::get('ambientes/{ambiente}','DatoController@getClasesEnAmbiente');
+Route::get('index','DatoController@apiIndex');
+Route::get('index/materias/{semestre}','DatoController@getMaterias');
+Route::get('index/ambientes','DatoController@getAmbientes');
+Route::get('index/responsables','DatoController@getResponsables');
 
 Route::get('aulas','EventosController@getAula');
 
@@ -38,7 +45,7 @@ Route::resource('clases','ClaseController');
 Route::resource('ambiente', 'AmbienteController');
 
 Route::get('/semestre','MateriaController@getSemestre');
-Route::resource('materia', 'MateriaController');
+// Route::resource('materia', 'MateriaController');
 // Route::resource('semestre','ApiEventos');
 Route::get('/home', 'HomeController@index')->name('home');
 

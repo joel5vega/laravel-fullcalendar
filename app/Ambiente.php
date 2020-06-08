@@ -18,9 +18,9 @@ class Ambiente extends Model
     return $query->where('tipo','=','laboratorio');
     }
     //scope para retornar los registros q coincidan con el tipo
-    /*
-    public function scopeLabos($query){
-        return $query->where('tipo','=','laboratorio');
+    
+    public function scopeTipo($query,$tipo){
+        return $query->where('tipo','=',$tipo);
     }
-    */
+    
 }

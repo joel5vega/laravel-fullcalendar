@@ -15,4 +15,7 @@ class Materia extends Model
     public function scopeMateriasSemestre($query,$semestre){
         return $query->where('semestre','=',$semestre);
     }
+    public function scopeMateriasSemestreMencion($query,$semestre,$mencion){
+        return $query->where('semestre','=',$semestre)->where($mencion,'=','si');;
+    }
 }

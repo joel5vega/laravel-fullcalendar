@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Clase;
 use App\Dato;
+
 use Illuminate\Http\Request;
 
 class ClaseController extends Controller
@@ -57,7 +58,7 @@ class ClaseController extends Controller
     {
         //
     }
-
+  
     /**
      * Store a newly created resource in storage.
      *
@@ -82,46 +83,7 @@ class ClaseController extends Controller
         
         return response()->json($data['eventos']);
     }                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          
-    public function getDatos(){
-         $datos=Dato::all();
-        return $datos;
-    }
-    public function getSearch(Request $request){
-        $semestre=$request->query('semestre');
-        $mencion=$request->query('mencion');
-        $ambiente=$request->query('ambiente');
-        if($semestre<7){
-            $clases= Dato::Ambiente($semestre)->get();
-            return response()->json($clases);
-        }
-        elseif(isset($mencion)){
-            $clases= Dato::Mencion($semestre,$mencion)->get();
-            return response()->json($clases);
-            
-        }
-        
-        
-   }
     
-    public function getSemestre(Request $request)
-    {
-        $semestre=$request->semestre;
-        $mencion=$request->query('mencion');
-        if($semestre<7){
-            $clases= Dato::Ambiente($semestre)->get();
-            return response()->json($clases);
-        }
-        elseif(isset($mencion)){
-            $clases= Dato::Mencion($semestre,$mencion)->get();
-            return response()->json($clases);
-        }
-    }
-    
-    public function getAmbiente($id)
-    {
-        $clases= Dato::Ambiente($id)->get();
-        return response()->json($clases);
-    }
 
 
 

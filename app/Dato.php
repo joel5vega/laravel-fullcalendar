@@ -25,5 +25,9 @@ class Dato extends Model
         return $query->where('semestre','=',$semestre)->where($mencion,'=','si');
     }
     
+    public function scopeindexAmbiente($query){
+return $query->select('ambiente_id as id','ambiente as nombre','tipoAmbiente as tipo')->groupBy('id');
+    }
+    
 
 }
