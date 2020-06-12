@@ -36,6 +36,7 @@ Route::get('index/materias/{semestre}','DatoController@getMaterias');
 Route::get('index/ambientes','DatoController@getAmbientes');
 Route::get('index/responsables','DatoController@getResponsables');
 
+
 Route::get('aulas','EventosController@getAula');
 
 

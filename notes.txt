@@ -46,3 +46,8 @@ return Destination::addSelect(['last_flight' => Flight::select('name')
     ->orderBy('arrived_at', 'desc')
     ->limit(1)
 ])->get();
+
+
+
+///Para crear un request customizado
+php artisan make:request CrearClaseRequest

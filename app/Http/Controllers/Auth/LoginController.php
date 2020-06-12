@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+Use App\User;
+use Illuminate\Http\Request;
 
 class LoginController extends Controller
 {
@@ -37,4 +39,22 @@ class LoginController extends Controller
     {
         $this->middleware('guest')->except('logout');
     }
+
+        //Login creado desde https://www.toptal.com/laravel/restful-laravel-api-tutorial
+/*
+    public function login(Request $request){
+        $this->validateLogin($request);
+        if($this->attemptLogin($request)){
+            $user= new User;
+            $user=$this->guard()->user();
+            $token=$user->generateToken();
+
+            return response()->json([
+                'data'=>$user->toArray()
+            ]);
+        }
+
+        return $this->sendFailedLoginResponse($request);
+    }
+    */
 }
