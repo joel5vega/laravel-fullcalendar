@@ -18,7 +18,11 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 */
+// Route::get('periodos','')
 Route::post('login','Auth\LoginController@login');
 Route::post('crear','ClaseController@crearClase');
+Route::post('materias/eliminar/{id}','MateriaController@destroy');
+Route::get('materias','MateriaController@getMaterias');
+
 
 

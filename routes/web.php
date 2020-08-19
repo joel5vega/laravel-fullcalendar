@@ -31,6 +31,7 @@ Route::get('datos/','DatoController@getDatos');
 Route::get('search/{dato}','DatoController@getSearch');
 Route::get('semestres/{semestre}','DatoController@getClasesEnSemestre');
 Route::get('ambientes/{ambiente}','DatoController@getClasesEnAmbiente');
+Route::get('index/materias/','DatoController@getMaterias');
 Route::get('index','DatoController@apiIndex');
 Route::get('index/materias/{semestre}','DatoController@getMaterias');
 Route::get('index/ambientes','DatoController@getAmbientes');

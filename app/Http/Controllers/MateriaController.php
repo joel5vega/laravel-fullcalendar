@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Materia;
 use App\Pensum;
+
 class MateriaController extends Controller
 {
     /**
@@ -15,9 +16,9 @@ class MateriaController extends Controller
     public function index()
     {
         //
-        
-        $materias=Materia::orderBy('semestre','DESC')->paginate(30);
-        return view('Materia.index',compact('materias')); 
+
+        $materias = Materia::orderBy('semestre', 'DESC')->paginate(30);
+        return view('Materia.index', compact('materias'));
     }
 
     /**
@@ -32,24 +33,22 @@ class MateriaController extends Controller
         // foreach($pensums as $item){
         //     print_r($item->nombre);
         // }
-       //$pensums = Pensum::where("semestre","=",1)->select('nombre')->get()->toArray();
-        return view('Materia.create',compact('pensums'));
-        
+        //$pensums = Pensum::where("semestre","=",1)->select('nombre')->get()->toArray();
+        return view('Materia.create', compact('pensums'));
     }
-    public function getSemestre(Request $request){
+    public function getSemestre(Request $request)
+    {
         // echo "funcion getSemestre<br>";
-        if($request->ajax()){
-            $materias = Pensum::where("semestre",$request->semestre)->get();
-            
-            foreach($materias as $materia){
-                $materiasArray[$materia->id]=$materia->nombre;
+        if ($request->ajax()) {
+            $materias = Pensum::where("semestre", $request->semestre)->get();
+
+            foreach ($materias as $materia) {
+                $materiasArray[$materia->id] = $materia->nombre;
                 echo $materia->nombre;
             }
-            
+
             return response()->json($materiasArray);
         }
-        
-
     }
 
     /**
@@ -60,27 +59,26 @@ class MateriaController extends Controller
      */
     public function store(Request $request)
     {
-         $this->validate($request,['materia'=>'required','nivel'=>'required','paralelo'=>'nullable']);
-    //    print_r($request->materia);
+        $this->validate($request, ['materia' => 'required', 'nivel' => 'required', 'paralelo' => 'nullable']);
+        //    print_r($request->materia);
         $asignatura = new Pensum;
-        $asignatura = Pensum::where("id","=",$request->materia)->get()->toArray();
+        $asignatura = Pensum::where("id", "=", $request->materia)->get()->toArray();
         // $materia['nivel']= $request->nivel;
         $materia = new Materia;
         //hay que investigar como asignar un objeto a otro
-         $materia->sigla = $asignatura[0]['sigla'];
-         $materia->nombre = $asignatura[0]['nombre'];
-         $materia->tipo = $asignatura[0]['tipo'];
-         $materia->semestre = $asignatura[0]['semestre'];
+        $materia->sigla = $asignatura[0]['sigla'];
+        $materia->nombre = $asignatura[0]['nombre'];
+        $materia->tipo = $asignatura[0]['tipo'];
+        $materia->semestre = $asignatura[0]['semestre'];
         $materia->nivel = $request->nivel;
         $materia->paralelo = $request->paralelo;
         $materia->control = $request->control;
         $materia->telecomunicaciones = $request->telecomunicaciones;
-        $materia->pensum=$asignatura[0]['pensum'];
+        $materia->pensum = $asignatura[0]['pensum'];
         $materia->save();
 
         //Materia::create($request->all());
-        return redirect()->route('materia.index')->with('success','Registro creado satisfactoriamente');
-    
+        return redirect()->route('materia.index')->with('success', 'Registro creado satisfactoriamente');
     }
 
     /**
@@ -91,8 +89,8 @@ class MateriaController extends Controller
      */
     public function show($id)
     {
-        $materias=Materia::find($id);
-        return  view('Materias.show',compact('materias'));
+        $materias = Materia::find($id);
+        return  view('Materias.show', compact('materias'));
     }
 
     /**
@@ -103,8 +101,8 @@ class MateriaController extends Controller
      */
     public function edit($id)
     {
-        $materia=Materia::find($id);
-        return view('materia.edit',compact('materia'));
+        $materia = Materia::find($id);
+        return view('materia.edit', compact('materia'));
     }
 
     /**
@@ -117,9 +115,9 @@ class MateriaController extends Controller
     public function update(Request $request, $id)
     {
         //
-        $this->validate($request,[ 'nombre'=>'required','semestre'=>'required','mencion'=>'required','presigla'=>'required','postsigla'=>'required','pensum'=>'required','tipo'=>'required','nivel'=>'required','paralelo'=>'nullable']);
+        $this->validate($request, ['nombre' => 'required', 'semestre' => 'required', 'mencion' => 'required', 'presigla' => 'required', 'postsigla' => 'required', 'pensum' => 'required', 'tipo' => 'required', 'nivel' => 'required', 'paralelo' => 'nullable']);
         Materia::find($id)->update($request->all());
-        return redirect()->route('materia.index')->with('success','Registro actualizado satisfactoriamente');
+        return redirect()->route('materia.index')->with('success', 'Registro actualizado satisfactoriamente');
     }
 
     /**
@@ -131,16 +129,21 @@ class MateriaController extends Controller
     public function destroy($id)
     {
         //
-        Materia::find($id)->delete();
-        return redirect()->route('materia.index')->with('success','Registro eliminado satisfactoriamente');
-    }
-/*
-    public function getMaterias(Request $request,$id){
-        if($request->ajax()){
-            $selectmateria = Clase::selectmateria($id);
-            return response()->json($selectmateria);
-        }
+        // echo $id;
+        $response = $id;
+        // Materia::find($id)->delete();
+        // return redirect()->route('materia.index')->with('success','Registro eliminado satisfactoriamente');
+        return response()->json($response);
     }
 
-   */ 
+    public function getMaterias(Request $request)
+    {
+        $id = $request->id;
+        if (isset($id)) {
+            $datos['materias'] = Materia::find($id);
+        } else {
+            $datos['materias'] = Materia::all();
+        }
+        return response()->json($datos);
+    }
 }

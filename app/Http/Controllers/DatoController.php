@@ -6,6 +6,7 @@ use App\Ambiente;
 use App\Materia;
 use App\Responsable;
 use App\Dato;
+use App\Semestre;
 use App\Periodo;
 use Illuminate\Http\Request;
 
@@ -23,8 +24,15 @@ class DatoController extends Controller
         $mencion = $request->query('mencion');
         if (isset($mencion)) {
             $datos['materias'] = Materia::MateriasSemestreMencion($semestre, $mencion)->get();
-        } else {
+        } 
+        else{
+        if(isset($semestre)){
             $datos['materias'] = Materia::MateriasSemestre($semestre)->get();
+        }
+    
+        else {
+            $datos['materias']=Materia::all();
+        }
         }
 
         return response()->json($datos);
@@ -69,10 +77,16 @@ class DatoController extends Controller
         $periodo = $request->query('periodo');
         // $response = $ambiente;
         $index = $request->query('index');
+        $tipo = $request->query('tipo');
+
         if (isset($index)) {
             switch ($index) {
                 case 'ambientes': {
-                        $response['ambientes'] = Dato::indexAmbiente($periodo)->get();
+                        if (isset($periodo)) {
+                            $response['ambientes'] = Dato::indexAmbiente($periodo)->get();
+                        } else {
+                            $response['ambientes'] = Ambiente::all();
+                        }
                         $response['periodo'] = $periodo;
                     }
 
@@ -81,21 +95,31 @@ class DatoController extends Controller
                         $actual = $this->getActualPeriodo();
                         $response['periodo'] = $actual;
                     }
+                    case 'responsables': {
+                        $response['responsables'] = Responsable::all();
+                    }
+                case 'semestres': {
+                        $response['semestres'] = Semestre::Semestre()->get();
+                    }
+                case 'menciones': {
+                        $response['menciones'] = Semestre::Mencion()->get();
+                    }
+
                     break;
             }
+        } else {
+            $response = Dato::Periodo($periodo)->get();
         }
-        else{
-            $response=Dato::Periodo($periodo)->get();
-        }
-        
+
         // $response="no hay";
         return response()->json($response);
     }
-    public function getActualPeriodo(){
+    public function getActualPeriodo()
+    {
         //obtiene hora actual
         $now = date("Y-m-d");
-        
-        $actual= Periodo::Actual($now)->get();
+
+        $actual = Periodo::Actual($now)->get();
         return $actual;
     }
 
