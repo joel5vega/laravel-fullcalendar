@@ -51,3 +51,9 @@ return Destination::addSelect(['last_flight' => Flight::select('name')
 
 ///Para crear un request customizado
 php artisan make:request CrearClaseRequest
+
+
+///Para habilitar CORS no funciono
+
+https://github.com/fruitcake/laravel-cors
+composer require fruitcake/laravel-cors

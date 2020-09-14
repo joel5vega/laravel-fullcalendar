@@ -14,14 +14,16 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// Route::get('/', function () {
-//     // return view('welcome');
-//     return view('eventos/index');
-// });
+ Route::get('/', function () {
+     // return view('welcome');
+     return view('eventos/index');
+ });
 Route::get('/','ClaseController@index')->middleware('auth');
 
 
 Auth::routes(['register'=>false,'reset'=>false,'verify'=>false]);
+
+
 //para rececpcionar eventos
 Route::get('showSemestres/{semestre}','EventosController@showSemestres');
 Route::get('showAulas/{aula}','EventosController@showAulas');
