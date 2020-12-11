@@ -25,5 +25,12 @@ Route::post('crear','ClaseController@crearClase');
 Route::post('materias/eliminar/{id}','MateriaController@destroy');
 Route::get('materias','MateriaController@getMaterias');
 
+// Responsables
+
+// Route::get('responsables/lista', 'ArticleController@index');
+// Route::get('responsables/lista/{article}', 'ArticleController@show');
+Route::post('responsables/lista', 'ResponsableController@store');
+Route::put('responsables/lista/{article}', 'ResponsableController@update');
+Route::delete('responsables/lista/{article}', 'ResponsableController@destroy');
 
 

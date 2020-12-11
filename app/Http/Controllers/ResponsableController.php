@@ -36,6 +36,7 @@ class ResponsableController extends Controller
     public function store(Request $request)
     {
         //
+        return "store";
     }
 
     /**
@@ -70,6 +71,7 @@ class ResponsableController extends Controller
     public function update(Request $request, Responsable $responsable)
     {
         //
+        return "update";
     }
 
     /**
@@ -81,5 +83,6 @@ class ResponsableController extends Controller
     public function destroy(Responsable $responsable)
     {
         //
+        return "destroy";
     }
 }
