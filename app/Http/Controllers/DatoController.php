@@ -9,6 +9,7 @@ use App\Dato;
 use App\Semestre;
 use App\Periodo;
 use Illuminate\Http\Request;
+use stdClass;
 
 class DatoController extends Controller
 {
@@ -24,15 +25,12 @@ class DatoController extends Controller
         $mencion = $request->query('mencion');
         if (isset($mencion)) {
             $datos['materias'] = Materia::MateriasSemestreMencion($semestre, $mencion)->get();
-        } 
-        else{
-        if(isset($semestre)){
-            $datos['materias'] = Materia::MateriasSemestre($semestre)->get();
-        }
-    
-        else {
-            $datos['materias']=Materia::all();
-        }
+        } else {
+            if (isset($semestre)) {
+                $datos['materias'] = Materia::MateriasSemestre($semestre)->get();
+            } else {
+                $datos['materias'] = Materia::all();
+            }
         }
 
         return response()->json($datos);
@@ -95,7 +93,7 @@ class DatoController extends Controller
                         $actual = $this->getActualPeriodo();
                         $response['periodo'] = $actual;
                     }
-                    case 'responsables': {
+                case 'responsables': {
                         $response['responsables'] = Responsable::all();
                     }
                 case 'semestres': {
@@ -146,5 +144,56 @@ class DatoController extends Controller
         $periodo = $request->query('periodo');
         $clases = Dato::Ambiente($periodo, $ambiente)->get();
         return response()->json($clases);
+    }
+    public function getClasesEnResponsable(Request $request)
+    {
+        $responsable = $request->responsable;
+        $periodo = $request->query('periodo');
+        $clases = Dato::Responsable($periodo, $responsable)->get();
+        return response()->json($clases);
+    }
+    // Funcion para obtener las clases actuales en un tiempo dado
+    // en la consulta recibiremos la fecha actual, es decir
+    // fecha, dia , hora, minuto
+    //en nuestra tabla tenemos la siguiente informacion
+    // daysOfWeek (dia) startTime y endTime (tiempos de inicio y final) asi como periodo
+    /*
+    Algoritmo de busqueda
+    1. dia
+    horas
+    tenemos hora actual
+    queremos ver todos los q tengan hora de inicio menor a hora actual
+    y hora de fin mayor a la actual
+
+    */
+    public function getClasesNow(Request $request)
+    {
+        // Obtenemos el tipo de consulta, si es q no existe se retorna todas las clases
+        $ambientes = $request->query('ambientes');
+        $index = $request->query('index');
+        $today = getdate();
+        // Periodo
+        $periodo = $this->getActualPeriodo()[0]->id;
+        $dia = $today["wday"];
+        $hora = $today["hours"];
+        $minuto = $today["minutes"];
+        // La hora siempre debe estar en formato hh:mm si no esta asi falla
+        $time = "$hora:$minuto";
+        $clases = Dato::Hora($periodo, $dia, $time)->get();
+        $ocupado = Dato::IndexOcupado($periodo, $dia, $time)->pluck("ambiente_id");
+        /// Switch index
+        if (isset($ambientes)) {
+            switch ($ambientes) {
+                case 'ocupado': {
+                        $response['ambientes'] = Ambiente::all()->whereIn('id', $ocupado)->sortBy("tipo");
+                    }
+                    break;
+                case 'libre': {
+                        $response['ambientes'] = Ambiente::all()->whereNotIn('id', $ocupado)->sortBy("tipo");
+                    }
+                    break;
+            }
+        } else $response = $clases;
+        return response()->json(['ambientes' => $response['ambientes']->values()]);
     }
 }

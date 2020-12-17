@@ -10,7 +10,7 @@ class Dato extends Model
     protected $table = 'datos';
 
     //Disenamos scopes
-    //Para obtener el listado de las clases en un ambiente determindao
+    //Para obtener el listado de las clases en un periodp determindao
     public function scopePeriodo($query, $periodo)
     {
         return $query->where('periodo_id', '=', $periodo);
@@ -34,6 +34,31 @@ class Dato extends Model
     public function scopeMencion($query, $periodo, $semestre, $mencion)
     {
         return $query->where('periodo_id', '=', $periodo)->where('semestre', '=', $semestre)->where($mencion, '=', 'si');
+    }
+
+    //obtener las clases de un responsable especifico
+    public function scopeResponsable($query, $periodo, $responsable)
+    {
+        return $query->where('periodo_id', '=', $periodo)->where('responsable_id', '=', $responsable);
+    }
+    //para obtener las clases de un dia determinado
+    public function scopeDia($query, $periodo, $dia)
+    {
+        return $query->where('periodo_id', '=', $periodo)->where('daysOfWeek', '=', $dia);
+    }
+    //para obtener las clases de un hora determinado
+    public function scopeHora($query, $periodo, $dia,$hora)
+    {
+        return $query->where('periodo_id', '=', $periodo)->where('daysOfWeek','=',$dia)->where('endTime', '>', $hora)->where('startTime','<',$hora);
+    }
+    // Solo obtiene la lista especifica
+    public function scopeIndexOcupado($query, $periodo, $dia,$hora)
+    {
+        return $query->where('periodo_id', '=', $periodo)->where('daysOfWeek','=',$dia)->where('endTime', '>', $hora)->where('startTime','<',$hora)->select('ambiente_id');
+    }
+    public function scopeIndexLibre($query, $periodo, $dia,$hora,$id,$nombre)
+    {
+        return $query->where('periodo_id', '=', $periodo)->where('daysOfWeek','=',$dia)->where('endTime', '<', $hora)->orwhere('startTime','>',$hora)->select('ambiente_id');
     }
     //un indice de los ambientes disponibles en las clases existentes
     public function scopeindexAmbiente($query, $periodo)

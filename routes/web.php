@@ -31,12 +31,19 @@ Route::get('showAulas/{aula}', 'EventosController@showAulas');
 //obtener datos para api
 Route::get('datos/', 'DatoController@getDatos');
 Route::get('search/{dato}', 'DatoController@getSearch');
+//Devuelve las clases dadas ciertas condiciones
 Route::get('semestres/{semestre}', 'DatoController@getClasesEnSemestre');
 Route::get('ambientes/{ambiente}', 'DatoController@getClasesEnAmbiente');
+Route::get('responsables/{responsable}', 'DatoController@getClasesEnResponsable');
+//obtener las clases en el momento actual
+Route::get('now', 'DatoController@getClasesNow');
+
 Route::get('index/materias/', 'DatoController@getMaterias');
 Route::get('index', 'DatoController@apiIndex');
 Route::get('index/materias/{semestre}', 'DatoController@getMaterias');
+//Devuelve todos los ambientes
 Route::get('index/ambientes', 'DatoController@getAmbientes');
+//Devuelve los responsables
 Route::get('index/responsables', 'DatoController@getResponsables');
 
 
