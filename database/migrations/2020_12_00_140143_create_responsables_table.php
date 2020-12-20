@@ -19,9 +19,10 @@ class CreateResponsablesTable extends Migration
             $table->string('ap_paterno');
             $table->string('ap_materno')->nullable();
             $table->string('puesto');
-            $table->string('titulo','10')->nullable();
-            $table->string('estado')->nullable();
             // //este campo puede estar nulo
+            $table->string('titulo', '10')->nullable();
+            $table->string('descripcion')->nullable();
+            $table->string('foto')->nullable();
             $table->timestamps();
         });
     }

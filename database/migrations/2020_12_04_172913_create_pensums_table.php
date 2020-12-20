@@ -15,15 +15,9 @@ class CreatePensumsTable extends Migration
     {
         Schema::create('pensums', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('sigla');
             $table->string('nombre');
-            $table->string('tipo');
-            $table->unsignedInteger('semestre');
-            $table->string('control')->nullable();
-            $table->string('telecomunicaciones')->nullable();;
-            $table->string('sistemas')->nullable();;            
-            $table->string('requisito')->nullable();;
-            $table->string('pensum');
+            $table->string('descripcion')->nullable();
+            $table->timestamps();
         });
     }
 

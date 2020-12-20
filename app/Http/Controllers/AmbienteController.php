@@ -3,117 +3,75 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Ambiente;
+use App\Ambiente as Ambiente;
 
 class AmbienteController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        //
-        $ambientes=Ambiente::orderBy('id','DESC')->paginate(15);
-        
-        //return $ambientes;
-        return view('Ambiente.index',compact('ambientes')); 
-    }
-    public function api_index(Request $request)
-    {
-        
-        
-        $tipo=$request->query('tipo');
-        if(isset($tipo))
-        {
-            $ambientes=Ambiente::where('tipo','=',$tipo)->get();
-            return $ambientes;
-        } 
-        else
-        $ambientes=Ambiente::orderBy('id','DESC')->paginate(15);
-        return $ambientes;
-        //return $ambientes;
-        // return view('Ambiente.index',compact('ambientes')); 
+        $tipo = $request->query('tipo');
+        if (isset($tipo)) {
+            $ambientes = Ambiente::Tipo($tipo)->get();
+            $response = $ambientes;
+        } else {
+            $ambientes  = Ambiente::all();
+            $response['ambientes'] = $ambientes;
+        }
+        return response()->json($response);
+        // return view('Ambiente.index', compact('ambientes'));
     }
 
-    public function create()
-    {
-        //
-        echo 'llega';
-        return view('Ambiente.create');
-    }
-
-    
     public function store(Request $request)
     {
         //
-        $this->validate($request,['nombre'=>'required','tipo'=>'required','capacidad'=>'nullable','edificio','piso']);
-        Ambiente::create($request->all());
-        return redirect()->route('ambiente.index')->with('success','Registro creado satisfactoriamente');
-    
-    }
-    public function api_store(Request $request)
-    {
-        //
-        $this->validate($request,['nombre'=>'required','tipo'=>'required','capacidad'=>'nullable','edificio','piso']);
-        Ambiente::create($request->all());
-        echo $request;
-        return "exito";
-    
+        $validatedData = $request->validate(
+            ['nombre' => 'required', 'tipo' => 'required', 'capacidad' => 'nullable']
+        );
+        $ambiente = Ambiente::create($validatedData);
+        return response()->json('Ambiente creado');
+        // return $request;
+        //return redirect()->route('ambiente.index')->with('success', 'Registro creado satisfactoriamente');
     }
 
     public function show($id)
     {
         //
-        $ambientes=Ambiente::find($id);
-        //return $ambientes;
-        return  view('ambiente.show',compact('ambientes'));
-    }
-    //api
-    public function api_show($id)
-    {
-        //
-        $ambientes=Ambiente::find($id);
-        return $ambientes;
+        $ambientes = Ambiente::find($id);
+        return response()->json($ambientes);
+        // return  view('ambiente.show',compact('ambientes'));1
     }
 
-    public function edit($id)
+    public function update(Request $request)
     {
         //
-        $ambiente=ambiente::find($id);
-        return view('ambiente.edit',compact('ambiente'));
-    }
+        $validatedData = $request->validate(
+            ['id' => 'required', 'nombre' => 'required', 'tipo' => 'required', 'capacidad' => 'nullable']
+        );
+        Ambiente::find($request->id)->update($validatedData);
 
-    public function update(Request $request, $id)
-    {
-        //
-        $this->validate($request,['nombre'=>'required','tipo'=>'required','capacidad','edificio','piso']);
- 
-        ambiente::find($id)->update($request->all());
-        return redirect()->route('ambiente.index')->with('success','Registro actualizado satisfactoriamente');
- 
-    }
-
-    public function api_update(Request $request, $id)
-    {
-        //
-        $this->validate($request,['nombre'=>'required','tipo'=>'required','capacidad','edificio','piso']);
- 
-        ambiente::find($id)->update($request->all());
-        //return redirect()->route('ambiente.index')->with('success','Registro actualizado satisfactoriamente');
-        return "actualizado";
- 
+        return $request;
+        // return redirect()->route('ambiente.index')->with('success', 'Registro actualizado satisfactoriamente');
     }
 
     public function destroy($id)
     {
-        //
         Ambiente::find($id)->delete();
-        return redirect()->route('ambiente.index')->with('success','Registro eliminado satisfactoriamente');
+        return response()->json('Ambiente creado');
+        // return redirect()->route('ambiente.index')->with('success', 'Registro eliminado satisfactoriamente');
     }
-
-    public function api_delete($id)
+    /*
+    public function edit($id)
     {
         //
-        Ambiente::find($id)->delete();
-        //return redirect()->route('ambiente.index')->with('success','Registro eliminado satisfactoriamente');
-        return "eliminado";
+        $ambiente = ambiente::find($id);
+        return view('ambiente.edit', compact('ambiente'));
     }
-}
+    public function create()
+    {
+        //
+        echo 'llega';
+        // return view('Ambiente.create');
+    }
 
+    */
+}

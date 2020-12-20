@@ -29,6 +29,6 @@ class CreateSemestresTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('pensums');
+        Schema::dropIfExists('semestres');
     }
 }

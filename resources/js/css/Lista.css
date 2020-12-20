@@ -1,0 +1,105 @@
+body {
+    color: #404E67;
+    background: #F5F7FA;
+    font-family: 'Open Sans', sans-serif;
+}
+.table-wrapper {
+    width: 100%;
+    margin: 1% auto;
+    background: #fff;
+    /* padding: 1%;	 */
+    box-shadow: 0 1% 1px rgba(0,0,0,.05);
+}
+.table-title {
+    /* padding-bottom: 0.5%; */
+    margin: 0 0 1%;
+}
+.table-title h2 {
+    margin: 2% 0 0;
+    font-size: 1rem;
+}
+.table-title .add-new {
+    float: right;
+    height: 30px;
+    font-weight: bold;
+    font-size: 0.8rem;
+    text-shadow: none;
+    min-width: 5%;
+    border-radius: 50px;
+    line-height: 2px;
+}
+.table-title .add-new i {
+    margin-right: 0;
+}
+table.table {
+    table-layout: auto;
+}
+table.table tr th, table.table tr td {
+    font-size: 0.8rem;
+    border-color: #e9e9e9;
+}
+@media(max-width:420px){
+    table.table tr th{
+        font-size:0.6rem;
+        border-color: green;
+        max-width: 1%;
+        padding:1%;
+    }
+    th.fit{
+        width: 10%;
+        font-size: 0.2rem;
+    }
+    table.table tr td {
+        font-size: 0.7rem;
+        /* border-color: whitesmoke; */
+        border-color: blue;
+        font-weight: bold;
+        padding:2%;
+        border:0%;
+    }
+}
+table.table th i {
+    font-size: 13px;
+    margin: 0 0.1rem;
+    cursor: pointer;
+}
+table.table th:last-child {
+    width: 100px;
+}
+table.table td a {
+    cursor: pointer;
+    display: inline-block;
+    margin: 0 0.1rem;
+    min-width: 5%;
+    padding:1%;
+}    
+table.table td a.add {
+    color: #27C46B;
+}
+table.table td a.edit {
+    color: #FFC107;
+}
+table.table td a.delete {
+    color: #E34724;
+}
+table.table td i {
+    font-size: 0.8rem;
+}
+table.table td a.add i {
+    font-size: 0.7em;
+    margin-right: -1px;
+    position: relative;
+    top: 3px;
+}    
+table.table .form-control {
+    height: 32px;
+    line-height: 32px;
+    box-shadow: none;
+    border-radius: 0;
+}
+table.table .form-control.error {
+    border-color: #f50000;
+}
+table.table td .add {
+    display: none;
+}

@@ -1,0 +1,13 @@
+{
+	"folders": [
+		{
+			"path": "..\\.."
+		},
+		{
+			"path": "..\\..\\..\\..\\laravel-fullcalendar"
+		}
+	],
+	"settings": {
+		"liveServer.settings.port": 5501
+	}
+}

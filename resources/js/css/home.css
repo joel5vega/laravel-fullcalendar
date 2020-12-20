@@ -1,0 +1,24 @@
+#calendario{
+    padding-top: 10px;
+    border:0px solid black;
+    margin: 0 auto;
+    /* max-width: 900px; */
+}
+#title{
+    display: table;
+    margin: 0 auto;
+    align-items: center;
+  justify-content: center;
+  }
+
+  #periodo{
+    display: table;
+    margin: 0 rigth;
+    
+  }
+#pdf{
+    background-color: transparent;
+}
+#button{
+    background-color: transparent;
+}

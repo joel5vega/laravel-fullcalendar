@@ -9,13 +9,17 @@ en app/providers/appservicesproviders
 https://laravel.com/docs/7.x/authentication
 composer require laravel/ui --dev
 
-usamos vue
-php artisan ui vue --auth
-//si falla la key
-php artisan key:generate
-npm install
-
-
+utilizaremos react
+--------------------------------
+composer require laravel/ui:^2.4
+php artisan ui react
+npm install 
+npm audit fix
+&& npm run dev
+--------------------------------
+autenticacion
+https://laravel.com/docs/7.x/authentication#introduction-database-considerations
+php artisan ui react --auth
 php artisan make:controller EventosController
 
 en la vista index.blade

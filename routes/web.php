@@ -13,11 +13,14 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
+Route::view('/{path?}', 'app');
+/* Enrutado original a welcome.blade 
 Route::get('/', function () {
-    // return view('welcome');
-    return view('eventos/index');
+    return view('welcome');
 });
+*/
+// Route::resource('ambiente', 'AmbienteController');
+/*
 Route::get('/', 'ClaseController@index')->middleware('auth');
 
 
@@ -50,14 +53,22 @@ Route::get('index/responsables', 'DatoController@getResponsables');
 Route::get('aulas', 'EventosController@getAula');
 
 
-Route::resource('eventos', 'EventosController')->middleware('auth');
+// Route::resource('eventos', 'EventosController')->middleware('auth');
 Route::resource('clases', 'ClaseController');
 // ->middleware('auth');
-Route::resource('ambiente', 'AmbienteController');
+
 // crud responsable
 Route::resource('/responsable/lista', 'ResponsableController');
 
 Route::get('/semestre', 'MateriaController@getSemestre');
 // Route::resource('materia', 'MateriaController');
 // Route::resource('semestre','ApiEventos');
+Route::get('/home', 'HomeController@index')->name('home');
+*/
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
+
+Auth::routes();
+
 Route::get('/home', 'HomeController@index')->name('home');

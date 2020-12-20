@@ -1,0 +1,22 @@
+.p-31{
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+}
+.logo{
+    height:'50%';
+    width:'50%';
+}
+.header {
+  background-size: cover;
+  min-height: 10vh;
+    font-size: 24px;
+}
+
+.header .navbar{
+    background-color: transparent;
+    transition: all 0.2s;
+    box-shadow: 2px 2px 10px #666;
+    padding: 1%;
+    
+}

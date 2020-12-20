@@ -7,8 +7,10 @@ use App\Materia;
 use App\Responsable;
 use App\Dato;
 use App\Semestre;
+use App\Mencion;
 use App\Periodo;
 use Illuminate\Http\Request;
+use PhpParser\Node\Expr\AssignOp\Concat;
 use stdClass;
 
 class DatoController extends Controller
@@ -71,11 +73,10 @@ class DatoController extends Controller
     //esto nos dara los datos que necesitamos para nuestras opciones
     public function apiIndex(Request $request)
     {
-        // $ambiente = $request->query('ambiente');
         $periodo = $request->query('periodo');
-        // $response = $ambiente;
         $index = $request->query('index');
         $tipo = $request->query('tipo');
+        $actual = $this->getActualPeriodo();
 
         if (isset($index)) {
             switch ($index) {
@@ -87,30 +88,46 @@ class DatoController extends Controller
                         }
                         $response['periodo'] = $periodo;
                     }
+                    break;
+                case 'clases': {
+                        // $response['menciones'] = Semestre::Mencion()->get();
+                        $response['clases'] = Dato::Periodo($actual)->get();
+                    }
 
+                    break;
                 case 'periodos': {
                         $response['periodos'] = Periodo::all();
                         $actual = $this->getActualPeriodo();
                         $response['periodo'] = $actual;
                     }
+                    break;
                 case 'responsables': {
                         $response['responsables'] = Responsable::all();
                     }
+                    break;
                 case 'semestres': {
-                        $response['semestres'] = Semestre::Semestre()->get();
+                        // $response['semestres'] = Semestre::Semestre()->get();
                     }
                 case 'menciones': {
-                        $response['menciones'] = Semestre::Mencion()->get();
+                        // $response['menciones'] = Semestre::Mencion()->get();
                     }
 
                     break;
             }
         } else {
-            $response = Dato::Periodo($periodo)->get();
+            // $response['materias_control']=Materia::all()->menciones('nombre');
+            $response['materias'] = Materia::all();
+            $response['ambientes'] = Ambiente::all();
+            $response['menciones'] = Mencion::all();
+            $response['periodos'] = Periodo::all();
+            $response['periodoActual'] = $actual;
+            $response['responsables'] = Responsable::all();
+            $response['clases'] = Dato::Periodo($actual[0]->id)->get();
+            
         }
-
-        // $response="no hay";
-        return response()->json($response);
+        $datos = response()->json($response);
+        return $datos;
+        // return view('Home',compact('response'));
     }
     public function getActualPeriodo()
     {
@@ -175,7 +192,12 @@ class DatoController extends Controller
         // Periodo
         $periodo = $this->getActualPeriodo()[0]->id;
         $dia = $today["wday"];
-        $hora = $today["hours"];
+        $hour = $today["hours"];
+        if ($hour < 10) {
+            $hora = "0$hour";
+        } else {
+            $hora = $today["hours"];
+        }
         $minuto = $today["minutes"];
         // La hora siempre debe estar en formato hh:mm si no esta asi falla
         $time = "$hora:$minuto";

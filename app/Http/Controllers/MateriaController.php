@@ -17,8 +17,9 @@ class MateriaController extends Controller
     {
         //
 
-        $materias = Materia::orderBy('semestre', 'DESC')->paginate(30);
-        return view('Materia.index', compact('materias'));
+        $materias = Materia::with('pensum','menciones')->get();
+        return response()->json($materias);
+        // return view('Materia.index', compact('materias'));
     }
 
     /**

@@ -18,8 +18,7 @@ class CreateAmbientesTable extends Migration
             $table->string('nombre');
             $table->string('tipo');
             $table->unsignedInteger('capacidad')->nullable();
-            $table->string('edificio')->nullable();
-            $table->string('piso')->nullable();
+            $table->string('descripcion')->nullable();
             $table->timestamps();
         });
     }

@@ -9,7 +9,7 @@ class Clase extends Model
     //
     protected $table = 'clases';
    // protected $dates = ['deleted_at'];//Registramos la nueva columna para #SoftDelete
-    protected $fillable = ['materia_id','responsable_id','ambiente_id','dia','horaini','horafin','periodo'];
+    protected $fillable = ['materia_id','responsable_id','ambiente_id','periodo_id','dia','horaini','horafin','color','nivel','paralelo','estado'];
     public $timestamps = false;
 
     use SoftDeletes;

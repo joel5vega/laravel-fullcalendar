@@ -19,13 +19,8 @@ class CreateMateriasTable extends Migration
             $table->string('nombre');
             $table->string('tipo');
             $table->string('semestre');
-            $table->string('control')->nullable();;
-            $table->string('telecomunicaciones')->nullable();;
-            $table->string('sistemas')->nullable();
-            $table->string('requisito')->nullable();            
-            $table->string('pensum');
-            $table->string('nivel');
-            $table->string('paralelo');
+            $table->unsignedInteger('pensum_id');
+            $table->foreign('pensum_id')->references('id')->on('pensums');
             $table->timestamps();
         });
     }

@@ -25,9 +25,13 @@ class CreateClasesTable extends Migration
             $table->foreign('ambiente_id')->references('id')->on('ambientes');
             $table->unsignedInteger('periodo_id');
             $table->foreign('periodo_id')->references('id')->on('periodos');
-            $table->string('daysOfWeek'); //  dia que se repite
-            $table->string('startTime'); //hora de inicio
-            $table->string('endTime'); // hora de final
+            $table->string('dia'); //  dia que se repite
+            $table->string('hora_ini'); //hora de inicio
+            $table->string('hora_fin'); // hora de final
+            $table->string('color');
+            $table->string('nivel'); // 
+            $table->string('paralelo',10); 
+            $table->unsignedInteger('estado')->default(0); // 
             //esta linea permite el borrado logico pero no de todo
             $table->softDeletes();
             $table->timestamps();

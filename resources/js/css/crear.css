@@ -1,0 +1,12 @@
+.fc .fc-widget-content{
+    border: 1px solid black
+}
+.fc .fc-widget-header {
+    border: 0.5px solid black
+}
+.fc .fc-axis{
+    border: 1px solid black
+}
+.fc .fc-time{
+    font-weight: bold;
+}
