@@ -119,6 +119,7 @@ class DatoController extends Controller
             $response['materias'] = Materia::all();
             $response['ambientes'] = Ambiente::all();
             $response['menciones'] = Mencion::all();
+            $response['semestres'] = Semestre::all();
             $response['periodos'] = Periodo::all();
             $response['periodoActual'] = $actual;
             $response['responsables'] = Responsable::all();
