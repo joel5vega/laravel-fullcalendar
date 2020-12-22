@@ -116,7 +116,8 @@ class DatoController extends Controller
             }
         } else {
             // $response['materias_control']=Materia::all()->menciones('nombre');
-            $response['materias'] = Materia::all();
+            $materias = new MateriaController();
+            $response['materias'] = $materias->index()->original;
             $response['ambientes'] = Ambiente::all();
             $response['menciones'] = Mencion::all();
             $response['semestres'] = Semestre::all();
@@ -124,7 +125,6 @@ class DatoController extends Controller
             $response['periodoActual'] = $actual;
             $response['responsables'] = Responsable::all();
             $response['clases'] = Dato::Periodo($actual[0]->id)->get();
-            
         }
         $datos = response()->json($response);
         return $datos;
@@ -184,6 +184,7 @@ class DatoController extends Controller
     y hora de fin mayor a la actual
 
     */
+    /*
     public function getClasesNow(Request $request)
     {
         // Obtenemos el tipo de consulta, si es q no existe se retorna todas las clases
@@ -219,4 +220,5 @@ class DatoController extends Controller
         } else $response = $clases;
         return response()->json(['ambientes' => $response['ambientes']->values()]);
     }
+    */
 }

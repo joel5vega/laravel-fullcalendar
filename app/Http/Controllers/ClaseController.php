@@ -6,6 +6,7 @@ use App\Clase;
 use App\Dato;
 use App\Periodo;
 use App\Mencion;
+use App\Ambiente;
 
 use Illuminate\Http\Request;
 
@@ -35,7 +36,6 @@ class ClaseController extends Controller
                 $data = Dato::Ambiente($periodo, $ambiente)->get();
             return response()->json($data);
         }
-
         //Devolvemos las clases actuales
         $clases = Dato::Periodo($periodo)->get();
 
@@ -48,8 +48,7 @@ class ClaseController extends Controller
         $periodo = $request->query('periodo');
 
         if (!isset($periodo)) {
-            $dato = Periodo::Actual()->first();
-            $periodo = $dato->id;
+            $periodo = $this->getActualPeriodoId();
         }
         if ($semestre < 7) {
             $clases = Dato::Semestre($periodo, $semestre)->get();
@@ -74,7 +73,55 @@ class ClaseController extends Controller
         // $clases = $consulta->materias->pluck('materia_id');
         return $consulta;
     }
+    //Funcioin para obtener el periodo actual
+    public function getActualPeriodoId()
+    {
+        //obtiene hora actual
+        $now = date("Y-m-d");
+        $actual = Periodo::Actual($now)->first();
 
+        return $actual->id;
+    }
+    public function getTime()
+    {
+        $today = getdate();
+        $dia = $today["wday"];
+        $hour = $today["hours"];
+        if ($hour < 10) {
+            $hora = "0$hour";
+        } else {
+            $hora = $today["hours"];
+        }
+        $minuto = $today["minutes"];
+        // La hora siempre debe estar en formato hh:mm si no esta asi falla
+        $time = "$hora:$minuto";
+        $response['dia'] = $dia;
+        $response['time'] = $time;
+        return $response;
+    }
+    public function getClasesNow(Request $request)
+    {
+        // Obtenemos el tipo de consulta, si es q no existe se retorna todas las clases
+        $index = $request->query('index');
+        // Periodo, Dia y Hora Actual
+        $periodo = $this->getActualPeriodoId();
+        $dia = $this->getTime()['dia'];
+        $time = $this->getTime()['time'];
+        //Clases ocupadas
+        $clases = Dato::Hora($periodo, $dia, $time)->get();
+        $ocupado = Dato::IndexOcupado($periodo, $dia, $time)->pluck("ambiente_id");
+        if (isset($index)) {
+            switch ($index) {
+                    //para entregar lista de ambientes
+                case 'ambientes': {
+                        $response['ocupados'] = Ambiente::all()->whereIn('id', $ocupado)->sortBy("tipo")->values();
+                        $response['libres'] = Ambiente::all()->whereNotIn('id', $ocupado)->sortBy("tipo")->values();
+                    }
+                    break;
+            }
+        } else $response['clases'] = $clases;
+        return response()->json($response);
+    }
 
     /**
      * Show the fo`rm for creating a new resource.
