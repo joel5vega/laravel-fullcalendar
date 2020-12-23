@@ -41,7 +41,7 @@ class ClaseController extends Controller
 
         return response()->json($clases);
     }
-    public function getClasesEnSemestre(Request $request)
+    public function getClasesSemestre(Request $request)
     {
         $semestre = $request->semestre;
         $mencion = $request->query('mencion');
@@ -66,7 +66,13 @@ class ClaseController extends Controller
         } else $clases = Dato::Semestre($periodo, $semestre)->get();
         return response()->json($clases);
     }
-
+    public function getClasesAmbiente(Request $request)
+    {
+        $ambiente = $request->ambiente;
+        $periodo = $request->query('periodo');
+        $clases = Dato::Ambiente($periodo, $ambiente)->get();
+        return response()->json($clases);
+    }
     public function getMateriasEnMencion($mencion)
     {
         $consulta = Mencion::with('materias')->where('id', '=', $mencion)->first();
@@ -121,6 +127,13 @@ class ClaseController extends Controller
             }
         } else $response['clases'] = $clases;
         return response()->json($response);
+    }
+    public function getClasesResponsable(Request $request)
+    {
+        $responsable = $request->responsable;
+        $periodo = $request->query('periodo');
+        $clases = Dato::Responsable($periodo, $responsable)->get();
+        return response()->json($clases);
     }
 
     /**

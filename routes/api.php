@@ -34,6 +34,8 @@ Route::put('materias/', 'MateriaController@update');
 Route::delete('materias/{id}', 'MateriaController@destroy');
 //Clases
 Route::get('clases', 'ClaseController@index');
-Route::get('clases/semestre/{semestre}','ClaseController@getClasesEnSemestre');
+Route::get('clases/semestre/{semestre}','ClaseController@getClasesSemestre');
+Route::get('clases/ambiente/{ambiente}','ClaseController@getClasesAmbiente');
+Route::get('clases/responsable/{responsable}','ClaseController@getClasesResponsable');
 //obtener las clases en el momento actual
 Route::get('now', 'ClaseController@getClasesNow');
