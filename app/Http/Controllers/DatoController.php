@@ -118,11 +118,11 @@ class DatoController extends Controller
             // $response['materias_control']=Materia::all()->menciones('nombre');
             $materias = new MateriaController();
             $response['materias'] = $materias->index()->original;
-            $response['ambientes'] = Ambiente::all();
+            $response['ambientes'] = Ambiente::all()->sortByDesc('capacidad')->values();
             $response['menciones'] = Mencion::all();
             $response['semestres'] = Semestre::all();
-            $response['periodos'] = Periodo::all();
-            $response['periodoActual'] = $actual;
+            $response['periodos'] = Periodo::all()->values();
+            $response['periodoActual'] = $actual->first();
             $response['responsables'] = Responsable::all();
             $response['clases'] = Dato::Periodo($actual[0]->id)->get();
         }

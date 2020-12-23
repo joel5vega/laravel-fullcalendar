@@ -115,7 +115,7 @@ class ClaseController extends Controller
                     //para entregar lista de ambientes
                 case 'ambientes': {
                         $response['ocupados'] = Ambiente::all()->whereIn('id', $ocupado)->sortBy("tipo")->values();
-                        $response['libres'] = Ambiente::all()->whereNotIn('id', $ocupado)->sortBy("tipo")->values();
+                        $response['libres'] = Ambiente::all()->whereNotIn('id', $ocupado)->sortBy("tipo")->sortByDesc("capacidad")->values();
                     }
                     break;
             }
