@@ -18,7 +18,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'email', 'password','tipo','responsable_id'
     ];
 
     /**
@@ -44,5 +44,10 @@ class User extends Authenticatable
         $this->save();
 
         return $this->api_token;
+    }
+
+    //para vincularlo a un usuario
+    public function responsable(){
+        return $this->belongsTo(Responsable::class)->select('ap_paterno');
     }
 }

@@ -70,6 +70,9 @@ class ClaseController extends Controller
     {
         $ambiente = $request->ambiente;
         $periodo = $request->query('periodo');
+        if (!isset($periodo)) {
+            $periodo = $this->getActualPeriodoId();
+        }
         $clases = Dato::Ambiente($periodo, $ambiente)->get();
         return response()->json($clases);
     }
@@ -125,7 +128,7 @@ class ClaseController extends Controller
                     }
                     break;
             }
-        } else $response['clases'] = $clases;
+        } else $response = $clases;
         return response()->json($response);
     }
     public function getClasesResponsable(Request $request)

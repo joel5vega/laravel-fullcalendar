@@ -9,6 +9,8 @@ use App\Dato;
 use App\Semestre;
 use App\Mencion;
 use App\Periodo;
+use App\Pensum;
+
 use Illuminate\Http\Request;
 use PhpParser\Node\Expr\AssignOp\Concat;
 use stdClass;
@@ -117,6 +119,7 @@ class DatoController extends Controller
         } else {
             // $response['materias_control']=Materia::all()->menciones('nombre');
             $materias = new MateriaController();
+            $response['pensums'] = Pensum::all();
             $response['materias'] = $materias->index()->original;
             $response['ambientes'] = Ambiente::all()->sortByDesc('capacidad')->values();
             $response['menciones'] = Mencion::all();

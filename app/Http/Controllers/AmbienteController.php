@@ -25,7 +25,7 @@ class AmbienteController extends Controller
     {
         //
         $validatedData = $request->validate(
-            ['nombre' => 'required', 'tipo' => 'required', 'capacidad' => 'nullable']
+            ['nombre' => 'required', 'tipo' => 'required', 'capacidad' => 'nullable','descripcion'=>'nullable']
         );
         $ambiente = Ambiente::create($validatedData);
         return response()->json('Ambiente creado');
@@ -56,7 +56,7 @@ class AmbienteController extends Controller
     public function destroy($id)
     {
         Ambiente::find($id)->delete();
-        return response()->json('Ambiente creado');
+        return response()->json('Ambiente eliminado');
         // return redirect()->route('ambiente.index')->with('success', 'Registro eliminado satisfactoriamente');
     }
     /*
