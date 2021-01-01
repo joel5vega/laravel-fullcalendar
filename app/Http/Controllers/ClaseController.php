@@ -19,7 +19,9 @@ class ClaseController extends Controller
      */
     public function index(Request $request)
     {
+
         $periodo = $request->query('periodo');
+
         if (!isset($periodo)) {
             $dato = Periodo::Actual()->first();
             $periodo = $dato->id;
@@ -88,7 +90,6 @@ class ClaseController extends Controller
         //obtiene hora actual
         $now = date("Y-m-d");
         $actual = Periodo::Actual($now)->first();
-
         return $actual->id;
     }
     public function getTime()

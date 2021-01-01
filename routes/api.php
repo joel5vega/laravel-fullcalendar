@@ -20,6 +20,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 */
 //API index
 Route::get('index', 'DatoController@apiIndex');
+
 // Ambientes
 Route::get('ambientes', 'AmbienteController@index');
 Route::post('ambientes', 'AmbienteController@store');
