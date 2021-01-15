@@ -12,9 +12,14 @@ class ResponsableController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $nivel = $request->query('nivel');
+        if (isset($nivel)) {
+            $datos['responsables'] = Responsable::Nivel($nivel)->get();
+        } else
+            $datos['responsables'] = Responsable::all();
+        return response()->json($datos);
     }
 
     /**

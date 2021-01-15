@@ -7,6 +7,7 @@ use App\Dato;
 use App\Periodo;
 use App\Mencion;
 use App\Ambiente;
+use App\Materia;
 
 use Illuminate\Http\Request;
 
@@ -78,6 +79,23 @@ class ClaseController extends Controller
         $clases = Dato::Ambiente($periodo, $ambiente)->get();
         return response()->json($clases);
     }
+    public function getMaterias(Request $request)
+    {
+        $semestre = $request->semestre;
+        $mencion = $request->query('mencion');
+        if (isset($mencion)) {
+            $datos['materias'] = Materia::MateriasSemestreMencion($semestre, $mencion)->get();
+        } else {
+            if (isset($semestre)) {
+                $datos['materias'] = Materia::MateriasSemestre($semestre)->get();
+            } else {
+                $datos['materias'] = Materia::all();
+            }
+        }
+
+        return response()->json($datos);
+    }
+
     public function getMateriasEnMencion($mencion)
     {
         $consulta = Mencion::with('materias')->where('id', '=', $mencion)->first();
@@ -158,7 +176,53 @@ class ClaseController extends Controller
      */
     public function store(Request $request)
     {
+        //validar
+        $this->validate($request, [
+            'materia' => 'required', 'responsable' => 'required',
+            'ambiente' => 'required', 'tipo' => 'required',
+            'nivel' => 'required', 'day' => 'required',
+            'startTime' => 'required', 'endTime' => 'required'
+        ]);
         //
+        $clase = new Clase;
+        $clase->materia_id = $request->materia;
+        $clase->responsable_id = $request->responsable;
+        $clase->ambiente_id = $request->ambiente;
+        $clase->periodo_id = $request->periodo;
+        $clase->dia = $request->day;
+        $clase->hora_ini = $request->startTime;
+        $clase->hora_fin = $request->endTime;
+        $clase->nivel = $request->nivel;
+        $clase->paralelo = $request->paralelo;
+        $tipo = $request->tipo;
+        $nivel = $request->nivel;
+        return "request";
+        return $request;/*
+        function setColor($tipo, $nivel)
+        {
+            if ($tipo == 'aula') {
+                if ($nivel == 'docente') {
+                    $color = "#0066CC";
+                } else {
+                    $color = "#00CCFF";
+                }
+            } else {
+                if ($nivel == 'docente') {
+                    $color = "#006600";
+                } else {
+                    $color = "#00FF00";
+                }
+            }
+            return $color;
+        }
+        $color = setColor($tipo, $nivel);
+        $clase->color = $color;
+        $clase->save();*/
+        return response()->json([
+            "message" => "estudiante creado",
+            "request" => $clase,
+            "color" => $color
+        ], 201);
     }
 
     /**
@@ -177,15 +241,29 @@ class ClaseController extends Controller
 
     public function crearClase(Request $request)
     {
+        //validar
+        /*
+        $this->validate($request, [
+            'materia' => 'required', 'responsable' => 'required',
+            'ambiente' => 'required',
+            'periodo' => 'nullable',
+            'nivel' => 'required', 'day' => 'required',
+            'startTime' => 'required', 'endTime' => 'required',
+            'paralelo' => 'nullable'
+        ]);
+        */
+        //
 
         $clase = new Clase;
-        $clase->periodo_id = $request->periodo;
         $clase->materia_id = $request->materia;
         $clase->responsable_id = $request->responsable;
         $clase->ambiente_id = $request->ambiente;
-        $clase->daysOfWeek = $request->day;
-        $clase->startTime = $request->startTime;
-        $clase->endTime = $request->endTime;
+        $clase->periodo_id = $request->periodo;
+        $clase->dia = $request->day;
+        $clase->hora_ini = $request->startTime;
+        $clase->hora_fin = $request->endTime;
+        $clase->nivel = $request->nivel;
+        $clase->paralelo = $request->paralelo;
         $tipo = $request->tipo;
         $nivel = $request->nivel;
 
@@ -206,9 +284,11 @@ class ClaseController extends Controller
             }
             return $color;
         }
+
         $color = setColor($tipo, $nivel);
         $clase->color = $color;
         $clase->save();
+
         return response()->json([
             "message" => "estudiante creado",
             "request" => $clase,

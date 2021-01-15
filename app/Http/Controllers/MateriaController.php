@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Materia;
 use App\Pensum;
+use App\Mencion;
 
 class MateriaController extends Controller
 {
@@ -17,7 +18,7 @@ class MateriaController extends Controller
     {
         //
 
-        $materias = Materia::with('pensum','menciones')->get();
+        $materias = Materia::with('pensum', 'menciones')->get();
         return response()->json($materias);
         // return view('Materia.index', compact('materias'));
     }
@@ -39,17 +40,23 @@ class MateriaController extends Controller
     }
     public function getSemestre(Request $request)
     {
-        // echo "funcion getSemestre<br>";
-        if ($request->ajax()) {
-            $materias = Pensum::where("semestre", $request->semestre)->get();
-
-            foreach ($materias as $materia) {
-                $materiasArray[$materia->id] = $materia->nombre;
-                echo $materia->nombre;
+        $semestre = $request->semestre;
+        //La mencion debe llegar como mencion_id
+        $mencion = $request->query('mencion');
+        if (isset($mencion)) {
+                $menciones= Mencion::with('materias')->get();
+                $indexSemestres= Materia::MateriasSemestre($semestre)->pluck('id');
+                 $datos['materias']=$menciones[$mencion-1]->materias->whereIn('materia_id',$indexSemestres)->values();
+                // $datos =$semestres;
+        } else {
+            if (isset($semestre)) {
+                $datos['materias'] = Materia::MateriasSemestre($semestre)->get();
+            } else {
+                $datos['materias'] = Materia::all();
             }
-
-            return response()->json($materiasArray);
         }
+
+        return response()->json($datos);
     }
 
     /**
