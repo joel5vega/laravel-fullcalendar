@@ -2,24 +2,18 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+///Laravel8
+use Laravel\Passport\Http\Controllers\AccessTokenController;
+////////////////////////////////
+// Autenticacion
+Route::post('register', 'UserController@register');
+Route::post('login', [AccessTokenController::class, 'issueToken'])->middleware(['api-login', 'throttle']);
 
-/*
-|--------------------------------------------------------------------------
-| API Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register API routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| is assigned the "api" middleware group. Enjoy building your API!
-|
-*/
-/*
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});
-*/
+
+/////////////////////////////////////
 //API index
-Route::get('index', 'DatoController@apiIndex');
+ Route::get('index', 'DatoController@apiIndex');
+// Route::get('index', [DatoController::class, 'apiIndex']);
 //////////////////////////////////////////////////////
 // Ambientes
 Route::get('ambientes', 'AmbienteController@index');
@@ -42,7 +36,7 @@ Route::get('clases/semestre/{semestre}', 'ClaseController@getClasesSemestre');
 Route::get('clases/ambiente/{ambiente}', 'ClaseController@getClasesAmbiente');
 Route::get('clases/responsable/{responsable}', 'ClaseController@getClasesResponsable');
 // crear
-Route::post('clases/','ClaseController@crearClase');
+Route::post('clases/', 'ClaseController@crearClase');
 //obtener las clases en el momento actual
 Route::get('now', 'ClaseController@getClasesNow');
 //////////////////////////////////////////////////////

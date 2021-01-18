@@ -24,7 +24,7 @@ Route::get('/', function () {
 Route::get('/', 'ClaseController@index')->middleware('auth');
 
 
-Auth::routes(['register' => false, 'reset' => false, 'verify' => false]);
+// Auth::routes(['register' => false, 'reset' => false, 'verify' => false]);
 
 
 //para rececpcionar eventos
@@ -65,10 +65,10 @@ Route::get('/semestre', 'MateriaController@getSemestre');
 // Route::resource('semestre','ApiEventos');
 Route::get('/home', 'HomeController@index')->name('home');
 
-Auth::routes();
+// Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Auth::routes();
+
 
 Route::get('/home', 'HomeController@index')->name('home');
