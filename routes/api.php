@@ -12,7 +12,7 @@ Route::post('login', [AccessTokenController::class, 'issueToken'])->middleware([
 
 /////////////////////////////////////
 //API index
- Route::get('index', 'DatoController@apiIndex');
+Route::get('index', 'DatoController@apiIndex');
 // Route::get('index', [DatoController::class, 'apiIndex']);
 //////////////////////////////////////////////////////
 // Ambientes
@@ -46,3 +46,4 @@ Route::get('responsables', 'ResponsableController@index');
 //////////////////////////////////////////////////////
 //Rutas exclusivas de administradores
 Route::get('users', 'UserController@index');
+Route::get('users/{id}', 'UserController@show');
