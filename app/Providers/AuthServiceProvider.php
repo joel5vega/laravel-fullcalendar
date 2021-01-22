@@ -28,6 +28,13 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
+
+        //scopes dar permisos por roles
+        Passport::tokensCan([
+            'estudiante' => 'Usuario no autenticado',
+            'docente' => 'puede crear horarios',
+            'administrativo' => 'tiene todos los permisos'
+        ]);
         Passport::routes();
 
         Passport::tokensExpireIn(now()->addDays(15));

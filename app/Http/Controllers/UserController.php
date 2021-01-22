@@ -10,7 +10,8 @@ class UserController extends Controller
 {
     private $user;
 
-    public function __construct(User $user){
+    public function __construct(User $user)
+    {
         // İnitialize user property.
         $this->user = $user;
     }
@@ -71,7 +72,12 @@ class UserController extends Controller
     public function show($id)
     {
         //
-        return "show";
+        $usuario = User::find($id);
+        if ($usuario->estado === '1') {
+            $response['user'] = $usuario;
+            $response['tipo'] = User::Rol($id)->pluck('tipo')->first();
+        } else $response = "Usuario no habilitado";
+        return $response;
     }
 
     /**
