@@ -197,8 +197,8 @@ class ClaseController extends Controller
         $tipo = $request->tipo;
         $nivel = $request->nivel;
         return "request";
-        return $request;/*
-        function setColor($tipo, $nivel)
+        return $request;
+        function setColores($tipo, $nivel)
         {
             if ($tipo == 'aula') {
                 if ($nivel == 'docente') {
@@ -215,9 +215,9 @@ class ClaseController extends Controller
             }
             return $color;
         }
-        $color = setColor($tipo, $nivel);
+        $color = setColores($tipo, $nivel);
         $clase->color = $color;
-        $clase->save();*/
+        $clase->save();
         return response()->json([
             "message" => "estudiante creado",
             "request" => $clase,

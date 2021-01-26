@@ -58,6 +58,6 @@ class User extends Authenticatable
     //para vincularlo a un usuario
     public function responsable()
     {
-        return $this->belongsTo(Responsable::class)->select('ap_paterno');
+        return $this->belongsTo(Responsable::class);
     }
 }

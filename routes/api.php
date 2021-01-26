@@ -9,14 +9,9 @@ use Laravel\Passport\Http\Controllers\AccessTokenController;
 Route::post('register', 'UserController@register');
 Route::post('login', [AccessTokenController::class, 'issueToken'])
     ->middleware(['api-login', 'throttle']);
-////login con rol
-
-Route::post('rol/{id}', 'ApiLoginController@authenticated');
-
 /////////////////////////////////////
 //API index
 Route::get('index', 'DatoController@apiIndex');
-// Route::get('index', [DatoController::class, 'apiIndex']);
 //////////////////////////////////////////////////////
 // Ambientes
 Route::get('ambientes', 'AmbienteController@index');
@@ -38,16 +33,13 @@ Route::get('clases', 'ClaseController@index');
 Route::get('clases/semestre/{semestre}', 'ClaseController@getClasesSemestre');
 Route::get('clases/ambiente/{ambiente}', 'ClaseController@getClasesAmbiente');
 Route::get('clases/responsable/{responsable}', 'ClaseController@getClasesResponsable');
-// crear
-//daremos acceso a docentes
+// crear //daremos acceso a docentes
 Route::post('clases/', 'ClaseController@crearClase');
-
 //obtener las clases en el momento actual
 Route::get('now', 'ClaseController@getClasesNow');
 //////////////////////////////////////////////////////
 //Responsables
 Route::get('responsables', 'ResponsableController@index');
-
 //////////////////////////////////////////////////////
 //Rutas exclusivas de administradores
 Route::get('users', 'UserController@index');

@@ -12,4 +12,7 @@ class Responsable extends Model
     public function scopeNivel($query,$nivel){
         return $query->where('puesto','=',$nivel);
     }
+    public function user(){
+        return $this->belongsTo(User::class);
+    }
 }
