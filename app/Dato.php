@@ -65,4 +65,7 @@ class Dato extends Model
     {
         return $query->where('periodo_id', '=', $periodo)->select('ambiente_id as id', 'ambiente as nombre', 'tipoAmbiente as tipo')->groupBy('id');
     }
+    public function scopeClase($query,$id){
+        return $query->where('groupId',$id);
+    }
 }

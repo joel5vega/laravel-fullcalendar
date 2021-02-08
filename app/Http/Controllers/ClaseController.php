@@ -233,10 +233,8 @@ class ClaseController extends Controller
      */
     public function show($id)
     {
-        //
-        $data['eventos'] = Dato::all();
-
-        return response()->json($data['eventos']);
+        $data['evento'] = Dato::find($id);
+        return response()->json($data['evento']);
     }
 
     public function crearClase(Request $request)
