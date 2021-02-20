@@ -73,7 +73,7 @@ class UserController extends Controller
     {
         //
         $usuario = User::find($id);
-        if ($usuario->estado === '1') {
+        if ($usuario->estado === 'true') {
             $response['user'] = $usuario;
             $response['tipo'] = User::Rol($id)->pluck('tipo')->first();
         } else $response = "Usuario no habilitado";

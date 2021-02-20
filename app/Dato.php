@@ -47,25 +47,31 @@ class Dato extends Model
         return $query->where('periodo_id', '=', $periodo)->where('daysOfWeek', '=', $dia);
     }
     //para obtener las clases de un hora determinado
-    public function scopeHora($query, $periodo, $dia,$hora)
+    public function scopeHora($query, $periodo, $dia, $hora)
     {
-        return $query->where('periodo_id', '=', $periodo)->where('daysOfWeek','=',$dia)->where('endTime', '>', $hora)->where('startTime','<',$hora);
+        return $query->where('periodo_id', '=', $periodo)->where('daysOfWeek', '=', $dia)->where('endTime', '>', $hora)->where('startTime', '<', $hora);
     }
     // Solo obtiene la lista especifica
-    public function scopeIndexOcupado($query, $periodo, $dia,$hora)
+    public function scopeIndexOcupado($query, $periodo, $dia, $hora)
     {
-        return $query->where('periodo_id', '=', $periodo)->where('daysOfWeek','=',$dia)->where('endTime', '>', $hora)->where('startTime','<',$hora)->select('ambiente_id');
+        return $query->where('periodo_id', '=', $periodo)->where('daysOfWeek', '=', $dia)->where('endTime', '>', $hora)->where('startTime', '<', $hora)->select('ambiente_id');
     }
-    public function scopeIndexLibre($query, $periodo, $dia,$hora,$id,$nombre)
+    public function scopeIndexLibre($query, $periodo, $dia, $hora, $id, $nombre)
     {
-        return $query->where('periodo_id', '=', $periodo)->where('daysOfWeek','=',$dia)->where('endTime', '<', $hora)->orwhere('startTime','>',$hora)->select('ambiente_id');
+        return $query->where('periodo_id', '=', $periodo)->where('daysOfWeek', '=', $dia)->where('endTime', '<', $hora)->orwhere('startTime', '>', $hora)->select('ambiente_id');
     }
     //un indice de los ambientes disponibles en las clases existentes
     public function scopeindexAmbiente($query, $periodo)
     {
         return $query->where('periodo_id', '=', $periodo)->select('ambiente_id as id', 'ambiente as nombre', 'tipoAmbiente as tipo')->groupBy('id');
     }
-    public function scopeClase($query,$id){
-        return $query->where('groupId',$id);
+    public function scopeClase($query, $id)
+    {
+        return $query->where('groupId', $id);
+    }
+    //ver las clases por estado
+    public function scopeEstado($query, $estado)
+    {
+        return $query->where('estado', '=', $estado);
     }
 }

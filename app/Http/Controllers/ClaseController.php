@@ -13,11 +13,6 @@ use Illuminate\Http\Request;
 
 class ClaseController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index(Request $request)
     {
 
@@ -30,7 +25,12 @@ class ClaseController extends Controller
 
         $ambiente = $request->query('ambiente');
         $semestre = $request->query('semestre');
-
+        $estado = $request->query('estado');
+        if (isset($estado)) {
+            $clases = Dato::estado($estado)->get();
+            return response()->json($clases);
+        }
+        
         if (isset($ambiente)) {
             if ($ambiente == 'undefined') {
                 $data = Dato::all();
@@ -158,22 +158,18 @@ class ClaseController extends Controller
         return response()->json($clases);
     }
 
-    /**
-     * Show the fo`rm for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
         //
     }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+    public function habilitar(Request $request)
+    {
+        $id = $request->id;
+        $clase = Clase::findOrFail($id);
+        $clase->estado = "true";
+        $clase->save();
+        return $clase;
+    }
     public function store(Request $request)
     {
         //validar

@@ -35,51 +35,55 @@ class PeriodoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'nombre' => 'required', 'start_date' => 'required',
+            'gestion' => 'required', 'end_date' => 'required'
+
+        ]);
+        // $periodo = new Periodo;
+        $periodo = Periodo::create([
+            'nombre' => $request->nombre, 'start_date' => $request->start_date,
+            'gestion' => $request->gestion, 'end_date' => $request->end_date
+
+        ]);
+        $response['message'] = "Periodo creado exitosamente";
+        $response['periodo'] = $periodo;
+
+        return $response;
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Periodo  $periodo
-     * @return \Illuminate\Http\Response
-     */
+
     public function show(Periodo $periodo)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Periodo  $periodo
-     * @return \Illuminate\Http\Response
-     */
     public function edit(Periodo $periodo)
     {
         //
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Periodo  $periodo
-     * @return \Illuminate\Http\Response
-     */
+
     public function update(Request $request, Periodo $periodo)
     {
-        //
+        $periodo = Periodo::find($request->id);
+        $this->validate($request, [
+            'id' => 'required', 'nombre' => 'required', 'start_date' => 'required',
+            'gestion' => 'required', 'end_date' => 'required'
+
+        ]);
+        $periodo->nombre = $request->nombre;
+        $periodo->gestion = $request->gestion;
+        $periodo->start_date = $request->start_date;
+        $periodo->end_date = $request->end_date;
+        $periodo->save();
+        return $periodo;
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Periodo  $periodo
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Periodo $periodo)
+    public function destroy(Request $request)
     {
-        //
+        Periodo::destroy($request->id);
+        $response = "Registro eliminado satisfactoriamente";
+        return $response;
     }
 }

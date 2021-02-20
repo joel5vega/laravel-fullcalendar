@@ -30,14 +30,20 @@ Route::get('materias/semestre/{semestre}', 'MateriaController@getSemestre');
 //////////////////////////////////////////////////////
 //Clases
 Route::get('clases', 'ClaseController@index');
-Route::get('clases/{id}','ClaseController@show');
+Route::get('clases/{id}', 'ClaseController@show');
 Route::get('clases/semestre/{semestre}', 'ClaseController@getClasesSemestre');
 Route::get('clases/ambiente/{ambiente}', 'ClaseController@getClasesAmbiente');
 Route::get('clases/responsable/{responsable}', 'ClaseController@getClasesResponsable');
 // crear //daremos acceso a docentes
 Route::post('clases/', 'ClaseController@crearClase');
+Route::post('clases/habilitar/{id}', 'ClaseController@habilitar');
 //obtener las clases en el momento actual
 Route::get('now', 'ClaseController@getClasesNow');
+//////////////////////////////////////////////////////
+// Periodos
+Route::post('periodos/', 'PeriodoController@store');
+Route::put('periodos/', 'PeriodoController@update');
+Route::delete('periodos/{id}','PeriodoController@destroy');
 //////////////////////////////////////////////////////
 //Responsables
 Route::get('responsables', 'ResponsableController@index');
