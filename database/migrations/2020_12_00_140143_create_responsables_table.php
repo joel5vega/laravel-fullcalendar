@@ -15,12 +15,14 @@ class CreateResponsablesTable extends Migration
     {
         Schema::create('responsables', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('titulo', '10')->nullable();
             $table->string('nombre')->nullable();
             $table->string('ap_paterno');
             $table->string('ap_materno')->nullable();
             $table->string('puesto');
             // //este campo puede estar nulo
-            $table->string('titulo', '10')->nullable();
+            $table->string('telefono', '10')->nullable();
+            $table->string('email', '100')->nullable();
             $table->string('descripcion')->nullable();
             $table->string('foto')->nullable();
             $table->timestamps();

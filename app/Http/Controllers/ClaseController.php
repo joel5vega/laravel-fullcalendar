@@ -30,7 +30,7 @@ class ClaseController extends Controller
             $clases = Dato::estado($estado)->get();
             return response()->json($clases);
         }
-        
+
         if (isset($ambiente)) {
             if ($ambiente == 'undefined') {
                 $data = Dato::all();
@@ -41,7 +41,7 @@ class ClaseController extends Controller
         }
         //Devolvemos las clases actuales
         $clases = Dato::Periodo($periodo)->get();
-
+        // return $periodo;
         return response()->json($clases);
     }
     public function getClasesSemestre(Request $request)
@@ -154,7 +154,12 @@ class ClaseController extends Controller
     {
         $responsable = $request->responsable;
         $periodo = $request->query('periodo');
-        $clases = Dato::Responsable($periodo, $responsable)->get();
+        if ($periodo) {
+        } else {
+            $periodo = $this->getActualPeriodoId();
+        }
+
+        $clases = Dato::Responsable( $responsable)->where('periodo_id',$periodo)->get();
         return response()->json($clases);
     }
 
@@ -221,12 +226,7 @@ class ClaseController extends Controller
         ], 201);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Clase  $clase
-     * @return \Illuminate\Http\Response
-     */
+
     public function show($id)
     {
         $data['evento'] = Dato::find($id);
@@ -290,37 +290,16 @@ class ClaseController extends Controller
         ], 201);
     }
 
-
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Clase  $clase
-     * @return \Illuminate\Http\Response
-     */
     public function edit(Clase $clase)
     {
         //
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Clase  $clase
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, Clase $clase)
     {
         //
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Clase  $clase
-     * @return \Illuminate\Http\Response
-     */
     public function destroy(Clase $clase)
     {
         //

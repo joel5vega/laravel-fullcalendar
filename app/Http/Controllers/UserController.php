@@ -113,4 +113,12 @@ class UserController extends Controller
     {
         //
     }
+    public function habilitar(Request $request)
+    {
+        $id = $request->id;
+        $user = User::findOrFail($id);
+        $user->estado = "true";
+        $user->save();
+        return $user;
+    }
 }

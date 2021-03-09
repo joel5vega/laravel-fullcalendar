@@ -43,11 +43,13 @@ Route::get('now', 'ClaseController@getClasesNow');
 // Periodos
 Route::post('periodos/', 'PeriodoController@store');
 Route::put('periodos/', 'PeriodoController@update');
-Route::delete('periodos/{id}','PeriodoController@destroy');
+Route::delete('periodos/{id}', 'PeriodoController@destroy');
 //////////////////////////////////////////////////////
 //Responsables
 Route::get('responsables', 'ResponsableController@index');
+Route::delete('responsables/{id}', 'ResponsableController@destroy');
 //////////////////////////////////////////////////////
 //Rutas exclusivas de administradores
 Route::get('users', 'UserController@index');
 Route::get('users/{id}', 'UserController@show');
+Route::post('users/habilitar/{id}', 'UserController@habilitar');

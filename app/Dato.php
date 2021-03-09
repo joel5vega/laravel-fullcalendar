@@ -22,7 +22,7 @@ class Dato extends Model
     //para obtener las clases de un semestre determinado
     public function scopeSemestre($query, $periodo, $semestre)
     {
-        return $query->where('periodo_id', '=', $periodo)->where('semestre', '=', $semestre);
+        return $query->where('periodo_id', '=', $periodo)->where('semestre', '=', $semestre)->where("estado", '=', "true");
     }
     //para obtener las clases segun el tipo de(laboratorio o teoria)
     public function scopeTipo($query, $periodo, $semestre, $tipo)
@@ -37,9 +37,9 @@ class Dato extends Model
     }
 
     //obtener las clases de un responsable especifico
-    public function scopeResponsable($query, $periodo, $responsable)
+    public function scopeResponsable($query,  $responsable)
     {
-        return $query->where('periodo_id', '=', $periodo)->where('responsable_id', '=', $responsable);
+        return $query->where('responsable_id', '=', $responsable);
     }
     //para obtener las clases de un dia determinado
     public function scopeDia($query, $periodo, $dia)

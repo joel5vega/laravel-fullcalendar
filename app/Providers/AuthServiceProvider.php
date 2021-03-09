@@ -16,7 +16,7 @@ class AuthServiceProvider extends ServiceProvider
      * @var array
      */
     protected $policies = [
-        // 'App\Model' => 'App\Policies\ModelPolicy',
+         'App\Model' => 'App\Policies\ModelPolicy',
     ];
 
     /**
@@ -27,17 +27,18 @@ class AuthServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->registerPolicies();
-
-
-        //scopes dar permisos por roles
-        Passport::tokensCan([
-            'estudiante' => 'Usuario no autenticado',
-            'docente' => 'puede crear horarios',
-            'administrativo' => 'tiene todos los permisos'
-        ]);
         Passport::routes();
+        
+        //scopes dar permisos por roles
+        
+        // Passport::tokensCan([
+        //     'estudiante' => 'Usuario no autenticado',
+        //     'docente' => 'puede crear horarios',
+        //     'administrativo' => 'tiene todos los permisos'
+        // ]);
 
-        Passport::tokensExpireIn(now()->addDays(15));
+
+        // Passport::tokensExpireIn(now()->addDays(15));
 
         Passport::refreshTokensExpireIn(now()->addDays(30));
 

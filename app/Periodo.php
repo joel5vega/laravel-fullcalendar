@@ -13,8 +13,8 @@ class Periodo extends Model
     
     public function scopeActual($query)
     {
-        // $now =date ("Y-m-d");
-        $now = "2020-12-15";
+         $now =date ("Y-m-d");
+        // $now = "2020-12-15";
         return $query->where('start_date', '<=', $now)->where('end_date', '>=', $now);
     }
 }
