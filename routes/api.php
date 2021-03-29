@@ -48,6 +48,7 @@ Route::delete('periodos/{id}', 'PeriodoController@destroy');
 //Responsables
 Route::get('responsables', 'ResponsableController@index');
 Route::delete('responsables/{id}', 'ResponsableController@destroy');
+Route::post('responsables/','ResponsableController@store');
 //////////////////////////////////////////////////////
 //Rutas exclusivas de administradores
 Route::get('users', 'UserController@index');

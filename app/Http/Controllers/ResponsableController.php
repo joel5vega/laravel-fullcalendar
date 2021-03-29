@@ -33,7 +33,29 @@ class ResponsableController extends Controller
     public function store(Request $request)
     {
         //
-        return "store";
+        $this->validate($request, [
+            'ap_paterno' => 'required',
+            'puesto' => 'required'
+        ]);
+        $responsable = new Responsable;
+        $responsable->titulo = $request->titulo;
+        $responsable->nombre = $request->nombre;
+        $responsable->ap_paterno = $request->ap_paterno;
+        $responsable->ap_materno = $request->ap_materno;
+        $responsable->puesto = $request->puesto;
+        $responsable->telefono = $request->telefono;
+        $responsable->email = $request->email;
+        $responsable->descripcion = $request->descripcion;
+        $responsable->foto = $request->foto;
+
+        $responsable->save();
+
+        return response()->json([
+            "message" => "Responsable creado",
+            "request" => $responsable,
+
+        ], 201);
+        return $responsable;
     }
 
 
@@ -59,9 +81,9 @@ class ResponsableController extends Controller
         $id = $request->id;
         // $periodo
         $clases = Dato::Responsable($id)->pluck('id');
-        Clase::whereIn('id',$clases)->update(['responsable_id'=>'1']);
+        Clase::whereIn('id', $clases)->update(['responsable_id' => '1']);
         // ->get();
-        User::where('id',$id)->update(['responsable_id'=>'1']);
+        User::where('id', $id)->update(['responsable_id' => '1']);
         Responsable::destroy($request->id);
         $response = "Registro eliminado satisfactoriamente";
         return $response;
