@@ -159,7 +159,7 @@ class ClaseController extends Controller
             $periodo = $this->getActualPeriodoId();
         }
 
-        $clases = Dato::Responsable( $responsable)->where('periodo_id',$periodo)->get();
+        $clases = Dato::Responsable($responsable)->where('periodo_id', $periodo)->get();
         return response()->json($clases);
     }
 
@@ -283,8 +283,13 @@ class ClaseController extends Controller
         $clase->color = $color;
         $clase->save();
 
+        //Para copiar al periodo 2
+        $clone = $clase->replicate();
+        $clone->periodo_id = "3";
+        $clone->push();
+
         return response()->json([
-            "message" => "estudiante creado",
+            "message" => "Clase creada con exito",
             "request" => $clase,
             "color" => $color
         ], 201);
