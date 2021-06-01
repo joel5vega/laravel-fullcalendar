@@ -37,6 +37,7 @@ Route::get('clases/responsable/{responsable}', 'ClaseController@getClasesRespons
 // crear //daremos acceso a docentes
 Route::post('clases/', 'ClaseController@crearClase');
 Route::post('clases/habilitar/{id}', 'ClaseController@habilitar');
+Route::put('clases/{id}', 'ClaseController@editar');
 //obtener las clases en el momento actual
 Route::get('now', 'ClaseController@getClasesNow');
 //////////////////////////////////////////////////////

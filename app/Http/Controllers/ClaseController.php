@@ -175,6 +175,43 @@ class ClaseController extends Controller
         $clase->save();
         return $clase;
     }
+    public function editar(Request $request)
+    {
+        $id = $request->id;
+        $clase = Clase::findOrFail($id);
+        $clase->materia_id = $request->materia;
+        $clase->responsable_id = $request->responsable;
+        $clase->ambiente_id = $request->ambiente;
+        $clase->periodo_id = $request->periodo;
+        $clase->dia = $request->day;
+        $clase->hora_ini = $request->startTime;
+        $clase->hora_fin = $request->endTime;
+        $clase->nivel = $request->nivel;
+        $clase->paralelo = $request->paralelo;
+        $tipo = $request->tipo;
+        $nivel = $request->nivel;
+        if ($tipo == 'aula') {
+            if ($nivel == 'docente') {
+                $color = "#0066CC";
+            } else {
+                $color = "#00CCFF";
+            }
+        } else {
+            if ($nivel == 'docente') {
+                $color = "#006600";
+            } else {
+                $color = "#00FF00";
+            }
+        }
+        $clase->color = $color;
+        $clase->save();
+        return response()->json([
+            "message" => "Clase modificada con exito",
+            "request" => $clase,
+            "color" => $color
+        ], 201);
+
+    }
     public function store(Request $request)
     {
         //validar
@@ -197,8 +234,8 @@ class ClaseController extends Controller
         $clase->paralelo = $request->paralelo;
         $tipo = $request->tipo;
         $nivel = $request->nivel;
-        return "request";
-        return $request;
+        //return "request";
+        //return $request;
         function setColores($tipo, $nivel)
         {
             if ($tipo == 'aula') {
