@@ -72,6 +72,6 @@ class Dato extends Model
     //ver las clases por estado
     public function scopeEstado($query, $estado)
     {
-        return $query->where('estado', '=', $estado);
+        return $query->where('estado', '=', $estado)->where('deleted','=',null);
     }
 }

@@ -332,18 +332,19 @@ class ClaseController extends Controller
         ], 201);
     }
 
-    public function edit(Clase $clase)
+    public function destroy(Request $request)
+    {
+        $id=$request->id;
+        
+        $clase= Clase::findOrFail($id);
+        $clase->forceDelete();
+    
+        return $id;
+    }
+     public function update(Request $request, Clase $clase)
     {
         //
     }
 
-    public function update(Request $request, Clase $clase)
-    {
-        //
-    }
-
-    public function destroy(Clase $clase)
-    {
-        //
-    }
+  
 }
