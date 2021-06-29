@@ -6,7 +6,15 @@ GET {{url}}
 ###
 http://localhost:8000/api/clases?estado=false
 ###
+##  AMBIENTE
+###
 GET {{url}}/ambientes?tipo=laboratorio
+###
+# ambientes usados
+get {{url}}/now?index=ambientes
+
+
+##  CLASE 
 # Crear una clase
 ###
 POST {{url}}/clases
@@ -24,6 +32,7 @@ Content-Type: application/json
     "endTime": "19:00", 
     "paralelo": "A" 
 }
+###
 
 ###
 # Editar una clase
@@ -50,6 +59,77 @@ DELETE {{url}}/clases/170
 
 ###
 get {{url}}/clases?estado=false
+## RESPONSABLES
+###
+Put {{url}}/responsables/1
+###
+delete {{url}}/responsables/1
+# USERS #
+###
+get {{url}}/users
+###
+post {{url}}/users
+
+Content-Type: application/json
+
+{
+    "name": 4, 
+    "responsable": 414, 
+    "ambiente": 7, 
+    "periodo": 3, 
+    "tipo": "laboratorio", 
+    "nivel": "docente", 
+    "day": 4, 
+    "startTime": "15:00", 
+    "endTime": "19:00", 
+    "paralelo": "B" 
+}
+###
+put {{url}}/users/28
+{
+    "name": 4, 
+    "responsable": 414, 
+    "ambiente": 7, 
+    "periodo": 3, 
+    "tipo": "laboratorio", 
+    "nivel": "docente", 
+    "day": 4, 
+    "startTime": "15:00", 
+    "endTime": "19:00", 
+    "paralelo": "B" 
+}
+###
+delete {{url}}/users/28
+
+## PENSUM
+###
+POST {{url}}/pensums
+###
+put {{url}}/pensums/1
+###
+delete {{url}}/pensums/3
+## MENCION
+###
+post {{url}}/menciones
+###
+put {{url}}/menciones/15
+###
+delete {{url}}/menciones/15
+
+## Clases
+###
+get {{url}}/now?index=ambientes
+
+
+
+
+
+
+
+
+
+
+
 
 
 
