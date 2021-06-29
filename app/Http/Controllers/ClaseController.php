@@ -8,6 +8,7 @@ use App\Periodo;
 use App\Mencion;
 use App\Ambiente;
 use App\Materia;
+use Illuminate\Support\Facades\DB;
 
 use Illuminate\Http\Request;
 
@@ -61,9 +62,8 @@ class ClaseController extends Controller
             $arrayMaterias = new ClaseController();
             //Elegimos el campo materias de las menciones, 
             //y mediante pluck  obtenemos solamente los datos fuera del objeto
-            $materias = $arrayMaterias->getMateriasEnMencion($mencion)->materias->pluck('materia_id');
+            $materias = $arrayMaterias->getMateriasEnMencion($mencion)->materias->pluck('id');
             //Realizamos una comparacion de los datos de materia en mencion obtendos con las clases existentes actualmente
-            // $response = Dato::All()->whereIn('materia_id', $materias)->sortBy('semestre'); // Obtiene todos los registros
             $response = Dato::Semestre($periodo, $semestre)->whereIn('materia_id', $materias)->get();
             return response()->json($response->values());
         } else $clases = Dato::Semestre($periodo, $semestre)->get();
@@ -170,6 +170,15 @@ class ClaseController extends Controller
     public function habilitar(Request $request)
     {
         $id = $request->id;
+        if($id==0)
+        {
+            $habilitar=$request->todos;
+            if($habilitar=="yes"){
+                DB::update('update clases set estado=? where estado=?',["true","false"]);
+                return $habilitar;
+            }
+            
+        }
         $clase = Clase::findOrFail($id);
         $clase->estado = "true";
         $clase->save();

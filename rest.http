@@ -13,8 +13,14 @@ GET {{url}}/ambientes?tipo=laboratorio
 # ambientes usados
 get {{url}}/now?index=ambientes
 
-
+###
 ##  CLASE 
+# Get clases de mencion
+#semestre
+###
+get {{url}}/clases/semestre/7?mencion=2
+###
+get {{url}}/clases
 # Crear una clase
 ###
 POST {{url}}/clases
@@ -56,9 +62,12 @@ Content-Type: application/json
 ###
 #Eliminar
 DELETE {{url}}/clases/170
-
+###
+post {{url}}/clases/habilitar/0?todos=yes
 ###
 get {{url}}/clases?estado=false
+
+
 ## RESPONSABLES
 ###
 Put {{url}}/responsables/1
@@ -121,7 +130,9 @@ delete {{url}}/menciones/15
 get {{url}}/now?index=ambientes
 
 
-
+##  MATERIAS
+###
+get {{url}}/materias/semestre/7?mencion=2
 
 
 

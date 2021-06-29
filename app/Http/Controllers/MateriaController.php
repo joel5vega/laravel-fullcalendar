@@ -46,7 +46,11 @@ class MateriaController extends Controller
         if (isset($mencion)) {
                 $menciones= Mencion::with('materias')->get();
                 $indexSemestres= Materia::MateriasSemestre($semestre)->pluck('id');
-                 $datos['materias']=$menciones[$mencion-1]->materias->whereIn('materia_id',$indexSemestres)->values();
+                // $datos['mencion']=$menciones;
+                // $datos['semestre']=$indexSemestres;
+                $datos['materias']=$menciones[$mencion-1]->materias
+                ->whereIn('id',$indexSemestres)->values();
+                // ->get(['materia_id as id','nombre'])->values();
                 // $datos =$semestres;
         } else {
             if (isset($semestre)) {
@@ -59,12 +63,7 @@ class MateriaController extends Controller
         return response()->json($datos);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+  
     public function store(Request $request)
     {
         $this->validate($request, ['materia' => 'required', 'nivel' => 'required', 'paralelo' => 'nullable']);
@@ -89,37 +88,20 @@ class MateriaController extends Controller
         return redirect()->route('materia.index')->with('success', 'Registro creado satisfactoriamente');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+  
     public function show($id)
     {
         $materias = Materia::find($id);
         return  view('Materias.show', compact('materias'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+ 
     public function edit($id)
     {
         $materia = Materia::find($id);
         return view('materia.edit', compact('materia'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, $id)
     {
         //
@@ -128,12 +110,6 @@ class MateriaController extends Controller
         return redirect()->route('materia.index')->with('success', 'Registro actualizado satisfactoriamente');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
         //
