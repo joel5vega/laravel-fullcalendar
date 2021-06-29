@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Route;
 use Laravel\Passport\Http\Controllers\AccessTokenController;
 ////////////////////////////////
 // Autenticacion
-Route::post('register', 'UserController@register');
+
 Route::post('login', [AccessTokenController::class, 'issueToken'])
     ->middleware(['api-login', 'throttle']);
 /////////////////////////////////////
@@ -22,11 +22,12 @@ Route::delete('ambientes/{id}', 'AmbienteController@destroy');
 //////////////////////////////////////////////////////
 // Materias
 Route::get('materias', 'MateriaController@index');
-Route::post('materias', 'MateriaController@store');
 Route::get('materias/{id}', 'MateriaController@show');
+Route::get('materias/semestre/{semestre}', 'MateriaController@getSemestre');
+Route::post('materias', 'MateriaController@store');
 Route::put('materias/', 'MateriaController@update');
 Route::delete('materias/{id}', 'MateriaController@destroy');
-Route::get('materias/semestre/{semestre}', 'MateriaController@getSemestre');
+
 //////////////////////////////////////////////////////
 //Clases
 Route::get('clases', 'ClaseController@index');
@@ -50,9 +51,21 @@ Route::delete('periodos/{id}', 'PeriodoController@destroy');
 //Responsables
 Route::get('responsables', 'ResponsableController@index');
 Route::delete('responsables/{id}', 'ResponsableController@destroy');
+Route::put('responsables/{id}','ResponsableController@update');
 Route::post('responsables/','ResponsableController@store');
 //////////////////////////////////////////////////////
 //Rutas exclusivas de administradores
 Route::get('users', 'UserController@index');
 Route::get('users/{id}', 'UserController@show');
+Route::post('users', 'UserController@register');
 Route::post('users/habilitar/{id}', 'UserController@habilitar');
+Route::delete('users/{id}', 'UserController@destroy');
+/////////////////////////////////////////////////////////
+// PENSUM
+Route::post('pensums','PensumController@store');
+Route::put('pensums/{id}','PensumController@update');
+Route::delete('pensums/{id}','PensumController@destroy');
+// MENCION
+Route::post('menciones','MencionController@store');
+Route::put('menciones/{id}','MencionController@update');
+// Route::delete('menciones/{id}','MencionController@destroy');

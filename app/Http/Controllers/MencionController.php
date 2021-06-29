@@ -35,6 +35,7 @@ class MencionController extends Controller
     public function store(Request $request)
     {
         //
+        return "store";
     }
 
     /**

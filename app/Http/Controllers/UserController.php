@@ -111,7 +111,7 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        //
+        return "destroy";
     }
     public function habilitar(Request $request)
     {

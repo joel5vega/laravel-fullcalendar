@@ -25,12 +25,13 @@ class PensumController extends Controller
         $this->validate($request,[ 'nombre'=>'required','semestre'=>'required','mencion'=>'required','presigla'=>'required','postsigla'=>'required']);
         
         Pensum::create($request->all());
+        return "creado";
         return redirect()->route('pensum.index')->with('success','Registro creado satisfactoriamente');
     }
 
     public function show($id)
     {
-        //
+        return "show";
     }
 
     public function edit($id)
@@ -43,8 +44,11 @@ class PensumController extends Controller
     public function update(Request $request, $id)
     {
         //
+        /*
         $this->validate($request,[ 'nombre'=>'required','semestre'=>'required','mencion'=>'required','presigla'=>'required','postsigla'=>'required','pensum'=>'required']);
         Pensum::find($id)->update($request->all());
+        */
+        return "update";
         return redirect()->route('pensum.index')->with('success','Registro actualizado satisfactoriamente');
     }
 
@@ -52,6 +56,7 @@ class PensumController extends Controller
     public function destroy($id)
     {
         Pensum::find($id)->delete();
+        return "destroy";
         return redirect()->route('pensum.index')->with('success','Registro eliminado satisfactoriamente');
     }
 
