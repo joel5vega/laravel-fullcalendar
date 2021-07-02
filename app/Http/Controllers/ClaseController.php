@@ -199,7 +199,7 @@ class ClaseController extends Controller
         $clase->paralelo = $request->paralelo;
         $tipo = $request->tipo;
         $nivel = $request->nivel;
-        if ($tipo == 'aula') {
+        if ($tipo !== 'laboratorio') {
             if ($nivel == 'docente') {
                 $color = "#0066CC";
             } else {
@@ -223,6 +223,7 @@ class ClaseController extends Controller
     }
     public function store(Request $request)
     {
+        
         //validar
         $this->validate($request, [
             'materia' => 'required', 'responsable' => 'required',

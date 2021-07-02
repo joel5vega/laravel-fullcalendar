@@ -8,7 +8,7 @@ class Materia extends Model
 {
     //
     protected $table = 'materias';
-    protected $fillable = ['sigla','nombre','tipo','semestre','control','telecomunicaciones','sistemas','requisito','pensum','nivel','paralelo'];
+    protected $fillable = ['sigla','nombre','tipo','semestre','pensum'];
     public $timestamps = false;
     protected $hidden = ['pivot','created_at','updated_at'];
     

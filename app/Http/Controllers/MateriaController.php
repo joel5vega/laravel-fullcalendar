@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Materia;
 use App\Pensum;
 use App\Mencion;
+use Illuminate\Support\Facades\DB;
+use App\MateriaController\guardarMencion;
 
 class MateriaController extends Controller
 {
@@ -44,14 +46,14 @@ class MateriaController extends Controller
         //La mencion debe llegar como mencion_id
         $mencion = $request->query('mencion');
         if (isset($mencion)) {
-                $menciones= Mencion::with('materias')->get();
-                $indexSemestres= Materia::MateriasSemestre($semestre)->pluck('id');
-                // $datos['mencion']=$menciones;
-                // $datos['semestre']=$indexSemestres;
-                $datos['materias']=$menciones[$mencion-1]->materias
-                ->whereIn('id',$indexSemestres)->values();
-                // ->get(['materia_id as id','nombre'])->values();
-                // $datos =$semestres;
+            $menciones = Mencion::with('materias')->get();
+            $indexSemestres = Materia::MateriasSemestre($semestre)->pluck('id');
+            // $datos['mencion']=$menciones;
+            // $datos['semestre']=$indexSemestres;
+            $datos['materias'] = $menciones[$mencion - 1]->materias
+                ->whereIn('id', $indexSemestres)->values();
+            // ->get(['materia_id as id','nombre'])->values();
+            // $datos =$semestres;
         } else {
             if (isset($semestre)) {
                 $datos['materias'] = Materia::MateriasSemestre($semestre)->get();
@@ -63,60 +65,97 @@ class MateriaController extends Controller
         return response()->json($datos);
     }
 
-  
+
     public function store(Request $request)
     {
-        $this->validate($request, ['materia' => 'required', 'nivel' => 'required', 'paralelo' => 'nullable']);
-        //    print_r($request->materia);
-        $asignatura = new Pensum;
-        $asignatura = Pensum::where("id", "=", $request->materia)->get()->toArray();
-        // $materia['nivel']= $request->nivel;
+        //$this->validate($request, ['nombre' => 'required', 'tipo' => 'required', 'sigla' => 'required','pensum' => 'required','semestre' => 'required']);
         $materia = new Materia;
-        //hay que investigar como asignar un objeto a otro
-        $materia->sigla = $asignatura[0]['sigla'];
-        $materia->nombre = $asignatura[0]['nombre'];
-        $materia->tipo = $asignatura[0]['tipo'];
-        $materia->semestre = $asignatura[0]['semestre'];
-        $materia->nivel = $request->nivel;
-        $materia->paralelo = $request->paralelo;
-        $materia->control = $request->control;
-        $materia->telecomunicaciones = $request->telecomunicaciones;
-        $materia->pensum = $asignatura[0]['pensum'];
+        $materia->sigla = $request->sigla;
+        $materia->nombre = $request->nombre;
+        $materia->tipo = $request->tipo;
+        $materia->semestre = $request->semestre;
+        $materia->pensum_id = $request->pensum;
         $materia->save();
+        // Menciones
+        $mencionesSeleccionadas = $request->menciones;
+        $materia_id = $materia->id;
 
-        //Materia::create($request->all());
-        return redirect()->route('materia.index')->with('success', 'Registro creado satisfactoriamente');
+        //Las menciones deben llegar como un objeto en el formato :{id:true,id2:false}
+        $menciones = Mencion::all();
+        foreach ($menciones as $mencion) {
+            if ($mencion->nombre !== "General") {
+                $mencion_id = $mencion->id;
+                if (isset($mencionesSeleccionadas[$mencion_id])) {
+                    $valor = $mencionesSeleccionadas[$mencion_id];
+                    if ($valor == true) {
+                        $seleccion[$mencion_id] = $materia_id;
+                        DB::insert('insert into materia_mencion (materia_id, mencion_id) values (?, ?)', [$materia_id, $mencion_id]);
+                    }
+                }
+            }
+        }
+
+        return response()->json([
+            "message" => "Materia creada",
+            "requestw" => $seleccion,
+        ], 201);
     }
 
-  
+
     public function show($id)
     {
         $materias = Materia::find($id);
         return  view('Materias.show', compact('materias'));
     }
 
- 
-    public function edit($id)
-    {
-        $materia = Materia::find($id);
-        return view('materia.edit', compact('materia'));
-    }
+
 
     public function update(Request $request, $id)
     {
-        //
-        $this->validate($request, ['nombre' => 'required', 'semestre' => 'required', 'mencion' => 'required', 'presigla' => 'required', 'postsigla' => 'required', 'pensum' => 'required', 'tipo' => 'required', 'nivel' => 'required', 'paralelo' => 'nullable']);
-        Materia::find($id)->update($request->all());
-        return redirect()->route('materia.index')->with('success', 'Registro actualizado satisfactoriamente');
+        /*
+        $this->validate($request, [
+            'nombre' => 'required',
+            'sigla' => 'required',
+            'semestre' => 'required',
+            'pensum' => 'required',
+            'tipo' => 'required'
+        ]);
+        */
+        
+        $materia = Materia::find($id);
+        $materia->sigla = $request->sigla;
+        $materia->nombre = $request->nombre;
+        $materia->tipo = $request->tipo;
+        $materia->semestre = $request->semestre;
+        $materia->pensum_id = $request->pensum_id;
+        $materia->save(); 
+        // return $materia;
+        // Menciones
+        $mencionesSeleccionadas = $request->menciones;
+        //Las menciones deben llegar como un objeto en el formato :{id:true,id2:false}
+        $menciones = Mencion::all();
+        foreach ($menciones as $mencion) {
+            if ($mencion->nombre !== "General") {
+                $mencion_id = $mencion->id;
+                if (isset($mencionesSeleccionadas[$mencion_id])) {
+                    $valor = $mencionesSeleccionadas[$mencion_id];
+                    if ($valor == true) {
+                        $seleccion[$mencion_id] = $mencion_id;
+                    }
+                }
+            }
+        }
+        $materia->menciones()->sync($seleccion);
+        return response()->json([
+            "message" => "Materia editada",
+            "request" => $seleccion,
+        ], 201);
     }
 
     public function destroy($id)
     {
-        //
-        // echo $id;
         $response = $id;
-        // Materia::find($id)->delete();
-        // return redirect()->route('materia.index')->with('success','Registro eliminado satisfactoriamente');
+        Materia::find($id)->delete();
         return response()->json($response);
     }
 

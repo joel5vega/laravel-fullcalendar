@@ -133,9 +133,34 @@ get {{url}}/now?index=ambientes
 ##  MATERIAS
 ###
 get {{url}}/materias/semestre/7?mencion=2
+###
+post {{url}}/materias
 
+Content-Type: application/json
 
+{
+    "nombre":"aa",
+    "tipo":"teoria",
+    "pensum":"1",
+    "semestre":"2",
+    "menciones":{"1":"true"}
+}
+###
+put {{url}}/materias/57
 
+Content-Type: application/json
+
+{
+"id": "57",
+"menciones": {2: true, 3: true},
+"nombre": "Electronica Industrial",
+"pensum_id": "1",
+"semestre": "7",
+"sigla": "ETN 832",
+"tipo": "teoria",
+}
+### 
+delete {{url}}/materias/99
 
 
 

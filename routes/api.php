@@ -24,8 +24,8 @@ Route::delete('ambientes/{id}', 'AmbienteController@destroy');
 Route::get('materias', 'MateriaController@index');
 Route::get('materias/{id}', 'MateriaController@show');
 Route::get('materias/semestre/{semestre}', 'MateriaController@getSemestre');
-Route::post('materias', 'MateriaController@store');
-Route::put('materias/', 'MateriaController@update');
+Route::post('materias/', 'MateriaController@store');
+Route::put('materias/{id}', 'MateriaController@update');
 Route::delete('materias/{id}', 'MateriaController@destroy');
 
 //////////////////////////////////////////////////////
