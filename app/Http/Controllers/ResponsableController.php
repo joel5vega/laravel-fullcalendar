@@ -9,6 +9,7 @@ use App\Dato;
 use App\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\ClaseController;
+use Facade\FlareClient\Http\Response;
 
 class ResponsableController extends Controller
 {
@@ -21,12 +22,6 @@ class ResponsableController extends Controller
         } else
             $datos['responsables'] = Responsable::all();
         return response()->json($datos);
-    }
-
-
-    public function create()
-    {
-        //
     }
 
 
@@ -59,9 +54,11 @@ class ResponsableController extends Controller
     }
 
 
-    public function show(Responsable $responsable)
+    public function show(Request $request)
     {
-        //
+        $id = $request->id;
+        $responsable = Responsable::find($id);
+        return $responsable;
     }
 
     public function edit(Responsable $responsable)

@@ -50,6 +50,7 @@ Route::delete('periodos/{id}', 'PeriodoController@destroy');
 //////////////////////////////////////////////////////
 //Responsables
 Route::get('responsables', 'ResponsableController@index');
+Route::get('responsables/{id}', 'ResponsableController@show');
 Route::delete('responsables/{id}', 'ResponsableController@destroy');
 Route::put('responsables/{id}','ResponsableController@update');
 Route::post('responsables/','ResponsableController@store');

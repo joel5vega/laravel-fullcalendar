@@ -70,12 +70,17 @@ get {{url}}/clases?estado=false
 
 ## RESPONSABLES
 ###
+get {{url}}/responsables/1
+###
 Put {{url}}/responsables/1
 ###
 delete {{url}}/responsables/1
 # USERS #
 ###
-get {{url}}/users
+get {{url}}/users/21
+
+
+
 ###
 post {{url}}/users
 
