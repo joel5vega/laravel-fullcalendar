@@ -61,7 +61,7 @@ Content-Type: application/json
 
 ###
 #Eliminar
-DELETE {{url}}/clases/170
+DELETE {{url}}/clases/307
 ###
 post {{url}}/clases/habilitar/0?todos=yes
 ###
@@ -162,7 +162,21 @@ Content-Type: application/json
 ### 
 delete {{url}}/materias/99
 
+################################
+### Periodos
+###
 
+put {{url}}/periodos/2
+
+Content-Type: application/json
+
+{
+   
+    "nombre": "1",
+    "gestion": "2021",
+    "start_date": "2021-02-01",
+    "end_date": "2021-07-30"
+}
 
 
 

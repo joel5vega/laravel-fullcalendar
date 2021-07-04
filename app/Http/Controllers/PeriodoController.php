@@ -66,18 +66,18 @@ class PeriodoController extends Controller
 
     public function update(Request $request, Periodo $periodo)
     {
-        $periodo = Periodo::find($request->id);
+        $periodox = Periodo::find($request->id);
         $this->validate($request, [
             'id' => 'required', 'nombre' => 'required', 'start_date' => 'required',
             'gestion' => 'required', 'end_date' => 'required'
 
         ]);
-        $periodo->nombre = $request->nombre;
-        $periodo->gestion = $request->gestion;
-        $periodo->start_date = $request->start_date;
-        $periodo->end_date = $request->end_date;
-        $periodo->save();
-        return $periodo;
+        $periodox->nombre = $request->nombre;
+        $periodox->gestion = $request->gestion;
+        $periodox->start_date = $request->start_date;
+        $periodox->end_date = $request->end_date;
+        $periodox->save();
+        return $periodox;
     }
 
     public function destroy(Request $request)

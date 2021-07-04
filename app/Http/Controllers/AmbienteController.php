@@ -50,7 +50,6 @@ class AmbienteController extends Controller
         Ambiente::find($request->id)->update($validatedData);
 
         return $request;
-        // return redirect()->route('ambiente.index')->with('success', 'Registro actualizado satisfactoriamente');
     }
 
     public function destroy($id)
@@ -59,19 +58,5 @@ class AmbienteController extends Controller
         return response()->json('Ambiente eliminado');
         // return redirect()->route('ambiente.index')->with('success', 'Registro eliminado satisfactoriamente');
     }
-    /*
-    public function edit($id)
-    {
-        //
-        $ambiente = ambiente::find($id);
-        return view('ambiente.edit', compact('ambiente'));
-    }
-    public function create()
-    {
-        //
-        echo 'llega';
-        // return view('Ambiente.create');
-    }
-
-    */
+   
 }

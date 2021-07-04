@@ -170,14 +170,12 @@ class ClaseController extends Controller
     public function habilitar(Request $request)
     {
         $id = $request->id;
-        if($id==0)
-        {
-            $habilitar=$request->todos;
-            if($habilitar=="yes"){
-                DB::update('update clases set estado=? where estado=?',["true","false"]);
+        if ($id == 0) {
+            $habilitar = $request->todos;
+            if ($habilitar == "yes") {
+                DB::update('update clases set estado=? where estado=?', ["true", "false"]);
                 return $habilitar;
             }
-            
         }
         $clase = Clase::findOrFail($id);
         $clase->estado = "true";
@@ -219,11 +217,10 @@ class ClaseController extends Controller
             "request" => $clase,
             "color" => $color
         ], 201);
-
     }
     public function store(Request $request)
     {
-        
+
         //validar
         $this->validate($request, [
             'materia' => 'required', 'responsable' => 'required',
@@ -246,24 +243,21 @@ class ClaseController extends Controller
         $nivel = $request->nivel;
         //return "request";
         //return $request;
-        function setColores($tipo, $nivel)
-        {
-            if ($tipo == 'aula') {
-                if ($nivel == 'docente') {
-                    $color = "#0066CC";
-                } else {
-                    $color = "#00CCFF";
-                }
+
+        if ($tipo == 'aula') {
+            if ($nivel == 'docente') {
+                $color = "#0066CC";
             } else {
-                if ($nivel == 'docente') {
-                    $color = "#006600";
-                } else {
-                    $color = "#00FF00";
-                }
+                $color = "#00CCFF";
             }
-            return $color;
+        } else {
+            if ($nivel == 'docente') {
+                $color = "#006600";
+            } else {
+                $color = "#00FF00";
+            }
         }
-        $color = setColores($tipo, $nivel);
+
         $clase->color = $color;
         $clase->save();
         return response()->json([
@@ -344,17 +338,15 @@ class ClaseController extends Controller
 
     public function destroy(Request $request)
     {
-        $id=$request->id;
-        
-        $clase= Clase::findOrFail($id);
+        $id = $request->id;
+
+        $clase = Clase::findOrFail($id);
         $clase->forceDelete();
-    
+
         return $id;
     }
-     public function update(Request $request, Clase $clase)
+    public function update(Request $request, Clase $clase)
     {
         //
     }
-
-  
 }

@@ -55,7 +55,7 @@ class ResponsableController extends Controller
             "request" => $responsable,
 
         ], 201);
-        return $responsable;
+        // return $responsable;
     }
 
 
@@ -70,10 +70,27 @@ class ResponsableController extends Controller
     }
 
 
-    public function update(Request $request, Responsable $responsable)
+    public function update(Request $request)
     {
-        //
-        return "update";
+        $responsable = Responsable::find($request->id);
+        $this->validate($request, [
+            'ap_paterno' => 'required', 'id' => 'required', 'puesto' => 'required',
+        ]);
+        $responsable->titulo = $request->titulo;
+        $responsable->nombre = $request->nombre;
+        $responsable->ap_paterno = $request->ap_paterno;
+        $responsable->ap_materno = $request->ap_materno;
+        $responsable->puesto = $request->puesto;
+        $responsable->telefono = $request->telefono;
+        $responsable->email = $request->email;
+        $responsable->descripcion = $request->descripcion;
+        $responsable->foto = $request->foto;
+        $responsable->save();
+        return response()->json([
+            "message" => "Responsable creado",
+            "request" => $responsable,
+
+        ], 201);
     }
 
     public function destroy(Request $request)

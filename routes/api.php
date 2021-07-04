@@ -17,7 +17,7 @@ Route::get('index', 'DatoController@apiIndex');
 Route::get('ambientes', 'AmbienteController@index');
 Route::post('ambientes', 'AmbienteController@store');
 Route::get('ambientes/{id}', 'AmbienteController@show');
-Route::put('ambientes/', 'AmbienteController@update');
+Route::put('ambientes/{id}', 'AmbienteController@update');
 Route::delete('ambientes/{id}', 'AmbienteController@destroy');
 //////////////////////////////////////////////////////
 // Materias
@@ -45,7 +45,7 @@ Route::get('now', 'ClaseController@getClasesNow');
 //////////////////////////////////////////////////////
 // Periodos
 Route::post('periodos/', 'PeriodoController@store');
-Route::put('periodos/', 'PeriodoController@update');
+Route::put('periodos/{id}', 'PeriodoController@update');
 Route::delete('periodos/{id}', 'PeriodoController@destroy');
 //////////////////////////////////////////////////////
 //Responsables
