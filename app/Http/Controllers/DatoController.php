@@ -210,16 +210,16 @@ class DatoController extends Controller
             $periodo = $this->getActualPeriodoId();
             $ap_paterno = Responsable::find($id)->ap_paterno;
             $titulo = Responsable::find($id)->titulo;
-            $nombre=$titulo." ".$ap_paterno;
+            $nombre = $titulo . " " . $ap_paterno;
             $clases = Dato::Responsable($id)->where('periodo_id', $periodo)->select('id', 'startTime', 'endTime')->get();
             $horas = $this->buscarHoras($id, $clases);
             $registrados = $registrados + 1;
             if ($horas > 0) {
-                $total[$nombre] = round($horas / 0.75,0);
+                $total[$nombre] = round($horas / 0.75, 0);
                 $contar = $contar + 1;
             }
         }
-        $horas_acad = round(array_sum($total) / 40,2);
+        $horas_acad = round(array_sum($total) / 40, 2);
         $response['docentes_registrados'] = $registrados;
         $response['docentes_activos'] = $contar;
         $response['docente_equivalente'] = $horas_acad;
@@ -263,10 +263,10 @@ class DatoController extends Controller
         $total = [];
         foreach ($clases as $class) {
             $horas = $this->getIntervalo($class->startTime, $class->endTime);
-            $total[$i] = round($horas,2);
+            $total[$i] = round($horas, 2);
             $i = $i + 1;
         }
-        $tiempos = round(array_sum($total),2);
+        $tiempos = round(array_sum($total), 2);
         $tiempoTotal = round($tiempos, 1);
         return $tiempoTotal;
     }
@@ -274,80 +274,19 @@ class DatoController extends Controller
     {
         $startTime = Carbon::parse($start);
         $endTime = Carbon::parse($end);
-        $duration = round($startTime->diffInMinutes($endTime) / 60,2);
+        $duration = round($startTime->diffInMinutes($endTime) / 60, 2);
         return $duration;
     }
     public function buscarDias($id, $tipo)
     {
         $cont = [1, 2, 3, 4, 5, 6];
-        $dias = ['Lunes', 'Martes', 'Miercoles', 'Jueves', 'Viernes', 'Sabado'];
+        $dias = ['Lun.', 'Mar.', 'Mie.', 'Jue.', 'Vie.', 'Sab.'];
         $periodo = $this->getActualPeriodoId();
-        // switch ($tipo) {
-        //     case 'ambiente': {
-
-        //             $clases = Dato::Ambiente($periodo, $id)->where('periodo_id', $periodo)->select('id', 'startTime', 'endTime')->get();
-        //             break;
-        //         }
-        // }
         foreach ($cont as $dia) {
             $nombre = $dias[$dia - 1];
             $clases = Dato::Ambiente($periodo, $id)->where('daysOfWeek', $dia)->select('id', 'startTime', 'endTime')->get();
             $diarioA[$nombre] = $this->buscarHoras($id, $clases);
         }
-
         return $diarioA;
     }
-
-
-    // Funcion para obtener las clases actuales en un tiempo dado
-    // en la consulta recibiremos la fecha actual, es decir
-    // fecha, dia , hora, minuto
-    //en nuestra tabla tenemos la siguiente informacion
-    // daysOfWeek (dia) startTime y endTime (tiempos de inicio y final) asi como periodo
-    /*
-    Algoritmo de busqueda
-    1. dia
-    horas
-    tenemos hora actual
-    queremos ver todos los q tengan hora de inicio menor a hora actual
-    y hora de fin mayor a la actual
-
-    */
-    /*
-    public function getClasesNow(Request $request)
-    {
-        // Obtenemos el tipo de consulta, si es q no existe se retorna todas las clases
-        $ambientes = $request->query('ambientes');
-        $index = $request->query('index');
-        $today = getdate();
-        // Periodo
-        $periodo = $this->getActualPeriodo()[0]->id;
-        $dia = $today["wday"];
-        $hour = $today["hours"];
-        if ($hour < 10) {
-            $hora = "0$hour";
-        } else {
-            $hora = $today["hours"];
-        }
-        $minuto = $today["minutes"];
-        // La hora siempre debe estar en formato hh:mm si no esta asi falla
-        $time = "$hora:$minuto";
-        $clases = Dato::Hora($periodo, $dia, $time)->get();
-        $ocupado = Dato::IndexOcupado($periodo, $dia, $time)->pluck("ambiente_id");
-        /// Switch index
-        if (isset($ambientes)) {
-            switch ($ambientes) {
-                case 'ocupado': {
-                        $response['ambientes'] = Ambiente::all()->whereIn('id', $ocupado)->sortBy("tipo");
-                    }
-                    break;
-                case 'libre': {
-                        $response['ambientes'] = Ambiente::all()->whereNotIn('id', $ocupado)->sortBy("tipo");
-                    }
-                    break;
-            }
-        } else $response = $clases;
-        return response()->json(['ambientes' => $response['ambientes']->values()]);
-    }
-    */
 }
