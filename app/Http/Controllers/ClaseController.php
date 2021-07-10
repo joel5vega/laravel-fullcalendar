@@ -99,10 +99,9 @@ class ClaseController extends Controller
     public function getMateriasEnMencion($mencion)
     {
         $consulta = Mencion::with('materias')->where('id', '=', $mencion)->first();
-        // $clases = $consulta->materias->pluck('materia_id');
         return $consulta;
     }
-    //Funcioin para obtener el periodo actual
+    //Funcion para obtener el periodo actual
     public function getActualPeriodoId()
     {
         //obtiene hora actual
@@ -162,11 +161,7 @@ class ClaseController extends Controller
         $clases = Dato::Responsable($responsable)->where('periodo_id', $periodo)->get();
         return response()->json($clases);
     }
-
-    public function create()
-    {
-        //
-    }
+    
     public function habilitar(Request $request)
     {
         $id = $request->id;

@@ -54,6 +54,7 @@ Route::get('responsables/{id}', 'ResponsableController@show');
 Route::delete('responsables/{id}', 'ResponsableController@destroy');
 Route::put('responsables/{id}','ResponsableController@update');
 Route::post('responsables/','ResponsableController@store');
+Route::get('responsables/horas/{id}','ResponsableController@getHoras');
 //////////////////////////////////////////////////////
 //Rutas exclusivas de administradores
 Route::get('users', 'UserController@index');
@@ -70,3 +71,5 @@ Route::delete('pensums/{id}','PensumController@destroy');
 Route::post('menciones','MencionController@store');
 Route::put('menciones/{id}','MencionController@update');
 // Route::delete('menciones/{id}','MencionController@destroy');
+// DATOS
+Route::get('datos/','DatoController@getEstadistica');

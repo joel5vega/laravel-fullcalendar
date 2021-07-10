@@ -10,10 +10,14 @@ use App\Semestre;
 use App\Mencion;
 use App\Periodo;
 use App\Pensum;
+use Carbon\Carbon;
+
 
 use Illuminate\Http\Request;
 use PhpParser\Node\Expr\AssignOp\Concat;
 use stdClass;
+use App\Http\Controllers\ResponsableController\buscarHoras;
+use App\Http\Controllers\ClaseController\getActualPeriodoId;
 
 class DatoController extends Controller
 {
@@ -141,7 +145,13 @@ class DatoController extends Controller
         $actual = Periodo::Actual($now)->get();
         return $actual;
     }
-
+    public function getActualPeriodoId()
+    {
+        //obtiene hora actual
+        $now = date("Y-m-d");
+        $actual = Periodo::Actual($now)->first();
+        return $actual->id;
+    }
 
     public function getClasesEnSemestre(Request $request)
     {
@@ -173,6 +183,122 @@ class DatoController extends Controller
         $clases = Dato::Responsable($periodo, $responsable)->get();
         return response()->json($clases);
     }
+
+    public function getEstadistica(Request $request)
+    {
+        $tipo = $request->query('tipo');
+        switch ($tipo) {
+            case 'responsable': {
+                    $response[$tipo] = $this->getDatosResponsable();
+                    break;
+                }
+            case 'ambiente': {
+                    $response[$tipo] = $this->getDatosAmbiente();
+                    break;
+                }
+        }
+        return $response;
+    }
+
+    function getDatosResponsable()
+    {
+        $responsables_id = Responsable::nivel("docente")->pluck('id');
+
+        $contar = 0;
+        $registrados = 0;
+        foreach ($responsables_id as $id) {
+            $periodo = $this->getActualPeriodoId();
+            $ap_paterno = Responsable::find($id)->ap_paterno;
+            $titulo = Responsable::find($id)->titulo;
+            $nombre=$titulo." ".$ap_paterno;
+            $clases = Dato::Responsable($id)->where('periodo_id', $periodo)->select('id', 'startTime', 'endTime')->get();
+            $horas = $this->buscarHoras($id, $clases);
+            $registrados = $registrados + 1;
+            if ($horas > 0) {
+                $total[$nombre] = round($horas / 0.75,0);
+                $contar = $contar + 1;
+            }
+        }
+        $horas_acad = round(array_sum($total) / 40,2);
+        $response['docentes_registrados'] = $registrados;
+        $response['docentes_activos'] = $contar;
+        $response['docente_equivalente'] = $horas_acad;
+        $response['responsables'] = $total;
+        return $response;
+    }
+    function getDatosAmbiente()
+    {
+        $aulas_id = Ambiente::all()->pluck('id');
+        // $labos_id = Ambiente::tipo("labo")->pluck('id');
+        $contar = 0;
+        $registrados = 0;
+        $total = [];
+        foreach ($aulas_id as $id) {
+            $periodo = $this->getActualPeriodoId();
+            $ambiente = Ambiente::find($id)->nombre;
+            $clases = Dato::Ambiente($periodo, $id)->select('id', 'startTime', 'endTime')->get();
+            $horas = $this->buscarHoras($id, $clases);
+            $diarioH = $this->buscarDias($id, 'ambiente');
+            $registrados = $registrados + 1;
+            if ($horas > 0) {
+                $total[$ambiente] = $horas;
+
+                $contar = $contar + 1;
+            }
+            if ($diarioH > 0) {
+                $diario[$ambiente] = $diarioH;
+            }
+        }
+        $response['ambi'] = $ambiente;
+        $response['registrados'] = $registrados;
+
+        $response['diario'] = $diario;
+        $response['total'] = $total;
+        return $response;
+    }
+
+    public function buscarHoras($id, $clases)
+    {
+        $i = 0;
+        $total = [];
+        foreach ($clases as $class) {
+            $horas = $this->getIntervalo($class->startTime, $class->endTime);
+            $total[$i] = round($horas,2);
+            $i = $i + 1;
+        }
+        $tiempos = round(array_sum($total),2);
+        $tiempoTotal = round($tiempos, 1);
+        return $tiempoTotal;
+    }
+    function getIntervalo($start, $end)
+    {
+        $startTime = Carbon::parse($start);
+        $endTime = Carbon::parse($end);
+        $duration = round($startTime->diffInMinutes($endTime) / 60,2);
+        return $duration;
+    }
+    public function buscarDias($id, $tipo)
+    {
+        $cont = [1, 2, 3, 4, 5, 6];
+        $dias = ['Lunes', 'Martes', 'Miercoles', 'Jueves', 'Viernes', 'Sabado'];
+        $periodo = $this->getActualPeriodoId();
+        // switch ($tipo) {
+        //     case 'ambiente': {
+
+        //             $clases = Dato::Ambiente($periodo, $id)->where('periodo_id', $periodo)->select('id', 'startTime', 'endTime')->get();
+        //             break;
+        //         }
+        // }
+        foreach ($cont as $dia) {
+            $nombre = $dias[$dia - 1];
+            $clases = Dato::Ambiente($periodo, $id)->where('daysOfWeek', $dia)->select('id', 'startTime', 'endTime')->get();
+            $diarioA[$nombre] = $this->buscarHoras($id, $clases);
+        }
+
+        return $diarioA;
+    }
+
+
     // Funcion para obtener las clases actuales en un tiempo dado
     // en la consulta recibiremos la fecha actual, es decir
     // fecha, dia , hora, minuto

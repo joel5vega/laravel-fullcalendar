@@ -15,6 +15,7 @@ class Dato extends Model
     {
         return $query->where('periodo_id', '=', $periodo);
     }
+    /// Obtiene las clases de un ambiente determinado
     public function scopeAmbiente($query, $periodo, $aula_id)
     {
         return $query->where('periodo_id', '=', $periodo)->where('ambiente_id', '=', $aula_id);

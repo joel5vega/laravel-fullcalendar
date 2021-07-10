@@ -9,6 +9,9 @@ use App\Dato;
 use App\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\ClaseController;
+use App\Http\Controllers\ClaseController\getActualPeriodoId;
+use App\Http\Controllers\ClaseController\getClasesResponsable;
+use Carbon\Carbon;
 use Facade\FlareClient\Http\Response;
 
 class ResponsableController extends Controller
@@ -61,11 +64,34 @@ class ResponsableController extends Controller
         return $responsable;
     }
 
-    public function edit(Responsable $responsable)
+    public function getHoras(Request $request)
     {
-        //
+        //Recibe la consulta desde el exterior
+        $responsable = $request->id;
+        $horas = $this->buscarHoras($responsable);
+        $response = $horas;
+        return $response;
     }
-
+    public function buscarHoras($id)
+    {
+        // Sirve como una funcion en el sistema
+        $periodo = $this->getActualPeriodoId();
+        $clases = Dato::Responsable($id)->where('periodo_id', $periodo)->select('id','startTime','endTime')->get();
+        $i=0;
+        foreach($clases as $class){
+        $horas = $this->getIntervalo($class->startTime,$class->endTime);
+        $total[$i]=$horas;
+        $i=$i+1;
+        }
+        $tiempoTotal=array_sum($total);
+        return $tiempoTotal;
+    }
+    function getIntervalo($start,$end){
+        $startTime =Carbon::parse($start);
+        $endTime = Carbon::parse($end);
+        $duration = $startTime->diffInMinutes($endTime);
+        return $duration;
+    }
 
     public function update(Request $request)
     {

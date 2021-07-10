@@ -20,6 +20,8 @@ get {{url}}/now?index=ambientes
 ###
 get {{url}}/clases/semestre/7?mencion=2
 ###
+get {{url}}/clases/responsable/411
+###
 get {{url}}/clases
 # Crear una clase
 ###
@@ -75,9 +77,23 @@ get {{url}}/responsables/1
 Put {{url}}/responsables/1
 ###
 delete {{url}}/responsables/1
+
+
+
+###
+get {{url}}/responsables/horas/411
+###
+
+### DATOS
+###
+get {{url}}/datos?tipo=responsable
+
+###
+
 # USERS #
 ###
 get {{url}}/users/21
+###
 
 
 
