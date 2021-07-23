@@ -4,7 +4,9 @@
 ###
 GET {{url}}
 ###
-http://localhost:8000/api/clases?estado=false
+get {{url}}/index
+###
+get http://localhost:8000/api/clases?estado=false
 ###
 ##  AMBIENTE
 ###
@@ -12,7 +14,16 @@ GET {{url}}/ambientes?tipo=laboratorio
 ###
 # ambientes usados
 get {{url}}/now?index=ambientes
+###
+#Crear ambiente
+post {{url}}/ambientes
+Content-Type: application/json
 
+{
+    "nombre":"A2+- ll-",
+    "tipo":"labo",
+    "capacidad":"10"
+}
 ###
 ##  CLASE 
 # Get clases de mencion
@@ -94,9 +105,31 @@ get {{url}}/datos?tipo=responsable
 ###
 get {{url}}/users/21
 ###
+post {{url}}/users?email=email&name=name&password=password&c_password=c_password&tipo=tipo
+###
+post {{url}}/users
+Content-Type: application/json
 
+{ "email": "email",
+  "name": "",
+  "password": "password",
+  "c_password": "c_password",
+  "tipo": "tipo"
+}
 
+###
+put {{url}}/users/16
+Content-Type: application/json
 
+{
+"email": "docente@mail.com"
+"estado": "true"
+"id": 21
+"name": "Docente"
+"responsable": "396"
+"responsable_id": 1
+"tipo": "docente"
+}
 ###
 post {{url}}/users
 
@@ -149,14 +182,27 @@ delete {{url}}/menciones/15
 ## Clases
 ###
 get {{url}}/now?index=ambientes
+###
+put {{url}}/clases/152
+Content-Type: application/json
 
+{
+    "materia":"1",
+    "responsable":"414",
+    "ambiente":"10",
+    "periodo":"2",
+    "nivel":"auxiliar",
+    "day":"6",
+    "startTime":"12:00",
+    "endTime":"13:30",
+    "tipo":"teoria",
+}
 
 ##  MATERIAS
 ###
 get {{url}}/materias/semestre/7?mencion=2
 ###
 post {{url}}/materias
-
 Content-Type: application/json
 
 {
@@ -168,7 +214,6 @@ Content-Type: application/json
 }
 ###
 put {{url}}/materias/57
-
 Content-Type: application/json
 
 {
@@ -188,7 +233,6 @@ delete {{url}}/materias/99
 ###
 
 put {{url}}/periodos/2
-
 Content-Type: application/json
 
 {
