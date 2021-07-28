@@ -11,19 +11,17 @@ use App\Materia;
 use Illuminate\Support\Facades\DB;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class ClaseController extends Controller
 {
     public function index(Request $request)
     {
-
         $periodo = $request->query('periodo');
-
         if (!isset($periodo)) {
             $dato = Periodo::Actual()->first();
             $periodo = $dato->id;
         }
-
         $ambiente = $request->query('ambiente');
         $semestre = $request->query('semestre');
         $estado = $request->query('estado');
@@ -31,7 +29,6 @@ class ClaseController extends Controller
             $clases = Dato::estado($estado)->get();
             return response()->json($clases);
         }
-
         if (isset($ambiente)) {
             if ($ambiente == 'undefined') {
                 $data = Dato::all();
@@ -50,7 +47,6 @@ class ClaseController extends Controller
         $semestre = $request->semestre;
         $mencion = $request->query('mencion');
         $periodo = $request->query('periodo');
-
         if (!isset($periodo)) {
             $periodo = $this->getActualPeriodoId();
         }
@@ -92,7 +88,6 @@ class ClaseController extends Controller
                 $datos['materias'] = Materia::all();
             }
         }
-
         return response()->json($datos);
     }
 
@@ -128,9 +123,7 @@ class ClaseController extends Controller
     }
     public function getClasesNow(Request $request)
     {
-        // Obtenemos el tipo de consulta, si es q no existe se retorna todas las clases
         $index = $request->query('index');
-        // Periodo, Dia y Hora Actual
         $periodo = $this->getActualPeriodoId();
         $dia = $this->getTime()['dia'];
         $time = $this->getTime()['time'];
@@ -142,7 +135,8 @@ class ClaseController extends Controller
                     //para entregar lista de ambientes
                 case 'ambientes': {
                         $response['ocupados'] = Ambiente::all()->whereIn('id', $ocupado)->sortBy("tipo")->values();
-                        $response['libres'] = Ambiente::all()->whereNotIn('id', $ocupado)->sortBy("tipo")->sortByDesc("capacidad")->values();
+                        $response['libres'] = Ambiente::all()->whereNotIn('id', $ocupado)->sortBy("tipo")
+                            ->sortByDesc("capacidad")->values();
                     }
                     break;
             }
@@ -157,18 +151,20 @@ class ClaseController extends Controller
         } else {
             $periodo = $this->getActualPeriodoId();
         }
-
         $clases = Dato::Responsable($responsable)->where('periodo_id', $periodo)->get();
         return response()->json($clases);
     }
-    
+
     public function habilitar(Request $request)
     {
         $id = $request->id;
         if ($id == 0) {
             $habilitar = $request->todos;
             if ($habilitar == "yes") {
-                DB::update('update clases set estado=? where estado=?', ["true", "false"]);
+                DB::update(
+                    'update clases set estado=? where estado=?',
+                    ["true", "false"]
+                );
                 return $habilitar;
             }
         }
@@ -179,7 +175,31 @@ class ClaseController extends Controller
     }
     public function editar(Request $request)
     {
+
+        $validator = Validator::make(
+            $request->all(),
+            [
+                'materia' => 'required|int|min:1',
+                'responsable' => 'required|min:1|int',
+                'ambiente' => 'required|min:1|int',
+                'periodo' => 'required|int|between:(1,4)',
+                'nivel' => 'required|exists:clases',
+                'day' => 'required|int|between:(1,6)',
+                'startTime' => 'required|date_format:H:i',
+                'endTime' => 'required|date_format:H:i|after:startTime',
+            ],
+            ['required' => ':attribute es requerido']
+        );
+        if ($validator->fails()) {
+            return response()->json([
+                'error' => $validator->errors(),
+                'message' => 'Se necesita enviar los datos de clase con el formato requerido'
+            ], 400);
+        }
+
+        // Mapeo
         $id = $request->id;
+
         $clase = Clase::findOrFail($id);
         $clase->materia_id = $request->materia;
         $clase->responsable_id = $request->responsable;
@@ -190,7 +210,7 @@ class ClaseController extends Controller
         $clase->hora_fin = $request->endTime;
         $clase->nivel = $request->nivel;
         $clase->paralelo = $request->paralelo;
-        $tipo = $request->tipo;
+        $tipo = Ambiente::GetTipo($request->ambiente)->pluck('tipo')->first();
         $nivel = $request->nivel;
         if ($tipo !== 'laboratorio') {
             if ($nivel == 'docente') {
@@ -213,55 +233,6 @@ class ClaseController extends Controller
             "color" => $color
         ], 201);
     }
-    public function store(Request $request)
-    {
-
-        //validar
-        $this->validate($request, [
-            'materia' => 'required', 'responsable' => 'required',
-            'ambiente' => 'required', 'tipo' => 'required',
-            'nivel' => 'required', 'day' => 'required',
-            'startTime' => 'required', 'endTime' => 'required'
-        ]);
-        //
-        $clase = new Clase;
-        $clase->materia_id = $request->materia;
-        $clase->responsable_id = $request->responsable;
-        $clase->ambiente_id = $request->ambiente;
-        $clase->periodo_id = $request->periodo;
-        $clase->dia = $request->day;
-        $clase->hora_ini = $request->startTime;
-        $clase->hora_fin = $request->endTime;
-        $clase->nivel = $request->nivel;
-        $clase->paralelo = $request->paralelo;
-        $tipo = $request->tipo;
-        $nivel = $request->nivel;
-        //return "request";
-        //return $request;
-
-        if ($tipo == 'aula') {
-            if ($nivel == 'docente') {
-                $color = "#0066CC";
-            } else {
-                $color = "#00CCFF";
-            }
-        } else {
-            if ($nivel == 'docente') {
-                $color = "#006600";
-            } else {
-                $color = "#00FF00";
-            }
-        }
-
-        $clase->color = $color;
-        $clase->save();
-        return response()->json([
-            "message" => "estudiante creado",
-            "request" => $clase,
-            "color" => $color
-        ], 201);
-    }
-
 
     public function show($id)
     {
@@ -272,18 +243,27 @@ class ClaseController extends Controller
     public function crearClase(Request $request)
     {
         //validar
-        /*
-        $this->validate($request, [
-            'materia' => 'required', 'responsable' => 'required',
-            'ambiente' => 'required',
-            'periodo' => 'nullable',
-            'nivel' => 'required', 'day' => 'required',
-            'startTime' => 'required', 'endTime' => 'required',
-            'paralelo' => 'nullable'
-        ]);
-        */
-        //
-
+        $validator = Validator::make(
+            $request->all(),
+            [
+                'materia' => 'required|int|min:1',
+                'responsable' => 'required|min:1|int',
+                'ambiente' => 'required|min:1|int',
+                'periodo' => 'required|int|between:(1,4)',
+                'nivel' => 'required|exists:clases',
+                'day' => 'required|int|between:(1,6)',
+                'startTime' => 'required|date_format:H:i',
+                'endTime' => 'required|date_format:H:i|after:startTime',
+            ],
+            ['required' => ':attribute es requerido']
+        );
+        if ($validator->fails()) {
+            return response()->json([
+                'error' => $validator->errors(),
+                'message' => 'Se necesita enviar los datos con el formato requerido'
+            ], 400);
+        }
+        //Instanciar clases
         $clase = new Clase;
         $clase->materia_id = $request->materia;
         $clase->responsable_id = $request->responsable;
@@ -293,8 +273,11 @@ class ClaseController extends Controller
         $clase->hora_ini = $request->startTime;
         $clase->hora_fin = $request->endTime;
         $clase->nivel = $request->nivel;
-        $clase->paralelo = $request->paralelo;
-        $tipo = $request->tipo;
+        if (isset($request->paralelo)) {
+            $clase->paralelo = $request->paralelo;
+        }
+        $tipo = Ambiente::GetTipo($request->ambiente)
+            ->pluck('tipo')->first();
         $nivel = $request->nivel;
 
         function setColor($tipo, $nivel)
@@ -314,16 +297,13 @@ class ClaseController extends Controller
             }
             return $color;
         }
-
         $color = setColor($tipo, $nivel);
         $clase->color = $color;
         $clase->save();
-
         //Para copiar al periodo 2
         $clone = $clase->replicate();
         $clone->periodo_id = "3";
         $clone->push();
-
         return response()->json([
             "message" => "Clase creada con exito",
             "request" => $clase,
@@ -334,14 +314,9 @@ class ClaseController extends Controller
     public function destroy(Request $request)
     {
         $id = $request->id;
-
         $clase = Clase::findOrFail($id);
+        $clase->estado = false;
         $clase->forceDelete();
-
-        return $id;
-    }
-    public function update(Request $request, Clase $clase)
-    {
-        //
+        return response()->json(['message' => "se elimino la clase :id"]);
     }
 }

@@ -13,12 +13,12 @@ class Dato extends Model
     //Para obtener el listado de las clases en un periodp determindao
     public function scopePeriodo($query, $periodo)
     {
-        return $query->where('periodo_id', '=', $periodo);
+        return $query->where('periodo_id', '=', $periodo)->where("estado", '=', true);
     }
     /// Obtiene las clases de un ambiente determinado
     public function scopeAmbiente($query, $periodo, $aula_id)
     {
-        return $query->where('periodo_id', '=', $periodo)->where('ambiente_id', '=', $aula_id);
+        return $query->where('periodo_id', '=', $periodo)->where('ambiente_id', '=', $aula_id)->where("estado", '=', "true");
     }
     //para obtener las clases de un semestre determinado
     public function scopeSemestre($query, $periodo, $semestre)
@@ -29,28 +29,28 @@ class Dato extends Model
     public function scopeTipo($query, $periodo, $semestre, $tipo)
     {
 
-        return $query->where('periodo_id', '=', $periodo)->where('periodo_id', '=', $periodo)->where('semestre', '=', $semestre)->where('tipo', '=', $tipo);
+        return $query->where('periodo_id', '=', $periodo)->where('periodo_id', '=', $periodo)->where('semestre', '=', $semestre)->where('tipo', '=', $tipo)->where("estado", '=', "true");
     }
     //para obtener las clases de una mencion especifica
     public function scopeMencion($query, $periodo, $semestre, $mencion)
     {
-        return $query->where('periodo_id', '=', $periodo)->where('semestre', '=', $semestre)->where($mencion, '=', 'si');
+        return $query->where('periodo_id', '=', $periodo)->where('semestre', '=', $semestre)->where($mencion, '=', 'si')->where("estado", '=', "true");
     }
 
     //obtener las clases de un responsable especifico
     public function scopeResponsable($query,  $responsable)
     {
-        return $query->where('responsable_id', '=', $responsable);
+        return $query->where('responsable_id', '=', $responsable)->where("estado", '=', "true");
     }
     //para obtener las clases de un dia determinado
     public function scopeDia($query, $periodo, $dia)
     {
-        return $query->where('periodo_id', '=', $periodo)->where('daysOfWeek', '=', $dia);
+        return $query->where('periodo_id', '=', $periodo)->where('daysOfWeek', '=', $dia)->where("estado", '=', "true");
     }
     //para obtener las clases de un hora determinado
     public function scopeHora($query, $periodo, $dia, $hora)
     {
-        return $query->where('periodo_id', '=', $periodo)->where('daysOfWeek', '=', $dia)->where('endTime', '>', $hora)->where('startTime', '<', $hora);
+        return $query->where('periodo_id', '=', $periodo)->where('daysOfWeek', '=', $dia)->where('endTime', '>', $hora)->where('startTime', '<', $hora)->where("estado", '=', "true");
     }
     // Solo obtiene la lista especifica
     public function scopeIndexOcupado($query, $periodo, $dia, $hora)
@@ -76,3 +76,4 @@ class Dato extends Model
         return $query->where('estado', '=', $estado)->where('deleted','=',null);
     }
 }
+     

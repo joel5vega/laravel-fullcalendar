@@ -16,4 +16,8 @@ class Ambiente extends Model
     {
         return $query->where('tipo', '=', $tipo);
     }
+
+    public function scopeGetTipo($query,$id){
+        return $query->where('id','=',$id)->select('tipo');
+}
 }

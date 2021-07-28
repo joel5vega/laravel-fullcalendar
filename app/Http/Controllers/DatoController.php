@@ -196,6 +196,8 @@ class DatoController extends Controller
                     $response[$tipo] = $this->getDatosAmbiente();
                     break;
                 }
+            default:
+                $response = "Envie el tipo";
         }
         return $response;
     }
@@ -223,13 +225,12 @@ class DatoController extends Controller
         $response['docentes_registrados'] = $registrados;
         $response['docentes_activos'] = $contar;
         $response['docente_equivalente'] = $horas_acad;
-        $response['responsables'] = $total;
+        $response['responsables'] = $this->ordenar($total);
         return $response;
     }
     function getDatosAmbiente()
     {
         $aulas_id = Ambiente::all()->pluck('id');
-        // $labos_id = Ambiente::tipo("labo")->pluck('id');
         $contar = 0;
         $registrados = 0;
         $total = [];
@@ -249,14 +250,20 @@ class DatoController extends Controller
                 $diario[$ambiente] = $diarioH;
             }
         }
-        $response['ambi'] = $ambiente;
-        $response['registrados'] = $registrados;
 
+        $response['registrados'] = $registrados;
         $response['diario'] = $diario;
-        $response['total'] = $total;
+        $response['total'] = $this->ordenar($total);
         return $response;
     }
-
+    public function ordenar($array)
+    {
+        arsort($array);
+        foreach ($array as $key => $val) {
+            $orden[$key] = $val;
+        }
+        return $orden;
+    }
     public function buscarHoras($id, $clases)
     {
         $i = 0;

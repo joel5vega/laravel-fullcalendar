@@ -6,7 +6,6 @@ use Illuminate\Support\Facades\Route;
 use Laravel\Passport\Http\Controllers\AccessTokenController;
 ////////////////////////////////
 // Autenticacion
-
 Route::post('login', [AccessTokenController::class, 'issueToken'])
     ->middleware(['api-login', 'throttle']);
 /////////////////////////////////////
@@ -27,7 +26,6 @@ Route::get('materias/semestre/{semestre}', 'MateriaController@getSemestre');
 Route::post('materias/', 'MateriaController@store');
 Route::put('materias/{id}', 'MateriaController@update');
 Route::delete('materias/{id}', 'MateriaController@destroy');
-
 //////////////////////////////////////////////////////
 //Clases
 Route::get('clases', 'ClaseController@index');
@@ -56,9 +54,10 @@ Route::put('responsables/{id}','ResponsableController@update');
 Route::post('responsables/','ResponsableController@store');
 Route::get('responsables/horas/{id}','ResponsableController@getHoras');
 //////////////////////////////////////////////////////
-//Rutas exclusivas de administradores
+// USER
 Route::get('users', 'UserController@index');
 Route::get('users/{id}', 'UserController@show');
+Route::put('users/{id}', 'UserController@update');
 Route::post('users', 'UserController@register');
 Route::post('users/habilitar/{id}', 'UserController@habilitar');
 Route::delete('users/{id}', 'UserController@destroy');

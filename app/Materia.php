@@ -6,13 +6,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class Materia extends Model
 {
-    //
     protected $table = 'materias';
     protected $fillable = ['sigla','nombre','tipo','semestre','pensum'];
     public $timestamps = false;
     protected $hidden = ['pivot','created_at','updated_at'];
-    
-    
     //Relacion de uno a muchos
     // Una materia pertenece a un solo pensum
     public function pensum(){

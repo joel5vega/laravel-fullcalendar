@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Ambiente as Ambiente;
+use Illuminate\Support\Facades\Validator;
 
 class AmbienteController extends Controller
 {
@@ -24,10 +25,21 @@ class AmbienteController extends Controller
     public function store(Request $request)
     {
         //
-        $validatedData = $request->validate(
-            ['nombre' => 'required', 'tipo' => 'required', 'capacidad' => 'nullable', 'descripcion' => 'nullable']
-        );
-        $ambiente = Ambiente::create($validatedData);
+        $validator = Validator::make($request->all(), [
+            'nombre' => 'required|not_regex:/[^A-Za-z0-9\- ]/', 
+            'tipo' => 'required', 
+            'capacidad' => 'nullable|int', 'descripcion' => 'nullable'
+        ]);
+        // $validatedData = $request->validate(
+        //     ['nombre' => 'required', 'tipo' => 'required', 'capacidad' => 'nullable|int', 'descripcion' => 'nullable']
+        // );
+        if ($validator->fails()) {
+            return response()->json([
+                'error' => $validator->errors()
+            ], 400);
+        }
+        return $request;
+        // $ambiente = Ambiente::create($validatedData);
         return response()->json('Ambiente creado');
     }
 

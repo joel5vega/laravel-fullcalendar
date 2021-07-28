@@ -27,13 +27,13 @@ class UserController extends Controller
         if ($validator->fails()) {
             return response()->json(['error' => $validator->errors()], 401);
         }
+
         $input = $request->all();
         $input['password'] = bcrypt($input['password']);
         $user = User::create($input);
         $success['token'] =  $user->createToken('MyApp')->accessToken;
         $success['name'] =  $user->name;
         return response()->json(['success' => $success]);
-        // return response()->json(['success' => $success], $this->successStatus);
     }
     ////////////////
     public function index()
@@ -42,56 +42,41 @@ class UserController extends Controller
         return response()->json($usuarios);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function show($id)
     {
-
         $usuario = User::find($id);
         if ($usuario->estado === 'true') {
-            // $response['user'] = $usuario;
             $response['tipo'] = User::Rol($id)->pluck('tipo')->first();
             $response['user'] = User::with("responsable")->where('id', '=', $id)->first();
         } else $response = "Usuario no habilitado";
         return $response;
     }
 
-
-
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //
+        $id = $request->id;
+        $validator = Validator::make($request->all(), [
+            'id' => 'required',
+            'name' => 'required',
+            'email' => 'required|email',
+            'tipo' => 'required'
+        ]);
+        if ($validator->fails()) {
+            return response()->json(['error' => $validator->errors()], 401);
+        }
+        $user = User::find($id);
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->responsable_id = $request->responsable_id;
+        $user->tipo = $request->tipo;
+        $user->save();
+        $success['user'] = $user;
+        return response()->json(['success' => $success]);
     }
-
-
     public function destroy($id)
     {
-        return "destroy";
+        User::destroy($id);
+        return $id;
     }
     public function habilitar(Request $request)
     {
@@ -99,6 +84,7 @@ class UserController extends Controller
         $user = User::findOrFail($id);
         $user->estado = "true";
         $user->save();
-        return $user;
+        $success['user'] = $user;
+        return response()->json(['success' => $success]);
     }
 }
