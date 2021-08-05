@@ -6,9 +6,17 @@ use Illuminate\Support\Facades\Route;
 use Laravel\Passport\Http\Controllers\AccessTokenController;
 ////////////////////////////////
 // Autenticacion
+// PRUEBA
+// Route::prefix('/data')->group(function(){
+//     Route::post('/ingreso','api\v1\LoginController@login');
+// });
+//
 Route::post('login', [AccessTokenController::class, 'issueToken'])
     ->middleware(['api-login', 'throttle']);
 /////////////////////////////////////
+// DATOS
+Route::get('datos/','DatoController@getEstadistica');
+// ->middleware('auth:api');
 //API index
 Route::get('index', 'DatoController@apiIndex');
 //////////////////////////////////////////////////////
@@ -70,5 +78,14 @@ Route::delete('pensums/{id}','PensumController@destroy');
 Route::post('menciones','MencionController@store');
 Route::put('menciones/{id}','MencionController@update');
 // Route::delete('menciones/{id}','MencionController@destroy');
-// DATOS
-Route::get('datos/','DatoController@getEstadistica');
+///////////////////////
+Route::get('/redirect', function () {
+    $query = http_build_query([
+        'client_id' => 'client-id',
+        'redirect_uri' => 'http://example.com/callback',
+        'response_type' => 'code',
+        'scope' => 'place-orders check-status',
+    ]);
+
+    return redirect('http://passport-app.com/oauth/authorize?'.$query);
+});

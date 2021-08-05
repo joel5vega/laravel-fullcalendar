@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Materia;
 use App\Mencion;
+// use Dotenv\Validator;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\DB;
 
 class MateriaController extends Controller
@@ -39,6 +41,15 @@ class MateriaController extends Controller
     public function store(Request $request)
     {
         $materia = new Materia;
+        $validator = Validator::make($request->all(), [
+            'nombre' => 'required', 'semestre' => 'required', 'pensum' => 'required',
+            'sigla' => 'required', 'tipo' => ['required', 'regex:/(^teoria$|^laboratorio$)/']
+        ]);
+        if ($validator->fails()) {
+            return response()->json([
+                'error' => $validator->errors()
+            ], 400);
+        }
         $materia->sigla = $request->sigla;
         $materia->nombre = $request->nombre;
         $materia->tipo = $request->tipo;
@@ -57,15 +68,16 @@ class MateriaController extends Controller
                     $valor = $mencionesSeleccionadas[$mencion_id];
                     if ($valor == true) {
                         $seleccion[$mencion_id] = $materia_id;
-                        DB::insert('insert into materia_mencion (materia_id, mencion_id) values (?, ?)', [$materia_id, $mencion_id]);
+                        DB::insert(
+                            'insert into materia_mencion (materia_id, mencion_id) values (?, ?)',
+                            [$materia_id, $mencion_id]
+                        );
                     }
                 }
             }
         }
-
         return response()->json([
             "message" => "Materia creada",
-            "requestw" => $seleccion,
         ], 201);
     }
 

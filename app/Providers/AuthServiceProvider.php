@@ -16,7 +16,7 @@ class AuthServiceProvider extends ServiceProvider
      * @var array
      */
     protected $policies = [
-         'App\Model' => 'App\Policies\ModelPolicy',
+        'App\Model' => 'App\Policies\ModelPolicy',
     ];
 
     /**
@@ -28,21 +28,24 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
         Passport::routes();
-        
+
         //scopes dar permisos por roles
-        
-        // Passport::tokensCan([
-        //     'estudiante' => 'Usuario no autenticado',
-        //     'docente' => 'puede crear horarios',
-        //     'administrativo' => 'tiene todos los permisos'
-        // ]);
 
+        Passport::tokensCan([
+            'estudiante' => 'Usuario no autenticado',
+            'docente' => 'puede crear horarios',
+            'administrativo' => 'tiene todos los permisos'
+        ]);
 
-        // Passport::tokensExpireIn(now()->addDays(15));
+        Passport::setDefaultScope(['estudiante']);
+        ///
 
-        Passport::refreshTokensExpireIn(now()->addDays(30));
+        Passport::tokensExpireIn(now()->addSecond(15));
+
+        Passport::refreshTokensExpireIn(now()->addSecond(30));
 
 
         //
+        // Passport::loadKeysFrom(__DIR__.'/../secrets/oauth');
     }
 }

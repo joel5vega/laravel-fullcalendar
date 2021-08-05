@@ -230,7 +230,6 @@ class ClaseController extends Controller
         return response()->json([
             "message" => "Clase modificada con exito",
             "request" => $clase,
-            "color" => $color
         ], 201);
     }
 

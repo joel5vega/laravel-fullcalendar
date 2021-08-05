@@ -53,7 +53,6 @@ class ResponsableController extends Controller
             "request" => $responsable,
 
         ], 201);
-        // return $responsable;
     }
 
 
@@ -96,6 +95,7 @@ class ResponsableController extends Controller
     public function update(Request $request)
     {
         $responsable = Responsable::find($request->id);
+
         $this->validate($request, [
             'ap_paterno' => 'required', 'id' => 'required', 'puesto' => 'required',
         ]);

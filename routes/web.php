@@ -13,12 +13,13 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+/*
 Route::view('/{path?}', 'app');
 /* Enrutado original a welcome.blade 
 Route::get('/', function () {
     return view('welcome');
 });
-*/
+
 // Route::resource('ambiente', 'AmbienteController');
 
 Route::get('/', 'ClaseController@index')->middleware('auth');
@@ -72,3 +73,4 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 
 Route::get('/home', 'HomeController@index')->name('home');
+*/

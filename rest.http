@@ -20,10 +20,24 @@ post {{url}}/ambientes
 Content-Type: application/json
 
 {
-    "nombre":"A2+- ll-",
+    "nombre":"A52-",
     "tipo":"labo",
-    "capacidad":"10"
+    "capacidad":"10",
+    
 }
+###
+put {{url}}/ambientes/13
+Content-Type: application/json
+
+{
+    "id":13,
+    "nombre":"A2s-",
+    "tipo":"laboratorio",
+    "capacidad":"10",
+    "ss":11
+}
+###
+delete {{url}}/ambientes/13
 ###
 ##  CLASE 
 # Get clases de mencion
@@ -207,6 +221,7 @@ Content-Type: application/json
 
 {
     "nombre":"aa",
+    "sigla":"JOEL",
     "tipo":"teoria",
     "pensum":"1",
     "semestre":"2",
@@ -243,7 +258,33 @@ Content-Type: application/json
     "end_date": "2021-07-30"
 }
 
+###
+# AUTH
+get {{url}}/users
+###
+post {{url}}/data/login
+Content-Type: application/json
 
+{
+    'email': 'admin@mail.com',
+    'password':"p4ss"
+}
+###
+
+get http://localhost:8000/oauth/scopes
+Content-Type:  application/json
+
+{
+    token: "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIyIiwianRpIjoiMGUzNmZlZDMzMTE5OWNlYjg1ZjBmY2JiODQ2NGQwMmUyYTlhMjI1Y2QzMDk3N2MyNjQyZGEzZTVkNTgxYzZjYzQxMTk3YTVmNmQ4YTNiZWEiLCJpYXQiOjE2Mjc1NzQ3MzcuMzEyNTQzLCJuYmYiOjE2Mjc1NzQ3MzcuMzEyNTQ1LCJleHAiOjE2Mjc1NzQ3NTIuMjk5NzY4LCJzdWIiOiIxNiIsInNjb3BlcyI6W119.qPZ5fqI43bZV8qR_9RMoF9LOAdWxEmiMytlYHFrB_kCRUOujL07CpHC7hJB5joPQhqXzu0K6OzAUIW7XX7biRNPHyz_IE5Pfbe0FnbIp9KHjISjHw1uQTw-H96LQA5xw9gaLULklDA7rt9RNyfvfVwnPX7-IEu2YYY6hnnAwLb6blS1eGnQzotPjW95rtcctRHpsIr3hovFyPjzJu3Up2s66hjyjeTRdb6IZy9Hl5CGXW3nS4KkjVlHSMkOQuT1IIIPqGLn2RlHkCd32LHNAkOmlYqr9hIkPUUs0K1f_X8PpwmkSyQCQ_yrdBqgga8axYXOsuVIMjWrUKQVt74T13RsUwQniYd5IrfXzECOUCRyZkIGA-KEW3cWO32uVARSL-Wfrtb-HabWFRkuhmVEx0YtrQ61m_0fmYw5mD7E0DFdzL7tAVYlQ9NHrpRIGG8ZpMNsbDUyM-XmOA4L9n1bKx6OFp6wan0e3Z9M2VHov8VzZfGgBHTHf0qkhJ1Bg9jNWrQfoY9Rjxth40O04W65UwyiPtPBVamLZhluWBtMNSZcB7zYhT9RG4It3OrqkfhQMkaTOdwoWMP9DBHA3DCD7kK3HpAi2Cf2gnlfumTWRJRAPsEO6oh0CcSlQkz6DILLfU_af6RbNUHIoQ-KNz1l1QoE1wpWfyqWT3kZkI79RsAA"
+}
+###
+# ESTADISTICA
+GET {{url}}/datos?tipo=ambiente
+HEAD 
+
+{
+    token: "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIyIiwianRpIjoiMGUzNmZlZDMzMTE5OWNlYjg1ZjBmY2JiODQ2NGQwMmUyYTlhMjI1Y2QzMDk3N2MyNjQyZGEzZTVkNTgxYzZjYzQxMTk3YTVmNmQ4YTNiZWEiLCJpYXQiOjE2Mjc1NzQ3MzcuMzEyNTQzLCJuYmYiOjE2Mjc1NzQ3MzcuMzEyNTQ1LCJleHAiOjE2Mjc1NzQ3NTIuMjk5NzY4LCJzdWIiOiIxNiIsInNjb3BlcyI6W119.qPZ5fqI43bZV8qR_9RMoF9LOAdWxEmiMytlYHFrB_kCRUOujL07CpHC7hJB5joPQhqXzu0K6OzAUIW7XX7biRNPHyz_IE5Pfbe0FnbIp9KHjISjHw1uQTw-H96LQA5xw9gaLULklDA7rt9RNyfvfVwnPX7-IEu2YYY6hnnAwLb6blS1eGnQzotPjW95rtcctRHpsIr3hovFyPjzJu3Up2s66hjyjeTRdb6IZy9Hl5CGXW3nS4KkjVlHSMkOQuT1IIIPqGLn2RlHkCd32LHNAkOmlYqr9hIkPUUs0K1f_X8PpwmkSyQCQ_yrdBqgga8axYXOsuVIMjWrUKQVt74T13RsUwQniYd5IrfXzECOUCRyZkIGA-KEW3cWO32uVARSL-Wfrtb-HabWFRkuhmVEx0YtrQ61m_0fmYw5mD7E0DFdzL7tAVYlQ9NHrpRIGG8ZpMNsbDUyM-XmOA4L9n1bKx6OFp6wan0e3Z9M2VHov8VzZfGgBHTHf0qkhJ1Bg9jNWrQfoY9Rjxth40O04W65UwyiPtPBVamLZhluWBtMNSZcB7zYhT9RG4It3OrqkfhQMkaTOdwoWMP9DBHA3DCD7kK3HpAi2Cf2gnlfumTWRJRAPsEO6oh0CcSlQkz6DILLfU_af6RbNUHIoQ-KNz1l1QoE1wpWfyqWT3kZkI79RsAA"
+}
 
 
 
