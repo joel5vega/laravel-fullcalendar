@@ -117,7 +117,7 @@ get {{url}}/datos?tipo=responsable
 
 # USERS #
 ###
-get {{url}}/users/21
+get {{url}}/users/1
 ###
 post {{url}}/users?email=email&name=name&password=password&c_password=c_password&tipo=tipo
 ###
