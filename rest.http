@@ -70,7 +70,7 @@ Content-Type: application/json
 ###
 # Editar una clase
 ###
-Put {{url}}/clases/167
+Put {{url}}/clases/357
 Content-Type: application/json
 
 {
