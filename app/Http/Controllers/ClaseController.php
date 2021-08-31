@@ -175,7 +175,7 @@ class ClaseController extends Controller
     }
     public function editar(Request $request)
     {
-
+// return $request;
         $validator = Validator::make(
             $request->all(),
             [
@@ -201,6 +201,7 @@ class ClaseController extends Controller
         $id = $request->id;
 
         $clase = Clase::findOrFail($id);
+        // return $clase;
         $clase->materia_id = $request->materia;
         $clase->responsable_id = $request->responsable;
         $clase->ambiente_id = $request->ambiente;

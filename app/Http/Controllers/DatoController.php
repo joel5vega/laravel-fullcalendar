@@ -79,11 +79,11 @@ class DatoController extends Controller
     //esto nos dara los datos que necesitamos para nuestras opciones
     public function apiIndex(Request $request)
     {
+        
         $periodo = $request->query('periodo');
         $index = $request->query('index');
         $tipo = $request->query('tipo');
         $actual = $this->getActualPeriodo();
-
         if (isset($index)) {
             switch ($index) {
                 case 'ambientes': {
@@ -131,7 +131,7 @@ class DatoController extends Controller
             $response['periodos'] = Periodo::all()->values();
             $response['periodoActual'] = $actual->first();
             $response['responsables'] = Responsable::all();
-            $response['clases'] = Dato::Periodo($actual[0]->id)->get();
+            // $response['clases'] = Dato::Periodo($actual[0]->id)->get();
         }
         $datos = response()->json($response);
         return $datos;
@@ -141,16 +141,27 @@ class DatoController extends Controller
     {
         //obtiene hora actual
         $now = date("Y-m-d");
-
         $actual = Periodo::Actual($now)->get();
-        return $actual;
+        if($actual){
+            return $actual; 
+        }
+        else {
+            return "no se encuentra el periodo";
+        }
+       
     }
     public function getActualPeriodoId()
     {
         //obtiene hora actual
         $now = date("Y-m-d");
         $actual = Periodo::Actual($now)->first();
-        return $actual->id;
+        if($actual){
+            return $actual->id; 
+        }
+        else {
+            return "no se encuentra el periodo";
+        }
+        
     }
 
     public function getClasesEnSemestre(Request $request)
