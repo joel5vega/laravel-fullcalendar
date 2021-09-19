@@ -123,6 +123,8 @@ class DatoController extends Controller
         } else {
             // $response['materias_control']=Materia::all()->menciones('nombre');
             $materias = new MateriaController();
+            $response['actual']=$actual[0]->id;
+            $response['clases'] = Dato::Periodo("2")->get();
             $response['pensums'] = Pensum::all();
             $response['materias'] = $materias->index()->original;
             $response['ambientes'] = Ambiente::all()->sortByDesc('capacidad')->values();
@@ -131,11 +133,10 @@ class DatoController extends Controller
             $response['periodos'] = Periodo::all()->values();
             $response['periodoActual'] = $actual->first();
             $response['responsables'] = Responsable::all();
-            $response['clases'] = Dato::Periodo($actual[0]->id)->get();
+            
         }
         $datos = response()->json($response);
         return $datos;
-        // return view('Home',compact('response'));
     }
     public function getActualPeriodo()
     {

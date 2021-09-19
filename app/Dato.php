@@ -13,7 +13,7 @@ class Dato extends Model
     //Para obtener el listado de las clases en un periodp determindao
     public function scopePeriodo($query, $periodo)
     {
-        return $query->where('periodo_id', '=', $periodo)->where("estado", '=', true);
+        return $query->where('periodo_id', '=', $periodo)->where("estado", '=', "true");
     }
     /// Obtiene las clases de un ambiente determinado
     public function scopeAmbiente($query, $periodo, $aula_id)
