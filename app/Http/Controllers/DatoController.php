@@ -131,7 +131,7 @@ class DatoController extends Controller
             $response['periodos'] = Periodo::all()->values();
             $response['periodoActual'] = $actual->first();
             $response['responsables'] = Responsable::all();
-            // $response['clases'] = Dato::Periodo($actual[0]->id)->get();
+            $response['clases'] = Dato::Periodo($actual[0]->id)->get();
         }
         $datos = response()->json($response);
         return $datos;
