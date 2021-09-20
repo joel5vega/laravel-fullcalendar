@@ -1,4 +1,4 @@
-@url = http://localhost:8000/api
+@url = https://sishorarios.azurewebsites.net/public/api
 ###
 @evento = {"materia": 11, "responsable": "11", "ambiente": "11", "periodo": "11", "tipo": "laboratorio", "nivel": "docente", "day": "3", "startTime": "15:00", "endTime": "19:00", "paralelo": "A" };
 ###
@@ -262,11 +262,11 @@ Content-Type: application/json
 # AUTH
 get {{url}}/users
 ###
-post {{url}}/data/login
+post {{url}}/login
 Content-Type: application/json
 
 {
-    'email': 'admin@mail.com',
+    'username':"admin@mail.com",
     'password':"p4ss"
 }
 ###

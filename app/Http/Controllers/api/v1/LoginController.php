@@ -22,6 +22,10 @@ class LoginController extends Controller
         $accessToken='22';
         // $accessToken = Auth::user()->createToken('authToken')->accessToken;
 
-        return response(['user'=>Auth::user(),'access_token'=>$accessToken]);
+        return response([
+            'user'=>Auth::user(),
+        'access_token'=>$accessToken,
+        'tipo'=> "joel",
+    ]);
     }
 }
