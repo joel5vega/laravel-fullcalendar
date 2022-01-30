@@ -1,0 +1,583 @@
+class Materia : ETN-507 A(Historia Critica de América latina y Bolivia)
+person Docente : LIC Luis Medina Riveros
+phone Telefono : 70544990
+email Email : lm21650@hotmail.com
+ Grupo Whatsapp : Ingresar al Link
+record_voice_over Codigo de Classroom : No Disponible
+
+Comunicate con tu Docente
+class Materia : ETN 507B(Historia Critica de America Latina y Bolivia)
+person Docente : ING Wilma Amusquivar Caballero
+phone Telefono : 73274934
+email Email : wamusca@yahoo.com
+ Grupo Whatsapp : Ingresar al Link
+record_voice_over Codigo de Classroom : No Disponible
+
+Segundo Semestre
+
+Comunicate con tu Docente
+class Materia : ETN-401 (Probabilidad y Estadistica)
+person Docente : ING Luis Armando Rosas Rivera
+phone Telefono : 76539685
+email Email : rosas.luis.armando@gmail.com
+ Grupo Whatsapp : Ingresar al Link
+record_voice_over Codigo de Classroom : judhwa2
+
+Comunicate con tu Docente
+class Materia : MAT 102 (CÁLCULO II) Grupo E
+person Docente : ING Juan Carlos Quispe
+phone Telefono : 68121282
+email Email : juancarlos_quispeapaza@hotmail.com
+ Grupo Whatsapp : Ingresar al Link
+record_voice_over Codigo de Classroom : v32paw6
+
+Comunicate con tu Docente
+class Materia : MAT 218 (ANÁLISIS DE VARIABLE COMPLEJA)
+person Docente : ING JULIO CESAR UBERHUAGA CONDE
+phone Telefono : 77556602
+email Email : juliouberhuaga@gmail.com
+ Grupo Whatsapp : Ingresar al Link
+record_voice_over Codigo de Classroom : uetawzi
+
+Tercer Semestre
+
+Comunicate con tu Docente
+class Materia : ETN-307-L(Laboratorio de Programación)
+person Docente : ING Franz Alvarez
+phone Telefono : 69878515
+email Email : franzalvarezg@gmail.com
+ Grupo Whatsapp : Ingresar al Link
+record_voice_over Codigo de Classroom : ou6sgw4
+
+Comunicate con tu Docente
+class Materia : ETN-302 (Redes I)
+person Docente : ING Juan Alberto Aguilera Rios
+phone Telefono : 67080690
+email Email : j.albertoaguilera@gmail.com
+ Grupo Whatsapp : Ingresar al Link
+record_voice_over Codigo de Classroom : No Disponible
+
+Comunicate con tu Docente
+class Materia : ETN-406 B(Tecnologia de componentes)
+person Docente : ING Juan Alberto Aguilera Rios
+phone Telefono : 67080690
+email Email : j.albertoaguilera@gmail.com
+ Grupo Whatsapp : Ingresar al Link
+record_voice_over Codigo de Classroom : No Disponible
+
+Comunicate con tu Docente
+class Materia : ETN 307(Programacion Teoria)
+person Docente : LIC Virginia Zota Uño
+phone Telefono : No Disponible
+email Email : vizotau@yahoo.com
+ Grupo Whatsapp : Ingresar al Link
+record_voice_over Codigo de Classroom : No Disponible
+
+Comunicate con tu Docente
+class Materia : ETN 340 B (Proyecto I)
+person Docente : ING Wilber Flores Bustillo
+phone Telefono : 72565811
+email Email : wsflores@umsa.bo
+ Grupo Whatsapp : Ingresar al Link
+record_voice_over Codigo de Classroom : NO DISPONIBLE
+
+Comunicate con tu Docente
+class Materia : ETN 340 A (Proyecto I)
+person Docente : ING Quiroga
+phone Telefono : 72557658
+email Email : No Disponible
+ Grupo Whatsapp : Ingresar al Link
+record_voice_over Codigo de Classroom : No Disponible
+
+Comunicate con tu Docente
+class Materia : ETN-406 A(Tecnologia de Componentes)
+person Docente : ING Rosio Carrasco
+phone Telefono : 72041417
+email Email : rjcarrasco@umsa.edu.bo
+ Grupo Whatsapp : Ingresar al Link
+record_voice_over Codigo de Classroom : No Disponible
+
+Cuarto Semestre
+
+Comunicate con tu Docente
+class Materia : ETN-501(Física del Estado Sólido)
+person Docente : ING Busch Decovice Teodoro
+phone Telefono : 67349971
+email Email : teodorobuschdekovice@gmail.com
+ Grupo Whatsapp : Ingresar al Link
+record_voice_over Codigo de Classroom : No Disponible
+
+Comunicate con tu Docente
+class Materia : ETN 404(Mediciones Eléctricas )
+person Docente : ING Daniel Saul Celis Laguna
+phone Telefono : No Disponible
+email Email : No Disponible
+ Grupo Whatsapp : Ingresar al Link
+record_voice_over Codigo de Classroom : No Disponible
+
+Comunicate con tu Docente
+class Materia : ETN 607(Mecánica Aplicada)
+person Docente : ING Alejandro Martin Mayori Machicao
+phone Telefono : 72034828
+email Email : ammayori@gmail.com
+ Grupo Whatsapp : Ingresar al Link
+record_voice_over Codigo de Classroom : s4ry4yi
+
+Comunicate con tu Docente
+class Materia : ETN-503 (Electronica I)
+person Docente : ING Roberto Oropeza
+phone Telefono : 74070114
+email Email : robertooropezac@gmail.com
+ Grupo Whatsapp : Ingresar al Link
+record_voice_over Codigo de Classroom : No Disponible
+
+Comunicate con tu Docente
+class Materia : ETN 402(Teoria de Redes II)
+person Docente : ING Marcelo Gutierrez
+phone Telefono : 77296881
+email Email : mar2g6ut@gmail.com
+ Grupo Whatsapp : Ingresar al Link
+record_voice_over Codigo de Classroom : No Disponible
+
+Comunicate con tu Docente
+class Materia : ETN 505(Programacion y Metodos Numericos)
+person Docente : LIC Virginia Zota Uño
+phone Telefono : No Disponible
+email Email : vizotau@yahoo.com
+ Grupo Whatsapp : Ingresar al Link
+record_voice_over Codigo de Classroom : No Disponible
+
+Comunicate con tu Docente
+class Materia : ETN 503A(Electronica I)
+person Docente : ING David Molina
+phone Telefono : 72550472
+email Email : eduardomolina2503@gmail.com
+ Grupo Whatsapp : Ingresar al Link
+record_voice_over Codigo de Classroom : No Disponible
+
+Quinto Semestre
+
+Comunicate con tu Docente
+class Materia : ETN-502 (Campos Electromagneticos)
+person Docente : ING Gerardo Vicente Sanchez
+phone Telefono : 79566673
+email Email : gerardovicente8@gmail.com
+ Grupo Whatsapp : Ingresar al Link
+record_voice_over Codigo de Classroom : No Disponible
+
+Comunicate con tu Docente
+class Materia : ETN 603(Electronica II )
+person Docente : ING Jose Arturo Rios
+phone Telefono : 71537214
+email Email : riosjose29@gmail.com
+ Grupo Whatsapp : Ingresar al Link
+record_voice_over Codigo de Classroom : No Disponible
+
+Comunicate con tu Docente
+class Materia : ETN-601 (Digital I)
+person Docente : ING Roberto Oropeza
+phone Telefono : 74070114
+email Email : robertooropezac@gmail.com
+ Grupo Whatsapp : Ingresar al Link
+record_voice_over Codigo de Classroom : No Disponible
+
+Comunicate con tu Docente
+class Materia : ETN 506(Analisis de sistemas lineales)
+person Docente : ING Javier Sanabria Garcia
+phone Telefono : 70581953
+email Email : javisanabria@gmail.com
+ Grupo Whatsapp : Ingresar al Link
+record_voice_over Codigo de Classroom : No Disponible
+
+Comunicate con tu Docente
+class Materia : ETN 805(Investigacion de Operaciones)
+person Docente : ING Quiroga
+phone Telefono : 72557658
+email Email : No Disponible
+ Grupo Whatsapp : Ingresar al Link
+record_voice_over Codigo de Classroom : No Disponible
+
+Sexto Semestre
+
+Comunicate con tu Docente
+class Materia : ETN-606 (conversiones electromagneticas teoria y laboratorio)
+person Docente : ING Hugo Balderrama Barrios
+phone Telefono : 79106826
+email Email : h.balderramabarrios@gmail.com
+ Grupo Whatsapp : Ingresar al Link
+record_voice_over Codigo de Classroom : a2cc6by
+
+Comunicate con tu Docente
+class Materia : ETN-640 (proyecto II)
+person Docente : ING Hugo Balderrama Barrios
+phone Telefono : 79106826
+email Email : h.balderramabarrios@gmail.com
+ Grupo Whatsapp : Ingresar al Link
+record_voice_over Codigo de Classroom : l6fqlwt
+
+Comunicate con tu Docente
+class Materia : ETN-703 (teoria de telecomunicaciones I laboratorio)
+person Docente : ING Jhonny Wilder Cala Vargas
+phone Telefono : 72010402
+email Email : jhonnycala@gmail.com
+ Grupo Whatsapp : Ingresar al Link
+record_voice_over Codigo de Classroom : No Disponible
+
+Comunicate con tu Docente
+class Materia : ETN 702(Sistemas de Control I laboratorio)
+person Docente : ING Javier Sanabria Garcia
+phone Telefono : 70581953
+email Email : javisanabria@gmail.com
+ Grupo Whatsapp : Ingresar al Link
+record_voice_over Codigo de Classroom : No Disponible
+
+Comunicate con tu Docente
+class Materia : ETN 703(Telecomunicaciones I)
+person Docente : ING Juan Carlos Machicao Aparicio
+phone Telefono : 77527989
+email Email : juanmachicao@gmail.com
+ Grupo Whatsapp : Ingresar al Link
+record_voice_over Codigo de Classroom : No Disponible
+
+Comunicate con tu Docente
+class Materia : ETN 702(Sistemas de control I)
+person Docente : ING Oscar Mauricio Amestegui Moreno
+phone Telefono : 70634345
+email Email : mauricioamestegui@gmail.com
+ Grupo Whatsapp : Ingresar al Link
+record_voice_over Codigo de Classroom : No Disponible
+
+Comunicate con tu Docente
+class Materia : ETN 821(Sistemas Digitales II)
+person Docente : ING Jorge León Gómez
+phone Telefono : 75272720
+email Email : No Disponible
+ Grupo Whatsapp : Ingresar al Link
+record_voice_over Codigo de Classroom : No Disponible
+
+Septimo Semestre
+
+Comunicate con tu Docente
+class Materia : ETN-814 (Lineas de transmisión)
+person Docente : ING Fabian Tito Luque
+phone Telefono : 72532323
+email Email : fabiantito@gmail.com
+ Grupo Whatsapp : Ingresar al Link
+record_voice_over Codigo de Classroom : htatemt
+
+Comunicate con tu Docente
+class Materia : ETN 1016(Telecomunicaciones II )
+person Docente : ING Jose Campero
+phone Telefono : 67022211
+email Email : camperojose268@gmail.com
+ Grupo Whatsapp : Ingresar al Link
+record_voice_over Codigo de Classroom : duyvqe3
+
+Comunicate con tu Docente
+class Materia : ETN 902(Sistemas de Control II)
+person Docente : ING Jorge Antonio Nava Amador
+phone Telefono : 77225519
+email Email : janava@umsa.bo jorgeantonio.navaamador@gmail.com
+ Grupo Whatsapp : Ingresar al Link
+record_voice_over Link de Plataforma : INGRESAR LINK
+
+Comunicate con tu Docente
+class Materia : ETN-806 (Procesos Estocasticos)
+person Docente : ING Máximo Torrez
+phone Telefono : No Disponible
+email Email : motorrez1@umsa.bo
+ Grupo Whatsapp : Ingresar al Link
+record_voice_over Codigo de Classroom : No Disponible
+
+Comunicate con tu Docente
+class Materia : ETN-832 (Electronica Industrial teoria y laboratorio)
+person Docente : ING Hugo Balderrama Barrios
+phone Telefono : 79106826
+email Email : h.balderramabarrios@gmail.com
+ Grupo Whatsapp : Ingresar al Link
+record_voice_over Codigo de Classroom : tpvhyri
+
+Comunicate con tu Docente
+class Materia : ETN 704(Electronica de Pulsos)
+person Docente : ING Hernán Borja Omonte
+phone Telefono : 72050499
+email Email : hborjao@gmail.com
+ Grupo Whatsapp : Ingresar al Link
+record_voice_over Codigo de Classroom : pvjtddw
+
+Comunicate con tu Docente
+class Materia : ETN 801(Microprocesadores)
+person Docente : ING Marcelo Ramirez Molina
+phone Telefono : 78960703
+email Email : marcelo.ramirez.lpz@gmail.com
+ Grupo Whatsapp : Ingresar al Link
+record_voice_over Codigo de Classroom : No Disponible
+
+Comunicate con tu Docente
+class Materia : ETN 825(Organizacion y diseño de computadores)
+person Docente : ING Jorge León Gómez
+phone Telefono : 75272720
+email Email : No Disponible
+ Grupo Whatsapp : Ingresar al Link
+record_voice_over Codigo de Classroom : No Disponible
+
+Octavo Semestre
+
+Comunicate con tu Docente
+class Materia : ETN-933(Cotrol y Regulación Industrial)
+person Docente : ING Víctor Antonio Laredo Antezana
+phone Telefono : 71539950
+email Email : docencia.umsa.ing@gmail.com
+ Grupo Whatsapp : Ingresar al Link
+record_voice_over Codigo de Classroom : r7omkzz
+
+Comunicate con tu Docente
+class Materia : ETN 1015(Procesamiento Digital de Señales)
+person Docente : ING Oscar Mauricio Amestegui Moreno
+phone Telefono : 70634345
+email Email : mauricioamestegui@gmail.com
+ Grupo Whatsapp : Ingresar al Link
+record_voice_over Codigo de Classroom : No Disponible
+
+Comunicate con tu Docente
+class Materia : ETN 1000(Bases de datos)
+person Docente : ING Jorge Antonio Nava Amador
+phone Telefono : 77225519
+email Email : janava@umsa.bo jorgeantonio.navaamador@gmail.com
+ Grupo Whatsapp : Ingresar al Link
+record_voice_over Link de Plataforma : INGRESAR LINK
+
+Comunicate con tu Docente
+class Materia : ETN-911 (Sistemas de comunicaciones Laboratorio)
+person Docente : ING Juan Alberto Aguilera Rios
+phone Telefono : 67080690
+email Email : j.albertoaguilera@gmail.com
+ Grupo Whatsapp : Ingresar al Link
+record_voice_over Codigo de Classroom : No Disponible
+
+Comunicate con tu Docente
+class Materia : ETN-911 (Sistemas de comunicaciones I)
+person Docente : ING EDWIN RUBEN HUANCA CHOQUE
+phone Telefono : No Disponible
+email Email : cpf.huanca.choque.edwin@gmail.com
+ Grupo Whatsapp : Ingresar al Link
+record_voice_over Codigo de Classroom : ugyvdfx
+
+Comunicate con tu Docente
+class Materia : ETN-913 (Antenas y propagacion teoria y laboratorio)
+person Docente : ING Iván Caceres
+phone Telefono : No Disponible
+email Email : icaceres.etn@gmail.com
+ Grupo Whatsapp : Ingresar al Link
+record_voice_over Codigo de Classroom : rdwinsi
+
+Comunicate con tu Docente
+class Materia : ETN 1022(Interaccion Hardware Software)
+person Docente : ING Clifford Paravicini Hurtado
+phone Telefono : 77569799
+email Email : clipar@gmail.com
+ Grupo Whatsapp : Ingresar al Link
+record_voice_over Codigo de Classroom : k7c3gk3
+
+Comunicate con tu Docente
+class Materia : ETN 840(Preparacion y Evaluacion de Proyectos)
+person Docente : ING Quiroga
+phone Telefono : 72557658
+email Email : No Disponible
+ Grupo Whatsapp : Ingresar al Link
+record_voice_over Codigo de Classroom : No Disponible
+
+Noveno Semestre
+
+Comunicate con tu Docente
+class Materia : ETN-1050 (Redes de Computadores)
+person Docente : ING Ramiro Puch Terán
+phone Telefono : 75887633
+email Email : ramiro.puch@hotmail.com
+ Grupo Whatsapp : Ingresar al Link
+record_voice_over Codigo de Classroom : No Disponible
+
+Comunicate con tu Docente
+class Materia : ETN-1001(Ingeniería de Software)
+person Docente : ING Contreras Candia Juan Gonzalo
+phone Telefono : 68104882
+email Email : contrerascjg@gmail.com
+ Grupo Whatsapp : Ingresar al Link
+record_voice_over Codigo de Classroom : ksvw6mo
+
+Comunicate con tu Docente
+class Materia : REC-92(ESTUDION DE LOS RECURSOS NATURALES)
+person Docente : ING Edwin Arce Villanueva Santos
+phone Telefono : 77514775 - 70558581
+email Email : No Disponible
+ Grupo Whatsapp : Ingresar al Link
+record_voice_over Codigo de Classroom : fwa4aad
+
+Comunicate con tu Docente
+class Materia : ETN 1010(Inteligencia Artificial)
+person Docente : ING. Juan Carlos Duchen Cuellar
+phone Telefono : 72518041
+email Email : jcduchen@gmail.com
+ Grupo Whatsapp : Ingresar al Link
+record_voice_over Codigo de Classroom : NO DISPONIBLE
+
+Comunicate con tu Docente
+class Materia : ETN 1024( Seminarios en Telecomunicaciones )
+person Docente : ING Jose Campero
+phone Telefono : 67022211
+email Email : camperojose268@gmail.com
+ Grupo Whatsapp : Ingresar al Link
+record_voice_over Codigo de Classroom : ufkjbif
+
+Comunicate con tu Docente
+class Materia : ETN 935(Redes de datos)
+person Docente : ING Roberto Zambrana Flores
+phone Telefono : 69701279
+email Email : rzambrana@gmail.com
+ Grupo Whatsapp : Ingresar al Link
+record_voice_over Codigo de Classroom : gpgt7d2
+
+Comunicate con tu Docente
+class Materia : ETN 1039(Seminarios de control)
+person Docente : ING Oscar Mauricio Amestegui Moreno
+phone Telefono : 70634345
+email Email : mauricioamestegui@gmail.com
+ Grupo Whatsapp : Ingresar al Link
+record_voice_over Codigo de Classroom : No Disponible
+
+Comunicate con tu Docente
+class Materia : ETN 1036(Simulación de procesos Industriales)
+person Docente : ING Oscar Mauricio Amestegui Moreno
+phone Telefono : 70634345
+email Email : mauricioamestegui@gmail.com
+ Grupo Whatsapp : Ingresar al Link
+record_voice_over Codigo de Classroom : No Disponible
+
+Comunicate con tu Docente
+class Materia : ETN 1034(Aplicación de Técnicas de Control)
+person Docente : ING Jorge Antonio Nava Amador
+phone Telefono : 77225519
+email Email : janava@umsa.bo jorgeantonio.navaamador@gmail.com
+ Grupo Whatsapp : Ingresar al Link
+record_voice_over Link de Plataforma : INGRESAR LINK
+
+Comunicate con tu Docente
+class Materia : ETN-1037 (Instrumentos Industriales)
+person Docente : ING Alfonzo Jurado
+phone Telefono : 72055151
+email Email : juradoalfonso05@gmail.com
+ Grupo Whatsapp : Ingresar al Link
+record_voice_over Codigo de Classroom : vxmzd5r
+
+Comunicate con tu Docente
+class Materia : ETN 1012(Telefonia)
+person Docente : ING Marcelo Gutierrez
+phone Telefono : 77296881
+email Email : mar2g6ut@gmail.com
+ Grupo Whatsapp : Ingresar al Link
+record_voice_over Codigo de Classroom : No Disponible
+
+Comunicate con tu Docente
+class Materia : ETN 1011(Sistemas de Comunicaciones II)
+person Docente : ING Gonzalo Caba M.
+phone Telefono : 77294845
+email Email : goncabam@hotmail.com
+ Grupo Whatsapp : Ingresar al Link
+record_voice_over Codigo de Classroom : No Disponible
+
+Comunicate con tu Docente
+class Materia : ETN 903(Sistemas de Computacion teoria y laboratorio)
+person Docente : ING Javier Sanabria Garcia
+phone Telefono : 70581953
+email Email : javisanabria@gmail.com
+ Grupo Whatsapp : Ingresar al Link
+record_voice_over Codigo de Classroom : No Disponible
+
+Comunicate con tu Docente
+class Materia : ETN 921(Teoria de sistemas Operativos)
+person Docente : ING Javier Sanabria Garcia
+phone Telefono : 70581953
+email Email : javisanabria@gmail.com
+ Grupo Whatsapp : Ingresar al Link
+record_voice_over Codigo de Classroom : No Disponible
+
+Comunicate con tu Docente
+class Materia : ETN 1011(Sistemas de Telecomunicaciones II laboratorio)
+person Docente : ING Clifford Paravicini Hurtado
+phone Telefono : 77569799
+email Email : clipar@gmail.com
+ Grupo Whatsapp : Ingresar al Link
+record_voice_over Codigo de Classroom : nny3gri
+
+Comunicate con tu Docente
+class Materia : ETN 1038( Tecnologias de Telecomunicaciones )
+person Docente : ING Jose Campero
+phone Telefono : 67022211
+email Email : camperojose268@gmail.com
+ Grupo Whatsapp : Ingresar al Link
+record_voice_over Codigo de Classroom : vqvwiwj
+
+Decimo Semestre
+
+Comunicate con tu Docente
+class Materia : ETN 1040(Proyecto de Grado) G-A
+person Docente : ING Jose Campero
+phone Telefono : 67022211
+email Email : camperojose268@gmail.com
+ Grupo Whatsapp : Ingresar al Link
+record_voice_over Codigo de Classroom : 7bld3rc
+
+Comunicate con tu Docente
+class Materia : ETN 1040(Proyecto de Grado) G-F
+person Docente : ING Jorge Antonio Nava Amador
+phone Telefono : 77225519
+email Email : janava@umsa.bo jorgeantonio.navaamador@gmail.com
+ Grupo Whatsapp : Ingresar al Link
+record_voice_over Link de Plataforma : INGRESAR LINK
+
+Comunicate con tu Docente
+class Materia : ETN 1040(Proyecto de Grado) G-E
+person Docente : ING Jorge León Gómez
+phone Telefono : 75272720
+email Email : No Disponible
+ Grupo Whatsapp : Ingresar al Link
+record_voice_over Codigo de Classroom : No Disponible
+
+Comunicate con tu Docente
+class Materia : ETN-1040 (Proyecto de Grado) G-C
+person Docente : ING Alfonzo Jurado
+phone Telefono : 72055151
+email Email : juradoalfonso05@gmail.com
+ Grupo Whatsapp : Ingresar al Link
+record_voice_over Codigo de Classroom : bptpsam
+
+Comunicate con tu Docente
+class Materia : ETN 2000(Estrategia Empresarial)
+person Docente : ING Wilber Flores Bustillos
+phone Telefono : 72565811
+email Email : wsflores@umsa.bo
+ Grupo Whatsapp : Ingresar al Link
+record_voice_over Codigo de Classroom : NO DISPONIBLE
+
+Comunicate con tu Docente
+class Materia : ETN 1040(Proyecto de Grado) G-B
+person Docente : ING Gonzalo Caba M.
+phone Telefono : 77294845
+email Email : goncabam@hotmail.com
+ Grupo Whatsapp : Ingresar al Link
+record_voice_over Codigo de Classroom : No Disponible
+
+Comunicate con tu Docente
+class Materia : ETN 1040(Proyecto de grado) G- D
+person Docente : ING Victor Laredo Antezana
+phone Telefono : 71539950
+email Email : laredo.victor@gmail.com
+ Grupo Whatsapp : Ingresar al Link
+record_voice_over Codigo de Classroom : No Disponible
+
+Comunicate con tu Docente
+class Materia : ETN 906(Practica Industrial)
+person Docente : ING Wilber Flores Bustillos
+phone Telefono : 72565811
+email Email : wsflores@umsa.bo
+ Grupo Whatsapp : Ingresar al Link

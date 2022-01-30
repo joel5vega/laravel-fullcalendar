@@ -1,0 +1,43 @@
+LIC;Luis;Medina;Riveros;70544990;lm21650@hotmail.com
+ING;Wilma;Amusquivar;Caballero;73274934;wamusca@yahoo.com
+ING;Luis Armando;Rosas;Rivera;76539685;rosas.luis.armando@gmail.com
+ING;Juan Carlos;Quispe;;68121282;juancarlos_quispeapaza@hotmail.com
+ING;Julio Cesar;Uberhuaga;Conde;77556602;juliouberhuaga@gmail.com
+ING;Franz;Alvarez;;69878515;franzalvarezg@gmail.com
+ING;Juan Alberto;Aguilera;Rios;67080690;j.albertoaguilera@gmail.com
+LIC;Virginia;Zota;Uño;No Disponible;vizotau@yahoo.com
+ING;Wilber;Flores;Bustillo;72565811;wsflores@umsa.bo
+ING;;Quiroga;;72557658;No Disponible
+ING;Rosio;Carrasco;;72041417;rjcarrasco@umsa.edu.bo
+ING;Teodoro;Busch;Decovice;67349971;teodorobuschdekovice@gmail.com
+ING;Daniel Saul;Celis;Laguna;No Disponible;No Disponible
+ING;Alejandro Martin;Mayori;Machicao;72034828;ammayori@gmail.com
+ING;Roberto;Oropeza;Crespo;74070114;robertooropezac@gmail.com
+ING;Marcelo;Gutierrez;;77296881;mar2g6ut@gmail.com
+ING;David;Molina;;72550472;eduardomolina2503@gmail.com
+ING;Gerardo;Vicente;Sanchez;79566673;gerardovicente8@gmail.com
+ING;Jose Arturo;Rios;;71537214;riosjose29@gmail.com
+ING;Javier;Sanabria;Garcia;70581953;javisanabria@gmail.com
+ING;Hug ;Balderrama;Barrios;79106826;h.balderramabarrios@gmail.com
+ING;Jhonny Wilder;Cala;Vargas;72010402;jhonnycala@gmail.com
+ING;Juan Carlos;Machicao;Aparicio;77527989;juanmachicao@gmail.com
+ING;Oscar Mauricio;Amestegui;Moreno;70634345;mauricioamestegui@gmail.com
+ING;Jorge;León;Gómez;75272720;No Disponible
+ING;Fabian;Tito;Luque;72532323;fabiantito@gmail.com
+ING;Jose;Campero;;67022211;camperojose268@gmail.com
+ING;Jorge Antonio;Nava;Amador;77225519;janava@umsa.bo
+ING;Máximo;Torrez;No Disponible;motorrez1@umsa.bo
+ING;Hernán;Borja;Omonte;72050499;hborjao@gmail.com
+ING;Marcelo;Ramirez;Molina;78960703;marcelo.ramirez.lpz@gmail.com
+ING;Edwin Ruben;Huanca;Conde;No Disponible;cpf.huanca.choque.edwin@gmail.com
+ING;Iván;Caceres;;No Disponible;icaceres.etn@gmail.com
+ING;Clifford;Paravicini;Hurtado;77569799;clipar@gmail.com
+ING;Ramiro;Puch;Terán;75887633;ramiro.puch@hotmail.com
+ING;Juan Gonzalo;Contreras;Candia;;68104882;contrerascjg@gmail.com
+ING;Edwin Arce;Villanueva;Santos;77514775;-;70558581;No Disponible
+ING;Juan Carlos;Duchen;Cuellar;72518041;jcduchen@gmail.com
+ING;Roberto;Zambrana;Flores;69701279;rzambrana@gmail.com
+ING;Alfonzo;Jurado;72055151;juradoalfonso05@gmail.com
+ING;Gonzalo;Caba;;M.;77294845;goncabam@hotmail.com
+ING;Victor Laredo;Antezana;71539950;laredo.victor@gmail.com
+

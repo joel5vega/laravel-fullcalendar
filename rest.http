@@ -1,0 +1,315 @@
+@url = https://sishorarios.azurewebsites.net/public/api
+###
+@evento = {"materia": 11, "responsable": "11", "ambiente": "11", "periodo": "11", "tipo": "laboratorio", "nivel": "docente", "day": "3", "startTime": "15:00", "endTime": "19:00", "paralelo": "A" };
+###
+GET {{url}}
+###
+get {{url}}/index
+###
+get http://localhost:8000/api/clases?estado=false
+###
+##  AMBIENTE
+###
+GET {{url}}/ambientes?tipo=laboratorio
+###
+# ambientes usados
+get {{url}}/now?index=ambientes
+###
+#Crear ambiente
+post {{url}}/ambientes
+Content-Type: application/json
+
+{
+    "nombre":"A52-",
+    "tipo":"labo",
+    "capacidad":"10",
+    
+}
+###
+put {{url}}/ambientes/13
+Content-Type: application/json
+
+{
+    "id":13,
+    "nombre":"A2s-",
+    "tipo":"laboratorio",
+    "capacidad":"10",
+    "ss":11
+}
+###
+delete {{url}}/ambientes/13
+###
+##  CLASE 
+# Get clases de mencion
+#semestre
+###
+get {{url}}/clases/semestre/7?mencion=2
+###
+get {{url}}/clases/responsable/411
+###
+get {{url}}/clases
+# Crear una clase
+###
+POST {{url}}/clases
+Content-Type: application/json
+
+{
+    "materia": 4, 
+    "responsable": 414, 
+    "ambiente": 6, 
+    "periodo": 3, 
+    "tipo": "laboratorio", 
+    "nivel": "docente", 
+    "day": 3, 
+    "startTime": "15:00", 
+    "endTime": "19:00", 
+    "paralelo": "A" 
+}
+###
+
+###
+# Editar una clase
+###
+Put {{url}}/clases/357
+Content-Type: application/json
+
+{
+    "materia": 4, 
+    "responsable": 414, 
+    "ambiente": 7, 
+    "periodo": 3, 
+    "tipo": "laboratorio", 
+    "nivel": "docente", 
+    "day": 4, 
+    "startTime": "15:00", 
+    "endTime": "19:00", 
+    "paralelo": "B" 
+}
+
+###
+#Eliminar
+DELETE {{url}}/clases/307
+###
+post {{url}}/clases/habilitar/0?todos=yes
+###
+get {{url}}/clases?estado=false
+
+
+## RESPONSABLES
+###
+get {{url}}/responsables/1
+###
+Put {{url}}/responsables/1
+###
+delete {{url}}/responsables/1
+
+
+
+###
+get {{url}}/responsables/horas/411
+###
+
+### DATOS
+###
+get {{url}}/datos?tipo=responsable
+
+###
+
+# USERS #
+###
+get {{url}}/users/1
+###
+post {{url}}/users?email=email&name=name&password=password&c_password=c_password&tipo=tipo
+###
+post {{url}}/users
+Content-Type: application/json
+
+{ "email": "email",
+  "name": "",
+  "password": "password",
+  "c_password": "c_password",
+  "tipo": "tipo"
+}
+
+###
+put {{url}}/users/16
+Content-Type: application/json
+
+{
+"email": "docente@mail.com"
+"estado": "true"
+"id": 21
+"name": "Docente"
+"responsable": "396"
+"responsable_id": 1
+"tipo": "docente"
+}
+###
+post {{url}}/users
+
+Content-Type: application/json
+
+{
+    "name": 4, 
+    "responsable": 414, 
+    "ambiente": 7, 
+    "periodo": 3, 
+    "tipo": "laboratorio", 
+    "nivel": "docente", 
+    "day": 4, 
+    "startTime": "15:00", 
+    "endTime": "19:00", 
+    "paralelo": "B" 
+}
+###
+put {{url}}/users/28
+{
+    "name": 4, 
+    "responsable": 414, 
+    "ambiente": 7, 
+    "periodo": 3, 
+    "tipo": "laboratorio", 
+    "nivel": "docente", 
+    "day": 4, 
+    "startTime": "15:00", 
+    "endTime": "19:00", 
+    "paralelo": "B" 
+}
+###
+delete {{url}}/users/28
+
+## PENSUM
+###
+POST {{url}}/pensums
+###
+put {{url}}/pensums/1
+###
+delete {{url}}/pensums/3
+## MENCION
+###
+post {{url}}/menciones
+###
+put {{url}}/menciones/15
+###
+delete {{url}}/menciones/15
+
+## Clases
+###
+get {{url}}/now?index=ambientes
+###
+put {{url}}/clases/152
+Content-Type: application/json
+
+{
+    "materia":"1",
+    "responsable":"414",
+    "ambiente":"10",
+    "periodo":"2",
+    "nivel":"auxiliar",
+    "day":"6",
+    "startTime":"12:00",
+    "endTime":"13:30",
+    "tipo":"teoria",
+}
+
+##  MATERIAS
+###
+get {{url}}/materias/semestre/7?mencion=2
+###
+post {{url}}/materias
+Content-Type: application/json
+
+{
+    "nombre":"aa",
+    "sigla":"JOEL",
+    "tipo":"teoria",
+    "pensum":"1",
+    "semestre":"2",
+    "menciones":{"1":"true"}
+}
+###
+put {{url}}/materias/57
+Content-Type: application/json
+
+{
+"id": "57",
+"menciones": {2: true, 3: true},
+"nombre": "Electronica Industrial",
+"pensum_id": "1",
+"semestre": "7",
+"sigla": "ETN 832",
+"tipo": "teoria",
+}
+### 
+delete {{url}}/materias/99
+
+################################
+### Periodos
+###
+
+put {{url}}/periodos/2
+Content-Type: application/json
+
+{
+   
+    "nombre": "1",
+    "gestion": "2021",
+    "start_date": "2021-02-01",
+    "end_date": "2021-07-30"
+}
+
+###
+# AUTH
+get {{url}}/users
+###
+post {{url}}/login
+Content-Type: application/json
+
+{
+    'username':"admin@mail.com",
+    'password':"p4ss"
+}
+###
+
+get http://localhost:8000/oauth/scopes
+Content-Type:  application/json
+
+{
+    token: "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIyIiwianRpIjoiMGUzNmZlZDMzMTE5OWNlYjg1ZjBmY2JiODQ2NGQwMmUyYTlhMjI1Y2QzMDk3N2MyNjQyZGEzZTVkNTgxYzZjYzQxMTk3YTVmNmQ4YTNiZWEiLCJpYXQiOjE2Mjc1NzQ3MzcuMzEyNTQzLCJuYmYiOjE2Mjc1NzQ3MzcuMzEyNTQ1LCJleHAiOjE2Mjc1NzQ3NTIuMjk5NzY4LCJzdWIiOiIxNiIsInNjb3BlcyI6W119.qPZ5fqI43bZV8qR_9RMoF9LOAdWxEmiMytlYHFrB_kCRUOujL07CpHC7hJB5joPQhqXzu0K6OzAUIW7XX7biRNPHyz_IE5Pfbe0FnbIp9KHjISjHw1uQTw-H96LQA5xw9gaLULklDA7rt9RNyfvfVwnPX7-IEu2YYY6hnnAwLb6blS1eGnQzotPjW95rtcctRHpsIr3hovFyPjzJu3Up2s66hjyjeTRdb6IZy9Hl5CGXW3nS4KkjVlHSMkOQuT1IIIPqGLn2RlHkCd32LHNAkOmlYqr9hIkPUUs0K1f_X8PpwmkSyQCQ_yrdBqgga8axYXOsuVIMjWrUKQVt74T13RsUwQniYd5IrfXzECOUCRyZkIGA-KEW3cWO32uVARSL-Wfrtb-HabWFRkuhmVEx0YtrQ61m_0fmYw5mD7E0DFdzL7tAVYlQ9NHrpRIGG8ZpMNsbDUyM-XmOA4L9n1bKx6OFp6wan0e3Z9M2VHov8VzZfGgBHTHf0qkhJ1Bg9jNWrQfoY9Rjxth40O04W65UwyiPtPBVamLZhluWBtMNSZcB7zYhT9RG4It3OrqkfhQMkaTOdwoWMP9DBHA3DCD7kK3HpAi2Cf2gnlfumTWRJRAPsEO6oh0CcSlQkz6DILLfU_af6RbNUHIoQ-KNz1l1QoE1wpWfyqWT3kZkI79RsAA"
+}
+###
+# ESTADISTICA
+GET {{url}}/datos?tipo=ambiente
+HEAD 
+
+{
+    token: "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIyIiwianRpIjoiMGUzNmZlZDMzMTE5OWNlYjg1ZjBmY2JiODQ2NGQwMmUyYTlhMjI1Y2QzMDk3N2MyNjQyZGEzZTVkNTgxYzZjYzQxMTk3YTVmNmQ4YTNiZWEiLCJpYXQiOjE2Mjc1NzQ3MzcuMzEyNTQzLCJuYmYiOjE2Mjc1NzQ3MzcuMzEyNTQ1LCJleHAiOjE2Mjc1NzQ3NTIuMjk5NzY4LCJzdWIiOiIxNiIsInNjb3BlcyI6W119.qPZ5fqI43bZV8qR_9RMoF9LOAdWxEmiMytlYHFrB_kCRUOujL07CpHC7hJB5joPQhqXzu0K6OzAUIW7XX7biRNPHyz_IE5Pfbe0FnbIp9KHjISjHw1uQTw-H96LQA5xw9gaLULklDA7rt9RNyfvfVwnPX7-IEu2YYY6hnnAwLb6blS1eGnQzotPjW95rtcctRHpsIr3hovFyPjzJu3Up2s66hjyjeTRdb6IZy9Hl5CGXW3nS4KkjVlHSMkOQuT1IIIPqGLn2RlHkCd32LHNAkOmlYqr9hIkPUUs0K1f_X8PpwmkSyQCQ_yrdBqgga8axYXOsuVIMjWrUKQVt74T13RsUwQniYd5IrfXzECOUCRyZkIGA-KEW3cWO32uVARSL-Wfrtb-HabWFRkuhmVEx0YtrQ61m_0fmYw5mD7E0DFdzL7tAVYlQ9NHrpRIGG8ZpMNsbDUyM-XmOA4L9n1bKx6OFp6wan0e3Z9M2VHov8VzZfGgBHTHf0qkhJ1Bg9jNWrQfoY9Rjxth40O04W65UwyiPtPBVamLZhluWBtMNSZcB7zYhT9RG4It3OrqkfhQMkaTOdwoWMP9DBHA3DCD7kK3HpAi2Cf2gnlfumTWRJRAPsEO6oh0CcSlQkz6DILLfU_af6RbNUHIoQ-KNz1l1QoE1wpWfyqWT3kZkI79RsAA"
+}
+
+
+
+
+
+
+
+
+# ejemplo de uso de variables
+###
+@urlprueba = https://jsonplaceholder.typicode.com/posts 
+###
+
+# @name respuesta
+POST {{ urlprueba}}
+Content-Type: application/json
+
+{
+    "title": "joel",
+    "body"  : "bar",
+    "userId": 72
+}
+
+###
+@id ={{ respuesta.response.body.$.userId }}
+
+###
+GET {{urlprueba}}/{{id}}

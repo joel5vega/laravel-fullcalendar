@@ -3,117 +3,94 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Ambiente;
+use App\Ambiente as Ambiente;
+use App\Dato;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Validator;
+use PhpParser\Node\Expr\AssignOp\Concat;
 
 class AmbienteController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        //
-        $ambientes=Ambiente::orderBy('id','DESC')->paginate(15);
-        
-        //return $ambientes;
-        return view('Ambiente.index',compact('ambientes')); 
-    }
-    public function api_index(Request $request)
-    {
-        
-        
-        $tipo=$request->query('tipo');
-        if(isset($tipo))
-        {
-            $ambientes=Ambiente::where('tipo','=',$tipo)->get();
-            return $ambientes;
-        } 
-        else
-        $ambientes=Ambiente::orderBy('id','DESC')->paginate(15);
-        return $ambientes;
-        //return $ambientes;
-        // return view('Ambiente.index',compact('ambientes')); 
+        $tipo = $request->query('tipo');
+        if (isset($tipo)) {
+            $ambientes = Ambiente::Tipo($tipo)->get();
+            $response = $ambientes;
+        } else {
+            $ambientes  = Ambiente::all();
+            $response['ambientes'] = $ambientes;
+        }
+        return response()->json($response);
     }
 
-    public function create()
-    {
-        //
-        echo 'llega';
-        return view('Ambiente.create');
-    }
-
-    
     public function store(Request $request)
     {
-        //
-        $this->validate($request,['nombre'=>'required','tipo'=>'required','capacidad'=>'nullable','edificio','piso']);
+        $validator = Validator::make($request->all(), [
+            'nombre' => 'required|not_regex:/[^A-Za-z0-9\- ]/',
+            'tipo' => ['required', 'regex:/(^laboratorio$|^aula$)/'],
+            'capacidad' => 'nullable|int', 'descripcion' => 'nullable'
+        ]);
+        if ($validator->fails()) {
+            return response()->json([
+                'error' => $validator->errors()
+            ], 400);
+        }
         Ambiente::create($request->all());
-        return redirect()->route('ambiente.index')->with('success','Registro creado satisfactoriamente');
-    
-    }
-    public function api_store(Request $request)
-    {
-        //
-        $this->validate($request,['nombre'=>'required','tipo'=>'required','capacidad'=>'nullable','edificio','piso']);
-        Ambiente::create($request->all());
-        echo $request;
-        return "exito";
-    
+        return response()->json('Ambiente creado');
     }
 
     public function show($id)
     {
         //
-        $ambientes=Ambiente::find($id);
-        //return $ambientes;
-        return  view('ambiente.show',compact('ambientes'));
-    }
-    //api
-    public function api_show($id)
-    {
-        //
-        $ambientes=Ambiente::find($id);
-        return $ambientes;
+        $ambientes = Ambiente::find($id);
+        return response()->json($ambientes);
     }
 
-    public function edit($id)
+    public function update(Request $request)
     {
-        //
-        $ambiente=ambiente::find($id);
-        return view('ambiente.edit',compact('ambiente'));
-    }
-
-    public function update(Request $request, $id)
-    {
-        //
-        $this->validate($request,['nombre'=>'required','tipo'=>'required','capacidad','edificio','piso']);
- 
-        ambiente::find($id)->update($request->all());
-        return redirect()->route('ambiente.index')->with('success','Registro actualizado satisfactoriamente');
- 
-    }
-
-    public function api_update(Request $request, $id)
-    {
-        //
-        $this->validate($request,['nombre'=>'required','tipo'=>'required','capacidad','edificio','piso']);
- 
-        ambiente::find($id)->update($request->all());
-        //return redirect()->route('ambiente.index')->with('success','Registro actualizado satisfactoriamente');
-        return "actualizado";
- 
+        $validator = Validator::make($request->all(), [
+            'nombre' => 'required|not_regex:/[^A-Za-z0-9\- ]/',
+            'tipo' => ['required', 'regex:/(^laboratorio$|^aula$)/'],
+            'capacidad' => 'nullable|int', 'descripcion' => 'nullable'
+        ]);
+        if ($validator->fails()) {
+            return response()->json([
+                'error' => $validator->errors()
+            ], 400);
+        }
+        $ambiente = Ambiente::find($request->id)->update($request->all());
+        if ($ambiente) {
+            $response = "Ambiente editado";
+        }
+        return response()->json($response);
     }
 
     public function destroy($id)
     {
-        //
-        Ambiente::find($id)->delete();
-        return redirect()->route('ambiente.index')->with('success','Registro eliminado satisfactoriamente');
-    }
+        $ambiente=Ambiente::find($id);
+        if(!isset($ambiente)){
+            return "Ambiente no encontrado";
+        }
+        $c1 = Dato::Ambiente(2, $id)->pluck('id');
+        $clase = [];
+        $i = 0;
+        foreach ($c1 as $c) {
 
-    public function api_delete($id)
-    {
-        //
-        Ambiente::find($id)->delete();
-        //return redirect()->route('ambiente.index')->with('success','Registro eliminado satisfactoriamente');
-        return "eliminado";
+            $clase[$i] = $c;
+            $i=$i+1;
+        }
+        $c2 = Dato::Ambiente(3, $id)->pluck('id');
+        foreach ($c2 as $c) {
+            array_push($clase, $c);
+        }
+        foreach ($clase as $id) {
+            DB::update(
+                'update clases set estado=?, ambiente_id=? where id=?',
+                ['false', 9, $id]
+            );
+        }
+         $ambiente->delete();
+        return response()->json('Ambiente eliminado');
     }
 }
-
