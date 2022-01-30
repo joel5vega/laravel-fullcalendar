@@ -14,7 +14,7 @@ php artisan ui vue --auth
 //si falla la key
 php artisan key:generate
 npm install
-
+composer self-update --rollback
 
 php artisan make:controller EventosController
 

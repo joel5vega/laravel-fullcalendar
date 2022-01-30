@@ -36,8 +36,8 @@ class AppServiceProvider extends ServiceProvider
         //     {"id":1,"nombre":"Primer Semestre"},
         //     {"id":2,"nombre":"Segundo Semestre"}
         // ]
-        $data['eventos']=evento::all();
-        $datos['eventos']=evento::query()->select(['daysOfWeek','startTime'])->get();
+        // $data['eventos']=evento::all();
+        // $datos['eventos']=evento::query()->select(['daysOfWeek','startTime'])->get();
         //print_r($datos);
         /*
         $semestres[1]="Primer Semestre";
