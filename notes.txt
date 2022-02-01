@@ -51,3 +51,13 @@ return Destination::addSelect(['last_flight' => Flight::select('name')
 
 ///Para crear un request customizado
 php artisan make:request CrearClaseRequest
+
+
+
+/// al reiniciar
+composer self-update
+composer update
+composer install
+php artisan generate:key
+php artisan passport:install
+php artisan cache:clear

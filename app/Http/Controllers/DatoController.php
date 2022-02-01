@@ -123,6 +123,7 @@ class DatoController extends Controller
         } else {
             // $response['materias_control']=Materia::all()->menciones('nombre');
             $materias = new MateriaController();
+            // return $actual;
             $response['actual']=$actual[0]->id;
             $response['clases'] = Dato::Periodo("2")->get();
             $response['pensums'] = Pensum::all();
