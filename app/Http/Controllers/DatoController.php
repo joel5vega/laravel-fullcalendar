@@ -79,7 +79,8 @@ class DatoController extends Controller
     //esto nos dara los datos que necesitamos para nuestras opciones
     public function apiIndex(Request $request)
     {
-        // return "hola";
+        $response['responsables'] = Responsable::all();
+        return $response;
         $periodo = $request->query('periodo');
         $index = $request->query('index');
         $tipo = $request->query('tipo');
