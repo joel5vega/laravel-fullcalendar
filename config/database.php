@@ -61,7 +61,8 @@ return [
             // Options to connect to azure
             'sslmode' => env('DB_SSLMODE','prefer'),
             'options' => (env('MYSQL_SSL') && extension_loaded('pdo_mysql')) ? [
-                PDO::MYSQL_ATTR_SSL_KEY    => '/ssl/BaltimoreCyberTrustRoot.crt.pem',
+                // PDO::MYSQL_ATTR_SSL_KEY    => '/ssl/BaltimoreCyberTrustRoot.crt.pem',
+                PDO::MYSQL_ATTR_SSL_CA => "/home/site/wwwroot/ssl/BaltimoreCyberTrustRoot.crt.pem",
             ] : []
             // 'options' => array(
             //     PDO::MYSQL_ATTR_SSL_CA => "/home/site/wwwroot/ssl/BaltimoreCyberTrustRoot.crt.pem",
