@@ -54,7 +54,7 @@
           uses: azure/webapps-deploy@v2
           id: deploy-to-webapp
           with:
-            app-name: 'sishorarios'
+            app-name: 'bksishorarios'
             slot-name: 'production'
             publish-profile: ${{ secrets.AzureAppService_PublishProfile_0aed7dc3d1e14a11ad1150a3688bc093 }}
             package: .
