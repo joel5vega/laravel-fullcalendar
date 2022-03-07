@@ -122,7 +122,7 @@ get {{url}}/datos?tipo=responsable
 ###
 get {{url}}/users/1
 ###
-post {{url}}/users?email=email&name=name&password=password&c_password=c_password&tipo=tipo
+post {{url}}/users?email=admin@gmail.com&name=name&password=p4ss&c_password=p4ss&tipo=tipo
 ###
 post {{url}}/users
 Content-Type: application/json
