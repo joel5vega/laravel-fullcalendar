@@ -43,6 +43,7 @@ Route::get('clases/ambiente/{ambiente}', 'ClaseController@getClasesAmbiente');
 Route::get('clases/responsable/{responsable}', 'ClaseController@getClasesResponsable');
 // crear //daremos acceso a docentes
 Route::post('clases/', 'ClaseController@crearClase');
+//-
 Route::post('clases/habilitar/{id}', 'ClaseController@habilitar');
 Route::put('clases/{id}', 'ClaseController@editar');
 Route::delete('clases/{id}', 'ClaseController@destroy');
@@ -51,6 +52,7 @@ Route::get('now', 'ClaseController@getClasesNow');
 //////////////////////////////////////////////////////
 // Periodos
 Route::post('periodos/', 'PeriodoController@store');
+//-
 Route::put('periodos/{id}', 'PeriodoController@update');
 Route::delete('periodos/{id}', 'PeriodoController@destroy');
 //////////////////////////////////////////////////////
