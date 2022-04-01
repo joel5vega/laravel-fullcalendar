@@ -91,6 +91,6 @@ class AmbienteController extends Controller
             );
         }
          $ambiente->delete();
-        return response()->json('Ambiente eliminado');
+        return response()->json(['message'=>'Ambiente eliminado'],201);
     }
 }
